@@ -14,7 +14,7 @@
 /* Homepage */
 Route::get('/', function()
 {
-   return View::make('pages.mainsearch',  array('countries' => array('Andorra','Austria','Croatia','France','Germany','Greece','Italy','Liechtenstein','Norway','Portugal','Slovenia', 'Spain','Switzerland' )), array('pagetype'=>'home'));
+   return View::make('pages.mainsearch', array('countries' => array('Andorra','Austria','Croatia','France','Germany','Greece','Italy','Liechtenstein','Norway','Portugal','Slovenia', 'Spain','Switzerland' )), array('pagetype'=>'home'));
 });
 
 /* About page*/
