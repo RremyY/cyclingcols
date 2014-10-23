@@ -47,8 +47,8 @@
             <div class="col-lg-6">
                 <div id="profile1" class="profile">
                     <div class="profiletitle">
-                        <h4 class="col-sm-10">Colle del Gran San Bernardo/ Col du Grand-Saint-Bernard <strong>North</strong> (from Martigny)</h4>
-                        <div class="col-sm-2">
+                        <h4 class="col-xs-10">Colle del Gran San Bernardo/ Col du Grand-Saint-Bernard <strong>North</strong> (from Martigny)</h4>
+                        <div class="col-xs-2">
                             <div class="category hc">HC</div>
                         </div>
                     </div>
@@ -65,8 +65,8 @@
             <div class="col-lg-6">
                 <div id="profile2" class="profile">
                     <div class="profiletitle">
-                        <h4 class="col-sm-10">Colle del Gran San Bernardo</h4>
-                        <div class="col-sm-2">
+                        <h4 class="col-xs-10">Colle del Gran San Bernardo</h4>
+                        <div class="col-xs-2">
                             <div class="category first">1</div>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
             <div class="col-lg-6">
                 <div id="profile3" class="profile">
                     <div class="profiletitle">
-                        <h4 class="col-sm-10">Colle del Gran San Bernardo/ Col du Grand-Saint-Bernard <strong>North</strong> (from Martigny)</h4>
-                        <div class="col-sm-2">
+                        <h4 class="col-xs-10">Colle del Gran San Bernardo/ Col du Grand-Saint-Bernard <strong>North</strong> (from Martigny)</h4>
+                        <div class="col-xs-2">
                             <div class="category hc">HC</div>
                         </div>
                     </div>
@@ -100,8 +100,8 @@
             <div class="col-lg-6">
                 <div id="profile4" class="profile">
                     <div class="profiletitle">
-                        <h4 class="col-sm-10">Colle del Gran San Bernardo/ Col du Grand-Saint-Bernard <strong>North</strong> (from Martigny)</h4>
-                        <div class="col-sm-2">
+                        <h4 class="col-xs-10">Colle del Gran San Bernardo/ Col du Grand-Saint-Bernard <strong>North</strong> (from Martigny)</h4>
+                        <div class="col-xs-2">
                             <div class="category first">1</div>
                         </div>
                     </div>
