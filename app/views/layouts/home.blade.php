@@ -2,7 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Cyclingcols</title>
+        <title>CyclingCols</title>		
+		
+		<link rel="shortcut icon" href="{{ URL::asset('images/cyclingcols2014_klein.ico') }}">
+		
         <link rel="stylesheet" href="{{ URL::asset('fonts/fonts.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
