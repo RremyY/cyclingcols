@@ -2,10 +2,10 @@
 
 @section('content')
 
-<script src="{{ URL::asset('js/jail.js') }}"></script>
 
-<div class="col-md-12">
-    <div class="randomcol">
+
+
+    <div class="col-md-12 randomcol">
             @foreach ($imagelocations as $imagelocation)
                 <div class='item'>
                     <a href="{{ URL::asset('col/chasseral')}}">
@@ -15,8 +15,8 @@
                 </div>
             @endforeach
     </div>
-</div>
 
+<script src="{{ URL::asset('js/jail.js') }}"></script>
 <script>
 
         $(function(){
