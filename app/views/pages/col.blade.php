@@ -6,36 +6,40 @@
          url( {{URL::asset("images/cols/chasseral/P1010004.JPG") }} );'>
     </div>
     <div class="coltitlesection">
-        <div class="col-md-2">
-            <div class='prevbutton'>
 
-                <i class="glyphicon glyphicon-arrow-left"></i>
-                <p>previous col in Switzerland (Alfabetic)</p>
+        <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-2 coltitle">
+                <h3><img src="{{ URL::asset('images/flags/Switzerland.gif') }}"/> Switzerland, Wallis/ Valais </h3>
+                <h1>Colle del Gran San Bernardo</h1>
+                <h3><img src="{{ URL::asset('images/flags/Italy.gif') }}"> Italy, Val d’Aoste/ Valle d’Aoste </h3>
+                <h1>Col du Grand-Saint-Bernard</h1>
+            </div>
 
+            <div class="col-md-2 altitude">
+                <div class="col-xs-6 altitudetext"><h1>2473m</h1></div>
+                <div class="col-xs-5 altitudesign">
+                    <img src="{{ URL::asset('images/cols/chasseral/Chasseral.jpg') }}" />
+                </div>
             </div>
         </div>
-        <div class="col-md-6 coltitle">
-            <h3><img src="{{ URL::asset('images/flags/Switzerland.gif') }}"/> Switzerland, Wallis/ Valais </h3>
-            <h1>Colle del Gran San Bernardo</h1>
-            <h3><img src="{{ URL::asset('images/flags/Italy.gif') }}"> Italy, Val d’Aoste/ Valle d’Aoste </h3>
-            <h1>Col du Grand-Saint-Bernard</h1>
-        </div>
+        <div class="col-md-12 buttons">
+            <div class="col-xs-4 col-md-2">
+                <div class='prevbutton'>
 
-        <div class="col-md-2 altitude">
-            <div class="altitudetext"><h1>2473m</h1></div>
-            <div class="altitudesign">
-                <img src="{{ URL::asset('images/cols/chasseral/Chasseral.jpg') }}" />
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    <p>previous col in Switzerland (Alfabetic)</p>
+
+                </div>
             </div>
+            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-8">
+                <div class='nextbutton'>
+
+                    <p>next col in Switzerland (Alfabetic)</p>
+                    <i class="glyphicon glyphicon-arrow-right"></i>
+
+                </div>
+            </div>    
         </div>
-
-        <div class="col-md-2">
-            <div class='nextbutton'>
-
-                <p>next col in Switzerland (Alfabetic)</p>
-                <i class="glyphicon glyphicon-arrow-right"></i>
-
-            </div>
-        </div>    
     </div>
 
     <div class="col-md-12 nrprofiles">
@@ -130,7 +134,6 @@
                     <h3>First on top in professional Cycling</h3>
                 </div>            
                 <div class="randomimage">
-                    <h3>Random Image</h3>
                     <img src="{{ URL::asset('images/cols/chasseral/P1010006.JPG') }}"/>
                 </div>
             </div>
