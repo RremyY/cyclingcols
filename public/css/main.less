@@ -362,10 +362,11 @@ form .twitter-typeahead .searchfield {
 }
 .prevbutton, .nextbutton {
   position:relative;
-  display: block;
+  display: inline-block;
   .gradient(#f7f7f7, #e7e7e7);
-  margin: 16px;
-  width: 150px;
+  padding: 16px;
+  width: 100%;
+  max-width:150px;
   height: 100px;
   position: relative;
   text-align: center;
@@ -373,14 +374,16 @@ form .twitter-typeahead .searchfield {
   border-radius: 5%;
   box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
 }
+.buttons {
+    position:relative;
+}
 .prevbutton:hover, .nextbutton:hover {
   text-decoration: none;
   color: @orangecolor;
   background: #f5f5f5;
+    cursor: pointer;
 }
-.nextbutton {
-    float:right;
-}
+
 .nextbutton p {
     width:80%;
     float:left;
@@ -388,7 +391,7 @@ form .twitter-typeahead .searchfield {
 }
 .nextbutton i {
     width:20%;
-    float:right;
+    float: right;
     .vertical-align();
 }
 .prevbutton p {
@@ -415,17 +418,18 @@ form .twitter-typeahead .searchfield {
 }
 .altitude{
     padding-top:20px;
+    padding-bottom:20px;
+    display:inline-block;
 }
 .altitudetext{
     margin-right:20px;
-    float:left;
 }
 .altitudesign {
-    float:left;
 }
 
 .nrprofiles {
     clear:both;
+    padding: 10px 30px;
 }
 .profile{
     border-radius:5px;
@@ -530,6 +534,15 @@ form .twitter-typeahead .searchfield {
 
 /*************************  media queries  ***********************/
 
+@media (max-width:600px) {
+    .category {
+        margin: 10px 10px 10px -10px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+}
+
 @media (min-width:992px) {
     .navarrow {
         display:inline-block;
@@ -558,7 +571,11 @@ form .twitter-typeahead .searchfield {
     .phototext, .footer, .scenery {
         position:fixed;
     }
-
+    .prevbutton, .nextbutton {
+        position:absolute;
+    bottom:20px;
+    left:0;
+    }
     
     .interaction {
         position:relative;
