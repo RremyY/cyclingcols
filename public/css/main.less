@@ -30,7 +30,8 @@ h1 {
         width:100%;
         max-width:@logopixelwidth;
         display:block;
-        margin:10px auto;
+        margin:0 auto;
+        padding: 10px;
 }
 //mainsearch
 
@@ -202,23 +203,26 @@ form .twitter-typeahead .searchfield {
     font-size:12px;
     padding-right:0;    
 }
-
-
-
-/******************* footer tab items ********************/
-
-.smallfooter {
-    padding:0;
-    font-size:18px;
-    .glyphicon {
-        font-size:15px;
-    }
+.footerblack {
+    background:#111;
 }
-@media(max-width:400px){
-    .smallfooter {
-        font-size:12px;
-    }
+
+.footercredits {
+        display:inline-block;
+        width:100%;
+        padding:10px 20px 0px 10px;
+        text-align: right;
 }
+
+/*******************  header ********************/
+
+
+.menu {
+    
+}
+
+/*******************  tab items ********************/
+
 
 .tabrow:before {
     z-index: 1;
@@ -244,12 +248,10 @@ form .twitter-typeahead .searchfield {
     position: relative;
     z-index: 0;
     margin: 0 0;
-    padding: 5px 3% 5px 3%;
+    padding: 5px 2% 5px 2%;
     border: 1px solid #eee;
     background: #222;
     display: inline-block;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
     margin: 0 -5px;
     .gradient(#555, #222);
@@ -262,57 +264,20 @@ form .twitter-typeahead .searchfield {
     border-bottom-color: #111;
     .gradient(#222, #111);   
 }
-.footermenu {
-    padding-right:0;
-}
-.footermenu .tabrow {
-    font-size:18px;
-    text-align:left;
-}
-
-    .footercredits {
-        display:inline-block;
-        margin:5px 10px;
-        img {
-            width:100%;
-            max-width:@mobilelogopixelwidth;
-            float:left; 
-            margin-right:10px;
-        }
-    }
-
-
-/*hidden for mobile*/
-.footermenu {
-    display:none;
-}
-
-/******************* large footer tab items ********************/
-.footerblack {
-    background:#111;
-}
-
-.logofooter{
-    padding-top: 10px;
-    padding-bottom:10px;
-    img {
-        width:100%;
-        max-width:@mobilelogopixelwidth;
-    }
-}
 
 
 //searchfield in the main header
-
-.mainheader .navbar-form {
-    margin-top:0;
-    padding-top:20px;
-}
 .mainheader {
     background:#111;
-}
-.mainheader .logoheader {
-    display:none;
+    position:relative;
+    display:block;
+    .navbar-form {
+        margin-top:0;
+        padding-top:20px;
+    }
+    .logoheader {
+        display:block;
+    }
 }
 
 /******************** countries section *****************/
@@ -542,7 +507,14 @@ form .twitter-typeahead .searchfield {
         line-height: 35px;
     }
 }
+/*bootstrap small*/
+@media (min-width:767px) {
+    .logoheader img {
+        padding:0;
+    }
 
+}
+/*bootstrap medium*/
 @media (min-width:992px) {
     .navarrow {
         display:inline-block;
@@ -573,8 +545,11 @@ form .twitter-typeahead .searchfield {
     }
     .prevbutton, .nextbutton {
         position:absolute;
-    bottom:20px;
-    left:0;
+        bottom:20px;
+        left:0;
+    }
+    .tabrow li {
+        padding: 5px 2% 5px 2%;
     }
     
     .interaction {
@@ -591,10 +566,10 @@ form .twitter-typeahead .searchfield {
         display:inline-block;
     }
 
+/* mainheader menu items*/
+
 /* mainheader searchbar */
-.mainheader .logoheader {
-    display:block;
-}
+
     .mainheader .navbar-form .input-group{
         width:100%;
     }
@@ -608,12 +583,10 @@ form .twitter-typeahead .searchfield {
         display:inline-block;
     }
 
-/* footer */
 .tabrow:after {
     border-bottom:none;
 }
 .tabrow li {
-    border-radius: 0 0 6px 6px;
     .gradient(#555, #222);
 }
 .tabrow li.selectedtab {
@@ -621,22 +594,7 @@ form .twitter-typeahead .searchfield {
     border-top-color:#555;
 }
 
-    .logofooter{
-        float:right;
-    }
 
-    .smallfooter {
-        display:none;
-    }    
-    .footermenu {
-        display:inline-block;
-    }
-
-
-    
-    .footer-nav {
-        display:inline;
-    }
 .colimage {
     display:block;
     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
@@ -646,11 +604,6 @@ form .twitter-typeahead .searchfield {
 .randomimage {
     display:none;
 }
-    /*.colimage {
-        -webkit-filter: grayscale(1);
-        filter: grayscale(1);
-        display:block;
-    }*/
 
     
     .plaintext {
@@ -659,7 +612,7 @@ form .twitter-typeahead .searchfield {
        margin-bottom:30px;
     }
 }
-
+/*bootstrap large*/
 @media (min-width:1200px) {
     .flag {
         width:32px;
