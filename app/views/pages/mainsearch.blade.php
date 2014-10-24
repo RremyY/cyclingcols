@@ -8,9 +8,10 @@
     <div id="thecountries" class="thecountries">
         @foreach ($countries as $country)
         <div class="country">
-            <img src="{{ URL::asset('images/flags') }}/{{$country}}.gif" class="flag"/>
-            <a href="#" title="Limit search to cols in {{$country}}" alt="Cols in {{$country}}" class="countryurl" onclick="countryclick(this.text);">{{$country}}</a>
-            <a id="globe" href="{{ URL::asset('/') }}country/{{$country}}"><img class="globeicon" src="{{ URL::asset('images/globe.png') }}" title="View in googlemaps" /></a>
+            <img src="{{ URL::asset('images/flags') }}/{{$country->Country}}.gif" class="flag"/>
+            <a href="#" title="Limit search to cols in {{$country->Country}}" alt="Cols in {{$country->Country}}" class="countryurl" onclick="countryclick(this.text);">{{$country->Country}}</a>
+            <span class="nrcols">{{$country->NrCols}} cols</span>
+			<a id="globe" href="{{ URL::asset('/') }}country/{{$country->CountryIDString}}"><img class="globeicon" src="{{ URL::asset('images/globe.png') }}" title="View in googlemaps" /></a>
             
         </div>
         @endforeach
@@ -23,7 +24,7 @@
         <div class="limitsearchflag"></div>
         <form class="navbar-form" role="search">
             <div class="add-on">
-                <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe.." name="srch-term" id="searchbox">
+                <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="srch-term" id="searchbox">
                 <div class="input-group-btn">
                     <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                 </div>

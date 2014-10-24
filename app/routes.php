@@ -14,13 +14,18 @@
 /* Homepage */
 Route::get('/', function()
 {
-   return View::make('pages.mainsearch', array('countries' => array('Andorra','Austria','Croatia','France','Germany','Greece','Italy','Liechtenstein','Norway','Portugal','Slovenia', 'Spain','Switzerland' )), array('pagetype'=>'home'));
+	$countries = Country::orderBy('CountrySort', 'ASC')->get();
+	
+	return View::make('pages.mainsearch')
+	->with('countries',$countries)
+	->with('pagetype','home');
 });
 
 /* About page*/
 Route::get('about', function()
 {
-  return View::make('pages.about', array('pagetype'=>'abouttemplate'));
+	$count = Col::where('ColID', '>', 0)->count();
+	return View::make('pages.about', array('pagetype'=>'abouttemplate'))->with('number_of_cols', $count);
 });
 
 /* Help page */
@@ -44,7 +49,21 @@ Route::get('pages.col/{colName}/slideshow', function($colName)
 /* Country googlemaps pages*/
 Route::get('country/{country}', function($country)
 {   
-    return View::make('pages.country', array('selectedcountry'=> $country), array('pagetype'=>'countrypage'));
+	$country = Country::where('Country',$country)->first();
+	$cols = DB::table('cols')->select('ColID','ColIDString','Col','Latitude','Longitude','Height')->get();
+	$countries = DB::table('countries')->select('CountryID','Country','Latitude','Longitude','NrCols')->get();
+	$regions = DB::table('regions')->select('RegionID','Region','CountryID','Latitude','Longitude','NrCols','NrSubRegions')->get();
+	$subregions = DB::table('subregions')->select('SubRegionID','SubRegion','CountryID','Latitude','Longitude','NrCols')->get();
+	
+    return View::make('pages.country')
+		->with('latitude',$country->Latitude/1000000)
+		->with('longitude',$country->Longitude/1000000)
+		->with('selectedcountry',$country)
+		->with('cols',$cols)
+		->with('countries',$countries)
+		->with('regions',$regions)
+		->with('subregions',$subregions)
+		->with('pagetype','countrypage');
 });
 
 /*random cols*/

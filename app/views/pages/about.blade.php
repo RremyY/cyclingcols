@@ -6,6 +6,7 @@
         <h1>
             About Cyclingcols
         </h1>
+		<p>There are {{$number_of_cols}} cols on this site!</p>
         <p>This website is a collection of unique and accurate information about cols in Europe, 
             it is maintained by Michiel van Lonkhuyzen. </p>
         <p>
