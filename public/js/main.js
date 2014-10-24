@@ -5,7 +5,7 @@ function countryclick(country) {
     if (windowwidth < 992) {
         $('#thecountries').removeClass('activecountries').hide(500);
     }
-    $('#searchbox').attr("placeholder", "Search a col in " + country + "..").focus();
+    $('#searchbox').attr("placeholder", "Search a col in " + country + "...").focus();
 
     //todo: change dataset for in slideshow.
     return false;
