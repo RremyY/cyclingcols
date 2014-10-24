@@ -126,7 +126,9 @@ h1 {
         text-shadow: 2px 2px 2px #000000;
     }
 }
-
+#arrow_left, #arrow_right {
+    display:none;
+}
 
 /******************* searchbar styling ********************/
 
@@ -138,6 +140,10 @@ h1 {
 .twitter-typeahead {
     float:left;
     width:100%;
+}
+.add-on .searchfield {
+    width:100%;
+    float:left;
 }
 form .twitter-typeahead .searchfield {
     width:100%;
@@ -208,7 +214,8 @@ form .twitter-typeahead .searchfield {
     padding-right:0;    
 }
 
-.randomtemplate .footer,
+.countrypage .footer,
+.randomtemplate .footer, 
 .home .footer {
     position:fixed;
 }
@@ -234,6 +241,12 @@ form .twitter-typeahead .searchfield {
     padding-right:0;
     .glyphicon{
         display:none;
+    }
+    a {
+        color:#fff;
+    }
+    a:active, a:hover {
+        color:@redcolor;
     }
 }
 
@@ -318,6 +331,9 @@ form .twitter-typeahead .searchfield {
     }
 }
 /******************** colpage section ********************/
+.colpage {
+    clear:both;
+}
 
 .colimage {
     display:none;
@@ -562,13 +578,9 @@ form .twitter-typeahead .searchfield {
         margin-top:20%;
     }
 
-
-
 /* mainheader menu items*/
 /* mainheader searchbar */
-    .menu .glyphicon{ 
-        display:inline-block;
-    }
+
     .navbar-form .input-group{
         width:100%;
     }
@@ -581,6 +593,11 @@ form .twitter-typeahead .searchfield {
         width:80%;
         padding:0;
         float:left;
+        display:inline-block;
+    }
+
+
+    .menu .glyphicon{ 
         display:inline-block;
     }
     .tabrow li {

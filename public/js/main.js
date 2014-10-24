@@ -23,16 +23,12 @@ $(function() {
 
 
     $(window).load(function() {
-        $(".footermenu li").removeClass("selectedtab");
-        $('.home .footermenu li:nth-child(1)').addClass("selectedtab");
-        $('.randomtemplate .footermenu li:nth-child(2)').addClass("selectedtab");
-        $('.helptemplate .footermenu li:nth-child(3)').addClass("selectedtab");
-        $('.abouttemplate .footermenu li:nth-child(4)').addClass("selectedtab");
-
-        $(".smallfooter li").removeClass("selectedtab");
-        $('.home .smallfooter li:nth-child(1)').addClass("selectedtab");
-        $('.helptemplate .smallfooter li:nth-child(3)').addClass("selectedtab");
-        $('.abouttemplate .smallfooter li:nth-child(4)').addClass("selectedtab");
+        $(".tabrow li").removeClass("selectedtab"); //remove 
+        
+        $('.home .menu a:nth-child(1) li').addClass("selectedtab");
+        $('.randomtemplate .menu a:nth-child(3) li').addClass("selectedtab");
+        $('.helptemplate .menu a:nth-child(4) li').addClass("selectedtab");
+        $('.abouttemplate .menu a:nth-child(5) li').addClass("selectedtab");
     });
 });
 
