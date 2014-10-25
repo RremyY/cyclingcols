@@ -50,19 +50,11 @@ Route::get('pages.col/{colName}/slideshow', function($colName)
 Route::get('country/{country}', function($country)
 {   
 	$country = Country::where('Country',$country)->first();
-	$cols = DB::table('cols')->select('ColID','ColIDString','Col','Latitude','Longitude','Height')->get();
-	$countries = DB::table('countries')->select('CountryID','Country','Latitude','Longitude','NrCols')->get();
-	$regions = DB::table('regions')->select('RegionID','Region','CountryID','Latitude','Longitude','NrCols','NrSubRegions')->get();
-	$subregions = DB::table('subregions')->select('SubRegionID','SubRegion','CountryID','Latitude','Longitude','NrCols')->get();
 	
     return View::make('pages.country')
 		->with('latitude',$country->Latitude/1000000)
 		->with('longitude',$country->Longitude/1000000)
 		->with('selectedcountry',$country)
-		->with('cols',$cols)
-		->with('countries',$countries)
-		->with('regions',$regions)
-		->with('subregions',$subregions)
 		->with('pagetype','countrypage');
 });
 
