@@ -49,11 +49,11 @@ Route::get('pages.col/{colName}/slideshow', function($colName)
 /* Country googlemaps pages*/
 Route::get('country/{country}', function($country)
 {   
-	$country = Country::where('Country',$country)->first();
+	$country = Country::where('CountryIDString',$country)->first();
 	
     return View::make('pages.country')
-		->with('latitude',$country->Latitude/1000000)
-		->with('longitude',$country->Longitude/1000000)
+		//->with('latitude',$country->Latitude/1000000)
+		//->with('longitude',$country->Longitude/1000000)
 		->with('selectedcountry',$country)
 		->with('pagetype','countrypage');
 });
