@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script type="text/javascript" src="{{ URL::asset('js/markermanager.js') }}"></script>
 
 <div id="mygeocode" class="geocode">
-	<input id="address" type="textbox" placeholder="example: Bormio, ITA" style="width:150px">
-	<input type="button" value="Find Place" onclick="codeAddress()">
+	<div class="add-on">
+		<input id="address" type="text" class="searchfield form-control typeahead" placeholder="Search a place..." name="srch-term">
+	</div>
 </div>
             
 <div class="col-sm-12" id="map-canvas" style="height:87%"></div>	
@@ -338,6 +339,38 @@
 		var top = $(map_canvas).offset().top;
 		
 		moveGeoCoder();
+		
+		//google maps places automcomplete
+		var input = document.getElementById('address');
+
+		var searchBox = new google.maps.places.SearchBox(input);
+		var markers = [];
+		
+		google.maps.event.addListener(searchBox, 'places_changed', function() {
+			var places = searchBox.getPlaces();
+
+			for (var i = 0, marker; marker = markers[i]; i++) {
+			  marker.setMap(null);
+			}
+
+			markers = [];
+			var bounds = new google.maps.LatLngBounds();
+			for (var i = 0, place; place = places[i]; i++) {
+			  var marker = new google.maps.Marker({
+				map: map,
+				//icon: image,
+				title: place.name,
+				position: place.geometry.location
+			  });
+
+			  markers.push(marker);
+
+			  bounds.extend(place.geometry.location);
+			}
+
+			map.fitBounds(bounds);
+			map.setZoom(10);
+		  });
 	};
 	
 	moveGeoCoder = function(){
@@ -380,21 +413,6 @@
 		google.maps.event.addListener(marker, 'mouseout', function() {
 			info.style.display='none';
 		});
-	}	
-	function codeAddress() {
-		var address = document.getElementById('address').value;
-		geocoder.geocode( { 'address': address}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK) {
-		  map.setCenter(results[0].geometry.location);
-		  map.setZoom(9);
-		  var marker = new google.maps.Marker({
-			  map: map,
-			  position: results[0].geometry.location
-		  });
-		} else {
-		  alert('Geocode was not successful for the following reason: ' + status);
-		}
-	  });
 	}
 </script>
 
