@@ -1,8 +1,14 @@
 @logopixelwidth: 200px;
 @mobilelogopixelwidth: 120px;
+
 @redcolor: #ff0000;
-@orangecolor: #ff8000;
-@yellowcolor: #ffff00;
+@orangecolor: #ffbb00;
+
+@color1: #ff0000;
+@color2: #ff6600;
+@color3: #ffbb00;
+@color4: #ffff40;
+@color5: #ffffff;
 
 // site wide styles
 body {
@@ -214,7 +220,7 @@ form .twitter-typeahead .searchfield {
     padding-right:0;    
 }
 
-.countrypage .footer,
+.mappage .footer,
 .randomtemplate .footer, 
 .home .footer {
     position:fixed;
@@ -416,14 +422,31 @@ form .twitter-typeahead .searchfield {
 }
 
 .nrprofiles {
-    clear:both;
+    clear: both;
     padding: 10px 30px;
 }
+
+.colmap
+{
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+
+.profileimage
+{
+	padding: 3px 5px 3px 5px;
+	align: left;
+}
+
 .profile{
-    border-radius:5px;
-    display:inline-block;
-    padding-bottom:15px;
-    width:100%;
+    border-radius: 10px;
+	border-width: 2px;
+	border-color: gray;
+	border-style: solid;
+    display: inline-block;
+    padding-bottom: 0px;
+    margin-bottom: 15px;
+    width: 100%;
     img {
         display:block;
         margin:10px 0 10px auto;
@@ -432,13 +455,13 @@ form .twitter-typeahead .searchfield {
     p {
         margin-bottom:5px;
     }
-
 }
+
 .profiletitle{
-    display:inline-block;
-    width:100%;
-    background:#cbcbcb;
-    border-radius:5px 5px 0 0;
+    border-radius: 8px 8px 0px 0px;
+	display: inline-block;
+    width: 100%;
+    background: #cbcbcb;	
     h4 {
         margin:0;
         padding:10px;
@@ -446,39 +469,40 @@ form .twitter-typeahead .searchfield {
 }
 
 .category {
-  display: block;
-  color: #FFF;
-  margin: 8px;
-  width: 50px;
-  height: 50px;
-  position: relative;
+  font-size: 20px;
+  /*display: block;*/
+  margin: 7px;
+  width: 40px;
+  height: 40px;
+  /*position: relative;*/
   text-align: center;
-  font-weight:bold;
-  line-height: 50px;
+  font-weight: bold;
+  line-height: 40px;
   border-radius: 50%;
   box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
-  .gradient(@redcolor, darken(@redcolor,10%));
+  .gradient(@color1, darken(@color1,10%));
 }
-.category.hc{
-    .gradient(@redcolor, darken(@redcolor,10%));
+.category.c1{
+    .gradient(@color1, darken(@color1,10%));
+	color: #ffffff;
 }
-.category.first{
-   .gradient(@orangecolor, darken(@orangecolor,10%));
+.category.c2{
+   .gradient(@color2, darken(@color2,10%));
+	color: #ffffff;
+}
+.category.c3{
+   .gradient(@color3, darken(@color3,10%));
+	color: #ffffff;
+}
+.category.c4{
+   .gradient(@color4, darken(@color4,10%));
+	color: #ffffff;
+}
+.category.c5{
+   .gradient(@color5, darken(@color5,10%));
+	color: #ffffff;
 }
 
-
-
-.profilestats{
-    padding:10px;
-    span{
-        padding:2px;
-    }
-}
-.profileimage {
-    background-position:right bottom;
-    background-repeat:no-repeat;
-    min-height:300px;
-}
 .randomimage img{
     width:100%;
     max-width:100%; 
@@ -722,4 +746,34 @@ div.geocode {
     padding: 0px;
 	font-size: 10px;
 	width: 250px;
+}
+
+.profilestat
+{
+	padding: 3px;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: gray;
+	border-style: solid;
+}
+
+.profilestat.c1
+{
+	background-color: @color1;
+}
+.profilestat.c2
+{
+	background-color: @color2;
+}
+.profilestat.c3
+{
+	background-color: @color3;
+}
+.profilestat.c4
+{
+	background-color: @color4;
+}
+.profilestat.c5
+{
+	background-color: @color5;
 }

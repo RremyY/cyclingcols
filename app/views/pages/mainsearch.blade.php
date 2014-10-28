@@ -11,7 +11,7 @@
             <img src="{{ URL::asset('images/flags') }}/{{$country->Country}}.gif" class="flag"/>
             <a href="#" title="Limit search to cols in {{$country->Country}}" alt="Cols in {{$country->Country}}" class="countryurl" onclick="countryclick(this.text);">{{$country->Country}}</a>
             <span class="nrcols">{{$country->NrCols}} cols</span>
-			<a id="globe" href="{{ URL::asset('/') }}country/{{$country->CountryIDString}}"><img class="globeicon" src="{{ URL::asset('images/globe.png') }}" title="View in googlemaps" /></a>
+			<a id="globe" href="{{ URL::asset('/') }}map/country/{{$country->CountryIDString}}"><img class="globeicon" src="{{ URL::asset('images/globe.png') }}" title="View in googlemaps" /></a>
             
         </div>
         @endforeach

@@ -36,9 +36,21 @@ Route::get('help', function()
 
 
 /*Col pages*/
-Route::get('col/{colName}', function($colName)
+Route::get('col/{colIDString}', function($colIDString)
 {
-  return View::make('pages.col', array('colname'=>$colName), array('pagetype'=>'coltemplate'));
+	$col = Col::where('ColIDString',$colIDString)->first();
+	
+	if (is_null($col))
+	{
+		return "Col does not exist.";
+	}
+
+	$profiles = Profile::where('ColID',$col->ColID)->get();
+	
+	return View::make('pages.col')
+		->with('col',$col)
+		->with('profiles',$profiles)
+		->with('pagetype','coltemplate');
 });
 
 Route::get('pages.col/{colName}/slideshow', function($colName)
@@ -46,16 +58,39 @@ Route::get('pages.col/{colName}/slideshow', function($colName)
   return "Photo's from {$colName}";
 });
 
-/* Country googlemaps pages*/
-Route::get('country/{country}', function($country)
+/* googlemaps pages*/
+Route::get('map', function()
+{   
+	return View::make('pages.map')
+		->with('pagetype','mappage');
+});
+
+Route::get('map/country/{country}', function($country)
 {   
 	$country = Country::where('CountryIDString',$country)->first();
 	
-    return View::make('pages.country')
-		//->with('latitude',$country->Latitude/1000000)
-		//->with('longitude',$country->Longitude/1000000)
-		->with('selectedcountry',$country)
-		->with('pagetype','countrypage');
+	if (is_null($country))
+	{
+		return "Page does not exist.";
+	}
+	
+    return View::make('pages.map')
+		->with('country',$country)
+		->with('pagetype','mappage');
+});
+
+Route::get('map/col/{col}', function($col)
+{   
+	$col = Col::where('ColIDString',$col)->first();
+	
+	if (is_null($col))
+	{
+		return "Page does not exist.";
+	}
+	
+    return View::make('pages.map')
+		->with('col',$col)
+		->with('pagetype','mappage');
 });
 
 /*random cols*/

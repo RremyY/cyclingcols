@@ -14,6 +14,39 @@
 
 <div id="myinfo" class="markerinfo"><p>...</p></div>
 
+<?php
+	$latitude = 51;
+	$longitude = 9.7;
+	$zoom_level = 4;
+	
+	if (isset($country))
+	{
+		$latitude = $country->Latitude/1000000;
+		$longitude = $country->Longitude/1000000;
+		$zoom_level = 6;
+	}
+	elseif (isset($region))
+	{
+		$latitude = $region->Latitude/1000000;
+		$longitude = $region->Longitude/1000000;
+		$zoom_level = 7;
+	}
+	
+	if (isset($subregion))
+	{
+		$latitude = $subregion->Latitude/1000000;
+		$longitude = $subregion->Longitude/1000000;
+		$zoom_level = 8;
+	}
+	
+	if (isset($col))
+	{
+		$latitude = $col->Latitude/1000000;
+		$longitude = $col->Longitude/1000000;
+		$zoom_level = 10;
+	}
+?>	
+
 <script type="text/javascript">
 	var map;
 	var geocoder = new google.maps.Geocoder();
@@ -52,8 +85,8 @@
 
 		var options = {
             // Algemene opties kaartje //
-            zoom: 6,
-            center: new google.maps.LatLng({{$selectedcountry->Latitude/1000000}},{{$selectedcountry->Longitude/1000000}}),
+            zoom: {{$zoom_level}},
+            center: new google.maps.LatLng({{$latitude}},{{$longitude}}),
             mapTypeId: google.maps.MapTypeId.TERRAIN,
 			mapTypeControl: true,
 			mapTypeControlOptions: {
