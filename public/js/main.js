@@ -35,7 +35,7 @@ $(function() {
 $(window).resize(function() {
     windowwidth = $(document).width();
     if (windowwidth > 992) {
-        $('#thecountries').hide(0).removeClass('activecountries').show(500);
+        $('#thecountries').hide(0).removeClass('activecountries').show(0);
     }
     else {
         $('#thecountries').hide(0);
