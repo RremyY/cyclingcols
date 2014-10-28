@@ -47,18 +47,6 @@ h1 {
 
 /******************* left section of homepage: countrychooser ****************/
 
-.logohomesearch {
-    display:none;
-    width: 100%;
-    margin:0;
-    img {
-        width:100%;
-        max-width:@logopixelwidth;
-        display:block;
-        margin:10px auto;
-    }
-}
-
 .flag {
     width: 25px;
     vertical-align:top;
@@ -282,7 +270,7 @@ form .twitter-typeahead .searchfield {
     background: #222;
     display: inline-block;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
-    margin: 0 -2px;
+    margin: 0 -1px;
     z-index:1;
     .gradient(#555, #222);
 }
@@ -305,6 +293,53 @@ form .twitter-typeahead .searchfield {
     .logoheader {
         display:block;
     }
+}
+/***************** menu section of homepage ******************/
+.overhome {
+    position:relative;
+    display:inline-block;
+}
+.homemenu {
+    width:100%;
+    z-index:1000;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:-2px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
+    .gradient(#555, #222);
+    a {
+        color:white;
+    }
+    .glyphicon {
+        display:none;
+    }
+}
+
+.homemenu .tabrow {
+    width:79%;
+    display:inline-block;
+}
+
+.homelogo {
+    width:16.66666667%;
+    margin:0;
+    display:inline-block;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;    
+    img {
+        padding:10px;
+        width:100%;
+        max-width:150px;
+        display:inline;
+    }
+}
+
+.homemenu .tabrow li {
+    padding: 15px 2% 15px 2%;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.4);
+    display:inline;
+    background:none;
 }
 
 /******************** countries section *****************/
@@ -542,6 +577,19 @@ form .twitter-typeahead .searchfield {
 
 
 /*************************  media queries  ***********************/
+@media (max-width:420px) {
+    .homemenu {
+        padding-left: 2px;
+        padding-right: 2px;
+        img {
+            padding:2px;
+        }
+        .tabrow li {
+            box-shadow: none;
+            font-size:11px;
+        }
+    }
+}
 
 @media (max-width:600px) {
     .category {
@@ -551,6 +599,12 @@ form .twitter-typeahead .searchfield {
         line-height: 35px;
     }
 }
+@media (min-width:500px) {
+    .homemenu .tabrow li {
+        padding: 18px 2% 18px 2%;
+    }
+}
+
 /*bootstrap small*/
 @media (min-width:767px) {
     .logoheader img {
@@ -559,12 +613,24 @@ form .twitter-typeahead .searchfield {
     .tabrow li {
         padding: 25px 2% 5px 2%;
     }
-
+    .homemenu .tabrow li {
+        padding: 25px 2% 25px 2%;
+    }
+    .homemenu .glyphicon {
+        display:inline-block;
+        padding-left:5px;
+    }
 }
 /*bootstrap medium*/
 @media (min-width:992px) {
     .navarrow {
         display:inline-block;
+    }
+    .tabrow {
+        text-align:left;
+    }
+    .homemenu #countrytab{
+        display:none;
     }
     .countries {
         .box-shadow(5px, 0px, 6px, 0.5);
@@ -576,13 +642,6 @@ form .twitter-typeahead .searchfield {
         position:relative;
         left:0px;
     }
-    .logohomesearch {
-        display:inline;
-        margin: 10px 0;
-    }
-    /*.countries {
-        padding-bottom:0px;
-    }*/
     .countries, scenery {
         min-height:100%;
     }
