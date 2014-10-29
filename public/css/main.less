@@ -1,4 +1,4 @@
-@logopixelwidth: 200px;
+@logopixelwidth: 150px;
 @mobilelogopixelwidth: 120px;
 
 @redcolor: #ff0000;
@@ -33,17 +33,6 @@ h1 {
     font-weight: bold;
 }
 
-.logoheader img{
-        width:100%;
-        max-width:@logopixelwidth;
-        display:block;
-        margin:0 auto;
-        padding: 10px;
-}
-.verticalalign {
-    .vertical-align();
-}
-//mainsearch
 
 /******************* left section of homepage: countrychooser ****************/
 
@@ -234,29 +223,10 @@ input:focus {
         text-align: right;
 }
 
-/*******************  header ********************/
-.mainheader{
-    padding-left:0;
-    padding-right:0;
-}
-
-.menu {
-    padding-left:0;
-    padding-right:0;
-    .glyphicon{
-        display:none;
-    }
-    a {
-        color:#fff;
-    }
-    a:active, a:hover {
-        color:@redcolor;
-    }
-}
+/*******************  header    ********************/
 
 
 /*******************  tab items ********************/
-
 
 .tabrow:before {
     z-index: 1;
@@ -276,34 +246,16 @@ input:focus {
     margin: 0 0;
     padding: 5px 2% 5px 2%;
     border: 0px solid #000;
-    background: #222;
     display: inline-block;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
+    
     margin: 0 -1px;
     z-index:1;
-    .gradient(#555, #222);
 }
 .tabrow li a {
     color:#fff;
 }
-.tabrow li.selectedtab {
-    z-index: 3;
-    /*border-bottom-color:#fff;*/
-    border-top-color:#555;
-    .gradient(#222, #111);   
-}
 
 
-//searchfield in the main header
-.mainheader {
-    background:#111;
-    position:relative;
-    display:block;
-    .logoheader {
-        display:block;
-    }
-}
-/***************** menu section of homepage ******************/
 .overhome {
     position:relative;
     display:inline-block;
@@ -321,7 +273,7 @@ input:focus {
     a {
         color:white;
     }
-    .glyphicon {
+    .tabrow .glyphicon {
         display:none;
     }
 }
@@ -331,6 +283,17 @@ input:focus {
     display:inline-block;
 }
 
+.overmain .homemenu {
+    position:relative;
+    display:inline-block;
+}
+
+    .headersearch {
+        width:100%;
+        display:block;
+        background:#333;
+        padding:2px 0;
+    }
 .homelogo {
     width:16.66666667%;
     margin:0;
@@ -339,16 +302,21 @@ input:focus {
     img {
         padding:10px;
         width:100%;
-        max-width:150px;
+        max-width:@logopixelwidth;
         display:inline;
     }
 }
 
 .homemenu .tabrow li {
-    padding: 15px 2% 15px 2%;
+    padding: 15px 2px 15px 2px;
     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.4);
     display:inline;
     background:none;
+}
+
+.tabrow li.selectedtab {
+    z-index: 1003;
+    .gradient(#222, #111);   
 }
 
 /******************** countries section *****************/
@@ -600,14 +568,14 @@ input:focus {
     .homemenu {
         padding-left: 2px;
         padding-right: 2px;
-        img {
-            padding:2px;
-        }
-        .tabrow li {
-            box-shadow: none;
-            font-size:11px;
+        .homelogo img {
+            padding-left:0;
         }
     }
+    .tabrow li {
+         box-shadow: none;
+         font-size:11px;
+     }
 }
 
 @media (max-width:600px) {
@@ -617,23 +585,27 @@ input:focus {
         height: 35px;
         line-height: 35px;
     }
+    .homelogo{
+        box-shadow:none;
+    }
+    .homelogo img {
+        padding:0;
+        padding-left:10px;
+    }
+    .homemenu .tabrow li {
+        display:inline-block;
+    }
 }
 @media (min-width:500px) {
     .homemenu .tabrow li {
-        padding: 18px 2% 18px 2%;
+        padding: 18px 8px 18px 8px;
     }
 }
 
 /*bootstrap small*/
 @media (min-width:767px) {
-    .logoheader img {
-        padding:0;
-    }
-    .tabrow li {
-        padding: 25px 2% 5px 2%;
-    }
     .homemenu .tabrow li {
-        padding: 25px 2% 25px 2%;
+        padding: 25px 10px 25px 10px;
     }
     .homemenu .glyphicon {
         display:inline-block;
@@ -642,6 +614,18 @@ input:focus {
 }
 /*bootstrap medium*/
 @media (min-width:992px) {
+.overmain .homemenu .tabrow {
+    width:40%;
+}
+.tabrow li {
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.4), inset 0 0px 0 #000;
+}
+.headersearch {
+        width:40%;
+        display:inline-block;
+        background:none;
+    }
+
     .navarrow {
         display:inline-block;
     }
@@ -657,9 +641,7 @@ input:focus {
         border-right: 1px solid black;
     }
 
-.countries .thecountries  {
-    .transition(none, 0);
-}
+
     .thecountries {
         display:block;
         position:relative;
@@ -700,28 +682,6 @@ input:focus {
     .navbar-form .input-group{
         width:100%;
     }
-    .mainheader .navbar-form .input-group{
-        width:100%;
-    }
-    .input-group-btn{
-    }
-    .mainheader .navbar-form {
-        width:80%;
-        padding:0;
-        float:left;
-        display:inline-block;
-    }
-
-
-    .menu .glyphicon{ 
-        display:inline-block;
-    }
-    .tabrow li {
-        padding: 30px 2% 5px 2%;
-    }
-    .tabrow li {
-        .gradient(#555, #222);
-    }
 
 
 .colimage_color {
@@ -757,9 +717,7 @@ input:focus {
     .country .globeicon {
         max-width:22px;
     }
-    .tabrow li {
-        padding: 41px 3% 5px 3%;
-    }
+
 }
 
 @media (print) {

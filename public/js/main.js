@@ -23,12 +23,8 @@ $(function() {
 
 
     $(window).load(function() {
-        $(".tabrow li").removeClass("selectedtab"); //remove 
-        
-        $('.home .menu a:nth-child(1) li').addClass("selectedtab");
-        $('.randomtemplate .menu a:nth-child(3) li').addClass("selectedtab");
-        $('.helptemplate .menu a:nth-child(4) li').addClass("selectedtab");
-        $('.abouttemplate .menu a:nth-child(5) li').addClass("selectedtab");
+        /* */
+
     });
 });
 
@@ -61,7 +57,14 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function() {
-
+    
+    /*select menu headeritem*/
+        $(".tabrow li").removeClass("selectedtab"); //remove     
+        $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
+        $('.randomtemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
+        $('.helptemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
+        $('.abouttemplate .tabrow a:nth-child(5) li').addClass("selectedtab");
+        
     //searchsuggestion home only.
     if ($('body').hasClass('home')) {
 
