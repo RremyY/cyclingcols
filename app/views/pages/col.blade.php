@@ -118,22 +118,21 @@
     <div class="colimage" style='background-image: 
          url( {{URL::asset("images/cols/chasseral/P1010004.JPG") }} );'>
     </div>
-    <div class="coltitlesection">
 
+    <div class="coltitlesection">
         <div class="col-md-12">
             <div class="col-md-6 col-md-offset-2 coltitle">
                 <h1>{{$colname}}</h1>
 				<h3><img src="{{ URL::asset('images/flags/' . $col->Country1 . '.gif') }}"/> {{$country1}}</h3>
                 @if ($country2)
                 <h3><img src="{{ URL::asset('images/flags/' . $col->Country2 . '.gif') }}"> {{$country2}}</h3>
-                <!--<h1>Col du Grand-Saint-Bernard</h1>-->
 				@endif
             </div>
 
-            <div class="col-md-2 altitude">
-                <div class="col-xs-6 altitudetext"><h1>{{$col->Height}}m</h1></div>
+            <div class="col-md-2 col-xs-12 altitude">
+                <div class="col-xs-6 col-md-6 altitudetext"><h1>{{$col->Height}}m</h1></div>
 				@if ($col->PanelURL)
-				<div class="col-xs-5 altitudesign">
+				<div class="col-xs-6 col-md-7 colpanel"">
                     <!--<img src="{{ URL::asset('images/cols/chasseral/Chasseral.jpg') }}" />-->
                     <img src="http://www.cyclingcols.com/photos/{{$col->PanelURL}}" />
                 </div>
