@@ -17,7 +17,7 @@
 </div>
 </div>
 
-<div>
+<div class="overcontent">
     <div class="col-md-2 countries">
         <div id="thecountries" class="thecountries">
             @foreach ($countries as $country)

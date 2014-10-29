@@ -59,6 +59,8 @@ h1 {
     display:none;
     position:relative;
     left:-1000px;
+    padding-top: 75px;
+    padding-bottom: 20px;
     .transition(all, 0.5s, ease-in);
 }
 
@@ -68,12 +70,16 @@ h1 {
     margin-bottom:140px;
     .transition(all, 0.5s, ease-in);
 }
+.overcontent {
+    display:inline;
+}
 
 .countries {
     z-index:10;
     color:white;
     padding-left:0;
     padding-right:0;
+
 }
 .country{
     margin:0px 0 0 0;
@@ -180,11 +186,14 @@ form .twitter-typeahead .searchfield {
 }
 
 /* stop the glowing blue shadow and make it white */
-.add-on .form-control:focus {
+.add-on input:focus {
     box-shadow:none;
     .box-white-shadow(0px, 0px, 10px, 0.9);
-    .transition(all, 0.5s, ease-in-out);
     border-color:#cccccc; 
+    
+}
+input:focus {
+    .transition(all, 0.5s, ease-in-out);
 }
 /*hide bootstrap border*/
 .navbar-form {
@@ -647,6 +656,10 @@ form .twitter-typeahead .searchfield {
         background: rgba(0, 0, 0, 0.9);
         border-right: 1px solid black;
     }
+
+.countries .thecountries  {
+    .transition(none, 0);
+}
     .thecountries {
         display:block;
         position:relative;
