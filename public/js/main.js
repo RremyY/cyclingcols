@@ -11,6 +11,12 @@ function countryclick(country) {
     return false;
 }
 
+/*sets the height of the map-canvas so that it always fills the screen height*/
+function calculatemapheight(){
+    if($('body').hasClass('mappage')){
+        $('#map-canvas').height(($('.footer').offset().top) - ($('#map-canvas').offset().top));
+    }
+}
 
 
 $(function() {
@@ -29,6 +35,7 @@ $(function() {
 });
 
 $(window).resize(function() {
+    calculatemapheight();
     windowwidth = $(document).width();
     if (windowwidth > 992) {
         $('#thecountries').hide(0).removeClass('activecountries').show(0);
@@ -57,6 +64,7 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function() {
+    calculatemapheight();
     
     /*select menu headeritem*/
         $(".tabrow li").removeClass("selectedtab"); //remove     

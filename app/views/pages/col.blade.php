@@ -222,7 +222,7 @@ foreach($profiles as $profile) {
 	elseif($profile->ProfileIdx < 900) {$profileidx_cat = 2;} 
 	else {$profileidx_cat = 1;} 
 ?>
-	        <div class="col-md-12" id="profile{{$profile_count}}">
+	        <div id="profile{{$profile_count}}">
                 <div class="profile">
                     <div class="profiletitle">
                         <h4 class="col-xs-11">{{$col->Col}} <strong>{{$profile->Side}}</strong><br/><span style="font-size:12px;">from {{$profile->Start}}</span></h4>
