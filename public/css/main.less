@@ -432,16 +432,16 @@ input:focus {
 }
 
 .altitudetext{
-	padding: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
     h1 {
         margin: 10px 0px 5px 0px;
-		padding: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
     }
 }
 
 .colpanel {
     margin: 0px 0px 5px 0px;
-	padding: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 .nrprofiles {
@@ -449,12 +449,7 @@ input:focus {
     padding: 10px 30px;
 }
 
-.colmap
-{
-	border: 2px solid gray;
-	border-radius: 5px;
-}
-
+/**    left part colpage    */
 .profileimage
 {
 	padding: 3px 5px 3px 5px;
@@ -524,6 +519,81 @@ input:focus {
 .category.c5{
    .gradient(@color5, darken(@color5,10%));
 	color: #888888;
+}
+
+/**    right part colpage    */
+
+.colmap
+{
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-bottom:15px;
+}
+
+.support {
+    border-radius:10px;
+    border:2px solid gray;
+    margin-bottom:15px;
+    display:inline-block;
+    width:100%;
+    .supporttitle {
+        border-radius:8px 8px 0 0;
+        background: #cbcbcb;
+        h4 {
+            margin:0;
+            padding:10px;
+        }        
+    }
+    .reclame {
+        padding:5px 10px;
+        img {
+            border-radius:5px;
+            width:32%;
+        }
+    }
+}
+
+.profs{
+    border-radius:10px;
+    border:2px solid gray;
+    margin-bottom:15px;
+    display:inline-block;
+    width:100%;
+    .profstitle{
+        border-radius:8px 8px 0 0;
+        background: #cbcbcb;
+        h4 {
+            margin:0;
+            padding:10px;
+        }
+    }
+}
+.profrow {
+    padding:5px 10px;
+    width:100%;
+    .year{
+        float:left;
+        width:15%;
+    }
+    .race {
+        float:left;
+        width:35%;
+    }
+    .rider{
+        float:left;
+        width:35%;
+        font-weight:bold;
+    }
+    .profcountry{
+        float:left;
+        width:15%;
+        img{
+            max-width:36px;
+            display:block;
+            margin:0 auto;
+            padding:2px;
+        }
+    }
 }
 
 .randomimage img{
@@ -607,7 +677,7 @@ input:focus {
     .homemenu .tabrow li {
         padding: 25px 10px 25px 10px;
     }
-    .homemenu .glyphicon {
+    .homemenu .tabrow .glyphicon {
         display:inline-block;
         padding-left:5px;
     }

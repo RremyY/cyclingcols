@@ -257,11 +257,28 @@ foreach($profiles as $profile) {
 					
                 </div>
                 <div class="support">
-                    <h3>Support Cyclingcols</h3>
+                    <div class="supporttitle"><h4>Support Cyclingcols</h4></div>
+                    <div class="reclame">
+                        <img src="{{ URL::asset('images/bannercyclosouvenir.png') }}">
+                        <img src="{{ URL::asset('images/logochaletbeyond.gif') }}">
+                        <img src="{{ URL::asset('images/bannerlescamelias.jpg') }}">
+                    </div>
                 </div>
                 <div class="profs">
-                    <h3>First on top in professional Cycling</h3>
-                </div>            
+                    <div class="profstitle"><h4>First on top in professional Cycling</h4></div>
+                        <div class="profrow clearfix">
+                            <div class="year">2009</div> 
+                            <div class="race">Tour de France</div> 
+                            <div class="rider">Franco Pelliziotti</div>
+                            <div class="profcountry"><img src="{{ URL::asset('images/flags/italy.gif') }}"></div>
+                        </div>
+                        <div class="profrow clearfix">
+                            <div class="year">2006</div> 
+                            <div class="race">Giro d'Italia</div> 
+                            <div class="rider">Sandy Casar</div>
+                            <div class="profcountry"><img src="{{ URL::asset('images/flags/france.gif') }}"></div>
+                        </div>
+                </div>
                 <div class="randomimage">
                     <img src="{{ URL::asset('images/cols/chasseral/P1010006.JPG') }}"/>
                 </div>
