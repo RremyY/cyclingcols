@@ -9,10 +9,10 @@
         </div>
         <ul class='tabrow'>
             <a href="{{url('/')}}"><li class='selectedtab'>Home</li></a>
-            <a id="countrytab" href="#"><li class="countrymenuitem">Countries</li></a>
             <a href="{{url('/random')}}"><li>Random cols</li></a>
             <a href="{{url('/help')}}"><li>Help<i class="glyphicon glyphicon-question-sign"></i></li></a>
             <a href="{{url('/about')}}"><li>About<i class="glyphicon glyphicon-info-sign"></i></li></a>
+            <!--<a id="countrytab" href="#"><li class="countrymenuitem">Countries</li></a>-->
         </ul>
         <div class="headersearch">
             <div class="limitsearchflag"></div>

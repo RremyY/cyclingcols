@@ -12,8 +12,8 @@ function countryclick(country) {
 }
 
 /*sets the height of the map-canvas so that it always fills the screen height*/
-function calculatemapheight(){
-    if($('body').hasClass('mappage')){
+function calculatemapheight() {
+    if ($('body').hasClass('mappage')) {
         $('#map-canvas').height(($('.footer').offset().top) - ($('#map-canvas').offset().top));
     }
 }
@@ -65,14 +65,14 @@ $(window).scroll(function() {
 
 $(document).ready(function() {
     calculatemapheight();
-    
+
     /*select menu headeritem*/
-        $(".tabrow li").removeClass("selectedtab"); //remove     
-        $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
-        $('.randomtemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
-        $('.helptemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
-        $('.abouttemplate .tabrow a:nth-child(5) li').addClass("selectedtab");
-        
+    $(".tabrow li").removeClass("selectedtab"); //remove     
+    $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
+    $('.randomtemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
+    $('.helptemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
+    $('.abouttemplate .tabrow a:nth-child(5) li').addClass("selectedtab");
+
     //searchsuggestion home only.
     if ($('body').hasClass('home')) {
 

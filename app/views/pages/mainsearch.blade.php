@@ -9,33 +9,17 @@
         </div>
         <ul class='tabrow'>
             <a href="{{url('/')}}"><li class='selectedtab'>Home</li></a>
-            <a id="countrytab" href="#"><li class="countrymenuitem">Countries</li></a>
             <a href="{{url('/random')}}"><li>Random cols</li></a>
             <a href="{{url('/help')}}"><li>Help<i class="glyphicon glyphicon-question-sign"></i></li></a>
             <a href="{{url('/about')}}"><li>About<i class="glyphicon glyphicon-info-sign"></i></li></a>
+            <!--<a id="countrytab" href="#"><li class="countrymenuitem">Countries</li></a>-->            
         </ul>
     </div>
 </div>
 
 <div class="overcontent">
-    <div class="col-md-2 countries">
-        <div id="thecountries" class="thecountries">
-            @foreach ($countries as $country)
-            <div class="country">
-                <img src="{{ URL::asset('images/flags') }}/{{$country->Country}}.gif" class="flag"/>
-                <a href="#" title="Limit search to cols in {{$country->Country}}" alt="Cols in {{$country->Country}}" class="countryurl" onclick="countryclick(this.text);">{{$country->Country}}</a>
-                <span class="nrcols">{{$country->NrCols}} cols</span>
-                <a id="globe" href="{{ URL::asset('/') }}map/country/{{$country->CountryIDString}}"><img class="globeicon" src="{{ URL::asset('images/globe.png') }}" title="View in googlemaps" /></a>
-
-            </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="col-md-10 scenery">
+    <div class="col-md-12 scenery">
         <div class='col-md-12 interaction'>
-            <!--<a href="" class='navarrow' id="arrow_left"><img src="{{ URL::asset('images/arrow_left.png') }}" alt="Slide Left" /></a>-->
-
             <div class="limitsearchflag"></div>
             <form class="navbar-form" role="search">
                 <div class="add-on">
@@ -45,11 +29,8 @@
                     </div>
                 </div>
             </form>
-
-        <!--<a href="" class='navarrow' id="arrow_right"><img src="{{ URL::asset('images/arrow_right.png') }}" alt="Slide Right" /></a>-->
-
         </div>
-        <div class="phototext"><a href="{{ URL::asset('col/chasseral')}}">Visit Chasseral, Switserland</a></div>
+        <div class="phototext"><a href="{{ URL::asset('col/Ventoux')}}">Visit Chasseral, Switserland</a></div>
         <div id="maximage">
             <img src="{{ URL::asset('images/slideshow/Italy/P6170155.JPG') }}" alt="" />	
             <img src="{{ URL::asset('images/slideshow/Spain/P3020093.JPG') }}" alt="" />
