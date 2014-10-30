@@ -264,22 +264,52 @@ foreach($profiles as $profile) {
                         <img src="{{ URL::asset('images/bannerlescamelias.jpg') }}">
                     </div>
                 </div>
-                <div class="profs">
-                    <div class="profstitle"><h4>First on top in professional Cycling</h4></div>
-                        <div class="profrow clearfix">
-                            <div class="year">2009</div> 
-                            <div class="race">Tour de France</div> 
-                            <div class="rider">Franco Pelliziotti</div>
-                            <div class="profcountry"><img src="{{ URL::asset('images/flags/italy.gif') }}"></div>
-                        </div>
-                        <div class="profrow clearfix">
-                            <div class="year">2006</div> 
-                            <div class="race">Giro d'Italia</div> 
-                            <div class="rider">Sandy Casar</div>
-                            <div class="profcountry"><img src="{{ URL::asset('images/flags/france.gif') }}"></div>
-                        </div>
-                </div>
-                <div class="randomimage">
+<?php
+	$passages = Passage::where('ColID',$col->ColID)->orderBy('Edition','DESC')->get();
+	
+	if (count($passages) > 0) {
+		$count = 0;
+?>	
+				<div class="profs">
+					<div class="profstitle"><h4>First On Top</h4></div>
+<?php
+		for ($i = 0; $i < count($passages) && $i < 5; $i++) {
+			$passage = $passages[$i];
+			$event = "";
+			switch($passage->EventID) {
+				case 1: $event = "Tour de France"; break;
+				case 2: $event = "Giro d'Italia"; break;
+				case 3: $event = "Vuelta a España"; break;
+			}
+			
+			$person = $passage->Person;
+			$person_class = "rider";
+			$flag = true;
+			if ($passage->Neutralized) {$person = "-neutralized-"; $flag = false;}
+			elseif ($passage->Cancelled) {$person = "-cancelled-"; $flag = false;}
+?>	
+					<div class="profrow clearfix">
+						<div class="year">{{$passage->Edition}}</div> 
+						<div class="race"><i>{{$event}}</i></div> 
+						<div class="rider">{{$person}}</div>
+					@if ($flag)
+						<div class="profcountry"><img src="{{ URL::asset('images/flags/small/'. $passage->NatioAbbr . '.gif') }}"></div>
+					@endif
+					</div>       
+<?php		
+		}
+		
+		if (count($passages) > 5) {
+?>
+		<div class="profrow"><a href="#">show all</a></div>
+<?php
+		}
+?>	
+				</div>
+<?php		
+	}
+?>
+                 <div class="randomimage">
                     <img src="{{ URL::asset('images/cols/chasseral/P1010006.JPG') }}"/>
                 </div>
             </div>
