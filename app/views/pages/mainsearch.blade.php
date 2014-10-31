@@ -25,7 +25,8 @@
                 <div class="add-on">
                     <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="srch-term" id="searchbox">
                     <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default search" type="submit" title="Search"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default globe" type="submit" title="Search on the map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></button>
                     </div>
                 </div>
             </form>
