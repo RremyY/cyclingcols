@@ -97,7 +97,7 @@ var countries = new Bloodhound({
   //local: $.map(states, function(state) { return { value: state }; })
   limit:10,
   prefetch: {
-      url: 'ajax/getcols.php'
+      url: 'ajax/getcolsforsearch.php'
     // the json file contains an array of strings, but the Bloodhound
     // suggestion engine expects JavaScript objects so this converts all of
     // those strings

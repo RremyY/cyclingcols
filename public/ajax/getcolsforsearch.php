@@ -22,10 +22,11 @@
   //--------------------------------------------------------------------------
   // 2) Query database for data
   //--------------------------------------------------------------------------
-  $result = mysql_query("SELECT ColID,ColIDString,Col,Latitude,Longitude,Height FROM cols");          //query
+  $result = mysql_query("SELECT Col FROM cols");          //query
   $cols = array();
   while($res = mysql_fetch_array($result)) {
-	$cols[] = $res;
+      //echo $res[0];
+	$cols[] = $res[0];
   }
 
   //--------------------------------------------------------------------------
