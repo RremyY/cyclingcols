@@ -529,8 +529,9 @@ input:focus {
 {
     border: 2px solid gray;
     border-radius: 10px;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
+
 .randomimage img {
     border-radius: 10px;
     margin-bottom:15px;
@@ -543,20 +544,27 @@ input:focus {
     display:inline-block;
     width:100%;
     .supporttitle {
+		padding: 5px;
         border-radius:8px 8px 0 0;
         background: #cbcbcb;
-        h4 {
-            margin:0;
-            padding:10px;
-        }        
+        /*h4 {
+            margin: 0;
+            padding: 10px;
+        }*/  
     }
-    .reclame {
-        padding:5px 10px;
-        img {
-            border-radius:5px;
-            width:32%;
-        }
-    }
+	.supporttext {
+		text-align: justify;
+        padding: 5px;
+	}
+}
+
+.reclame {
+	margin-bottom:15px;
+    padding:5px 10px;
+	img {
+		border-radius:5px;
+		max-width:190px;
+	}
 }
 
 .profs{
@@ -606,13 +614,14 @@ input:focus {
     width:100%;
     max-width:100%; 
 }
+
 .rightposition {
-    position:relative;
+    position: relative;
 }
 
 .fixed {
-    position:fixed;
-    top:0;
+    position: fixed;
+    top: 0px;
 }
 
 
@@ -689,7 +698,7 @@ input:focus {
         padding: 36px 10px;
     }
     .homelogo img {
-        width:@logopixelwidth;
+        width: @logopixelwidth;
     }
 .overmain .homemenu .tabrow {
     width:40%;

@@ -257,13 +257,35 @@ foreach($profiles as $profile) {
 					
                 </div>
                 <div class="support">
-                    <div class="supporttitle"><h4>Support Cyclingcols</h4></div>
-                    <div class="reclame">
-                        <img src="{{ URL::asset('images/bannercyclosouvenir.png') }}">
-                        <img src="{{ URL::asset('images/logochaletbeyond.gif') }}">
-                        <img src="{{ URL::asset('images/bannerlescamelias.jpg') }}">
-                    </div>
-                </div>
+                    <div class="supporttitle">
+					<form class="donate" align="center" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="6ME8CQEG33GT4">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
+</form>
+					</div>
+					<div class="supporttext">
+					If you appreciate the services of CyclingCols, you could thank by doing a donation. This will promote the continuity and development of CyclingCols.
+					</div>
+				</div>
+				<div class="reclame">
+@if(in_array($col->ColID,array(198)))
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_grossglockner.gif" border="0"/></a>
+@endif
+@if(in_array($col->ColID,array(485,519,577)))
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_ventoux.gif" border="0"/></a>
+@endif
+@if(in_array($col->ColID,array(520,570)))
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond.gif" border="0"/></a>
+@endif
+@if(in_array($col->ColID,array(634)))
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_stelvio.gif" border="0"/></a>
+@endif
+@if(in_array($col->ColID,array(398,399,444,475,485,519,526,542,570,577,578,634,655,1549,1553)))
+					<a href="http://www.cyclosouvenir.be" target="_blank"><img src="../images/banners/bannercyclosouvenir.png" border="0"/></a>
+@endif
+				</div>
 <?php
 	$passages = Passage::where('ColID',$col->ColID)->orderBy('Edition','DESC')->get();
 	
