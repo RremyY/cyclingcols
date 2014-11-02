@@ -97,13 +97,13 @@ var countries = new Bloodhound({
   //local: $.map(states, function(state) { return { value: state }; })
   limit:10,
   prefetch: {
-      url: 'ajax/getcolsforsearch.php'
+      url: 'http://localhost/laravel/public/ajax/getcolsforsearch.php',
     // the json file contains an array of strings, but the Bloodhound
     // suggestion engine expects JavaScript objects so this converts all of
     // those strings
-      /*filter: function(list) {
+      filter: function(list) {
         return $.map(list, function(country) { return { name: country }; });
-    }*/
+    }
   }/*,
   remote: {
       url: 'http://localhost/laravel/public/ajax/getcols.php'
