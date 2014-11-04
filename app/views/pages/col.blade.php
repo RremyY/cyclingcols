@@ -115,9 +115,9 @@
 	}
 ?>
 <div class="colpage">
-    <div class="colimage" style='background-image: 
-         url( {{URL::asset("images/cols/chasseral/P1010004.JPG") }} );'>
-    </div>
+    <div class="colimage" style='background-image: url( {{URL::asset("images/cols/chasseral/P1010004.JPG") }} );'>
+		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
+	</div>
 
     <div class="coltitlesection">
         <div class="col-md-12">
@@ -256,7 +256,7 @@ foreach($profiles as $profile) {
                             src="https://www.google.com/maps/embed/v1/place?q=chasseral&key=AIzaSyAygOiuwB64V3LNNXX5i6p-gRArxV1-P94"></iframe>-->
 					
                 </div>
-                <div class="support">
+                <div id="donate" class="support">
                     <div class="supporttitle">
 					<form class="donate" align="center" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -269,7 +269,7 @@ foreach($profiles as $profile) {
 					If you appreciate the services of CyclingCols, you could thank by doing a donation. This will promote the continuity and development of CyclingCols.
 					</div>
 				</div>
-				<div class="reclame">
+				<div id="reclame" class="reclame">
 @if(in_array($col->ColID,array(198)))
 					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_grossglockner.gif" border="0"/></a>
 @endif
@@ -292,10 +292,16 @@ foreach($profiles as $profile) {
 	if (count($passages) > 0) {
 		$count = 0;
 ?>	
-				<div class="profs">
-					<div class="profstitle"><h4>First On Top</h4></div>
+				<div class="profs" id="profs">
+					<div class="profstitle">
+						<h4>First On Top
+@if (count($passages) > 5)
+						<a id="show_or_hide_a" href="javascript:showAllPassages()"><img align="right" id="show_or_hide" width="20" src="{{ URL::asset('images/expand.png') }}" title="expand list"/></a>						
+@endif
+						</h4>
+					</div>
 <?php
-		for ($i = 0; $i < count($passages) && $i < 5; $i++) {
+		for ($i = 0; $i < count($passages); $i++) {
 			$passage = $passages[$i];
 			$event = "";
 			switch($passage->EventID) {
@@ -309,8 +315,11 @@ foreach($profiles as $profile) {
 			$flag = true;
 			if ($passage->Neutralized) {$person = "-neutralized-"; $flag = false;}
 			elseif ($passage->Cancelled) {$person = "-cancelled-"; $flag = false;}
+			
+			$hidden = "profrow_hidden";
+			if ($i < 5) {$hidden = "";}
 ?>	
-					<div class="profrow clearfix">
+					<div class="profrow {{$hidden}} clearfix">
 						<div class="year">{{$passage->Edition}}</div> 
 						<div class="race"><i>{{$event}}</i></div> 
 						<div class="rider">{{$person}}</div>
@@ -319,12 +328,6 @@ foreach($profiles as $profile) {
 					@endif
 					</div>       
 <?php		
-		}
-		
-		if (count($passages) > 5) {
-?>
-		<div class="profrow"><a href="#">show all</a></div>
-<?php
 		}
 ?>	
 				</div>
@@ -337,8 +340,30 @@ foreach($profiles as $profile) {
             </div>
         </div>
     </div>
-
-
 </div>
+
+<script type="text/javascript">	
+	var showAllPassages = function() {
+		$(".profrow_hidden").css("display","block");
+		$("#show_or_hide").attr("src","{{ URL::asset('images/collapse.png') }}");
+		$("#show_or_hide").attr("title","collapse list");
+		$("#show_or_hide_a").attr("href","javascript:hideAllPassages()");
+		if ($(window).width() >= 992)
+		{
+			$("#map").css("display","none");
+			$("#donate").css("display","none");
+			$("#reclame").css("display","none");
+		}
+	}
+	var hideAllPassages = function() {
+		$("#map").css("display","block");
+		$("#donate").css("display","block");
+		$("#reclame").css("display","block");
+		$(".profrow_hidden").css("display","none");
+		$("#show_or_hide").attr("src","{{ URL::asset('images/expand.png') }}");
+		$("#show_or_hide").attr("title","expand list");
+		$("#show_or_hide_a").attr("href","javascript:showAllPassages()");
+	}
+</script>
 
 @stop

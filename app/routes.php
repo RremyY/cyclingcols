@@ -35,7 +35,7 @@ Route::get('help', function()
 });
 
 
-/*Col pages*/
+/*Col page*/
 Route::get('col/{colIDString}', function($colIDString)
 {
 	$col = Col::where('ColIDString',$colIDString)->first();
@@ -53,9 +53,27 @@ Route::get('col/{colIDString}', function($colIDString)
 		->with('pagetype','coltemplate');
 });
 
-Route::get('pages.col/{colName}/slideshow', function($colName)
+
+
+/*Slideshow page*/
+Route::get('slideshow/{colIDString}', function($colIDString)
 {
-  return "Photo's from {$colName}";
+	$col = Col::where('ColIDString',$colIDString)->first();
+	
+	if (is_null($col))
+	{
+		return "Col does not exist.";
+	}
+
+	return View::make('pages.slideshow')
+		->with('pagetype','slideshowpage');
+
+	$images = Image::where('ColID',$col->ColID)->get();
+	
+	return View::make('pages.slideshow')
+		->with('col',$col)
+		->with('images',$images)
+		->with('pagetype','slideshowpage');
 });
 
 /* googlemaps pages*/

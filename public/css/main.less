@@ -111,6 +111,20 @@ h1 {
         text-shadow: 2px 2px 2px #000000;
     }
 }
+
+.view_slideshow {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+
+    a {
+        color:white;
+        //text-decoration: underline;
+        font-size:14px;
+        text-shadow: 2px 2px 2px #000000;
+    }
+}
+
 #arrow_left, #arrow_right {
     display:none;
 }
@@ -358,6 +372,7 @@ input:focus {
 }
 
 .colimage {
+	position: relative;
     display: none;
     clear: both;
     max-width: 100%;
@@ -589,6 +604,11 @@ input:focus {
         }
     }
 }
+
+.profrow_hidden {
+	display: none;
+}
+
 .profrow {
     padding:5px 10px;
     width:100%;
@@ -745,9 +765,9 @@ input:focus {
     .randomcol .item {
         width:50%;
     }
-    .phototext, .scenery {
+/*    .phototext, .scenery, .view_slideshow {
         position:fixed;
-    }
+    }*/
 	
     .prevbutton {
 		text-align: left;
