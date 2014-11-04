@@ -49,7 +49,7 @@ $(window).resize(function() {
 $(window).scroll(function() {
     var s = $(".rightinfo");
     //fixing the googlemaps column on the col page
-    if (($('body').hasClass('coltemplate')) && ($(document).width() > 992)) {
+    /*if (($('body').hasClass('coltemplate')) && ($(document).width() > 992)) {
         var windowpos = $(window).scrollTop();
 
         if (windowpos >= $(".rightposition").offset().top) {
@@ -60,7 +60,7 @@ $(window).scroll(function() {
     }
     else if (($('body').hasClass('coltemplate')) && ($(document).width() < 992)) {
         s.removeClass("fixed");
-    }
+    }*/
 });
 
 $(document).ready(function() {
@@ -69,12 +69,12 @@ $(document).ready(function() {
     /*select menu headeritem*/
     $(".tabrow li").removeClass("selectedtab"); //remove     
     $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
-    $('.randomtemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
-    $('.helptemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
-    $('.abouttemplate .tabrow a:nth-child(5) li').addClass("selectedtab");
+    $('.randomtemplate .tabrow a:nth-child(2) li').addClass("selectedtab");
+    $('.helptemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
+    $('.abouttemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
 
     //searchsuggestion home only.
-    if ($('body').hasClass('home')) {
+    //if ($('body').hasClass('home')) {
 
 
         /*
@@ -102,7 +102,10 @@ var countries = new Bloodhound({
     // suggestion engine expects JavaScript objects so this converts all of
     // those strings
       filter: function(list) {
-        return $.map(list, function(country) { return { name: country }; });
+        return $.map(list, function(country) {
+            country = country.replace('-', ' ');
+            return { name: country }; 
+        });
     }
   }/*,
   remote: {
@@ -128,5 +131,5 @@ $('#bloodhound .typeahead').typeahead({
   source: countries.ttAdapter()
 });
 
-    }
+    //}
 });

@@ -16,8 +16,8 @@
         </ul>
         <div class="headersearch">
             <div class="limitsearchflag"></div>
-            <form class="navbar-form add-on" role="search">
-                <div class="add-on">
+            <form class="navbar-form" role="search">
+                <div id="bloodhound" class="add-on">
                     <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe.." name="srch-term" id="searchbox">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>

@@ -1,6 +1,6 @@
 <?php 
-  define('AJAX_REQUEST', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
-  if(!AJAX_REQUEST) {die();}
+  /*define('AJAX_REQUEST', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+  if(!AJAX_REQUEST) {die();}*/
 
   //--------------------------------------------------------------------------
   // Example php script for fetching data from mysql database
@@ -22,7 +22,7 @@
   //--------------------------------------------------------------------------
   // 2) Query database for data
   //--------------------------------------------------------------------------
-  $result = mysql_query("SELECT Col FROM cols");          //query
+  $result = mysql_query("SELECT Col FROM cols ORDER BY Col");          //query
   $cols = array();
   while($res = mysql_fetch_array($result)) {
       //echo $res[0];
