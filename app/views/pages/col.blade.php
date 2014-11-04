@@ -230,14 +230,14 @@ foreach($profiles as $profile) {
                             <div class="category c{{$profile->Category}}">{{$profile->Category}}</div>
                         </div>
                     </div>
-                    <div class="col-sm-12 profilestats">
+                    <div class="col-xs-12 profilestats">
 						<div class="profilestat_wrapper">Distance <span class="profilestat c{{$distance_cat}}">{{number_format($profile->Distance/10,1)}} km</span></div>
                         <div class="profilestat_wrapper">Height Difference <span class="profilestat c{{$heightdiff_cat}}">{{$profile->HeightDiff}}m</span></div>
                         <div class="profilestat_wrapper">Average Slope <span class="profilestat c{{$avgperc_cat}}">{{number_format($profile->AvgPerc/10,1)}}%</span></div>
                         <div class="profilestat_wrapper">Maximum Slope <span class="profilestat c{{$maxperc_cat}}">{{number_format($profile->MaxPerc/10,1)}}%</span></div>
                         <div class="profilestat_wrapper">Profile Index <span class="profilestat c{{$profileidx_cat}}">{{$profile->ProfileIdx}}</span></div>
                     </div>
-					<div class="col-sm-12 profileimage">
+					<div class="col-xs-12 profileimage">
 						<!--<img align="left" style="margin: 0px 0px 0px 0px" src="{{ URL::asset('profiles/' . $profile->FileName . '.gif') }}"/>-->
 						<img align="left" style="margin: 0px 0px 0px 0px" src="http://www.cyclingcols.com/profiles/{{$profile->FileName}}.gif" />
 					</div>
@@ -300,6 +300,7 @@ foreach($profiles as $profile) {
 @endif
 						</h4>
 					</div>
+					<div class="profrows">
 <?php
 		for ($i = 0; $i < count($passages); $i++) {
 			$passage = $passages[$i];
@@ -334,7 +335,8 @@ foreach($profiles as $profile) {
 <?php		
 	}
 ?>
-                 <div class="randomimage">
+				</div>
+                <div class="randomimage">
                     <img src="{{ URL::asset('images/cols/chasseral/P1010006.JPG') }}"/>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 
-var homedir = "http://localhost/laravel/public/";
+var homedir = "http://localhost:8000/";
 
 
 //country selection was removed
