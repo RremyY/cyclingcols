@@ -231,11 +231,11 @@ foreach($profiles as $profile) {
                         </div>
                     </div>
                     <div class="col-sm-12 profilestats">
-						Distance <span class="profilestat c{{$distance_cat}}">{{number_format($profile->Distance/10,1)}} km</span>
-                        &nbsp;Height Difference <span class="profilestat c{{$heightdiff_cat}}">{{$profile->HeightDiff}}m</span>
-                        &nbsp;Average Slope <span class="profilestat c{{$avgperc_cat}}">{{number_format($profile->AvgPerc/10,1)}}%</span>
-                        &nbsp;Maximum Slope <span class="profilestat c{{$maxperc_cat}}">{{number_format($profile->MaxPerc/10,1)}}%</span>
-                        &nbsp;Profile Index <span class="profilestat c{{$profileidx_cat}}">{{$profile->ProfileIdx}}</span>
+						<div class="profilestat_wrapper">Distance <span class="profilestat c{{$distance_cat}}">{{number_format($profile->Distance/10,1)}} km</span></div>
+                        <div class="profilestat_wrapper">Height Difference <span class="profilestat c{{$heightdiff_cat}}">{{$profile->HeightDiff}}m</span></div>
+                        <div class="profilestat_wrapper">Average Slope <span class="profilestat c{{$avgperc_cat}}">{{number_format($profile->AvgPerc/10,1)}}%</span></div>
+                        <div class="profilestat_wrapper">Maximum Slope <span class="profilestat c{{$maxperc_cat}}">{{number_format($profile->MaxPerc/10,1)}}%</span></div>
+                        <div class="profilestat_wrapper">Profile Index <span class="profilestat c{{$profileidx_cat}}">{{$profile->ProfileIdx}}</span></div>
                     </div>
 					<div class="col-sm-12 profileimage">
 						<!--<img align="left" style="margin: 0px 0px 0px 0px" src="{{ URL::asset('profiles/' . $profile->FileName . '.gif') }}"/>-->
