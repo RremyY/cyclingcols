@@ -23,12 +23,13 @@
             <div class="limitsearchflag"></div>
             <form class="navbar-form" role="search">
                 <div id="bloodhound" class="add-on">
-                    <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="srch-term" id="searchbox">
+                    <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="colid" id="searchbox">
                     <div class="input-group-btn">
-                        <button class="btn btn-default search" type="submit" title="Search"><i class="glyphicon glyphicon-search"></i></button>
+                        <div class="btn btn-default search" title="Search"><i class="glyphicon glyphicon-search"></i></div>
                         <button class="btn btn-default globe" type="submit" title="Search on the map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></button>
                     </div>
                 </div>
+                <input id="colid" type="hidden" name="colid" value=""/>
             </form>
         </div>
         <div class="phototext"><a href="{{ URL::asset('col/Ventoux')}}">Visit Chasseral, Switserland</a></div>

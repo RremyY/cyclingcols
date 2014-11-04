@@ -22,13 +22,19 @@
   //--------------------------------------------------------------------------
   // 2) Query database for data
   //--------------------------------------------------------------------------
-  $result = mysql_query("SELECT Col FROM cols ORDER BY Col");          //query
+  $result = mysql_query("SELECT ColIDstring, Col FROM cols ORDER BY Col");          //query
   $cols = array();
   while($res = mysql_fetch_array($result)) {
-      //echo $res[0];
-	$cols[] = $res[0];
+      if($res[1] != null){
+        $newarray = [
+            "colidstring" => $res[0],
+            "colname" => $res[1],
+        ];
+        $cols[] =$newarray;
+      }
   }
-
+//[4]=> string(12) "Montecassino"
+  //var_dump($cols);
   //--------------------------------------------------------------------------
   // 3) echo result as json 
   //--------------------------------------------------------------------------
