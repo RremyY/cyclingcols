@@ -23,6 +23,7 @@
                         <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>
+                <input id="colid" type="hidden" name="colid" value=""/>
             </form>
         </div>
     </div>

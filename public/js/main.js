@@ -1,6 +1,9 @@
 
-//
-function countryclick(country) {
+var homedir = "http://localhost/laravel/public/";
+
+
+//country selection was removed
+/*function countryclick(country) {
     windowwidth = $(document).width();
     if (windowwidth < 992) {
         $('#thecountries').removeClass('activecountries').hide(500);
@@ -9,7 +12,7 @@ function countryclick(country) {
 
     //todo: change dataset for in slideshow.
     return false;
-}
+}*/
 
 /*sets the height of the map-canvas so that it always fills the screen height*/
 function calculatemapheight() {
@@ -18,7 +21,7 @@ function calculatemapheight() {
     }
 }
 
-
+/*
 $(function() {
     $('#countrytab').on('click', function(e) {
         $("li").removeClass("selectedtab");
@@ -29,10 +32,10 @@ $(function() {
 
 
     $(window).load(function() {
-        /* */
-
+        
     });
 });
+*/
 
 $(window).resize(function() {
     calculatemapheight();
@@ -64,6 +67,18 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function() {
+    
+    
+    $('#bloodhound .search').click(function(event) {
+        //console.log( "Handler for .click() called." );
+        event.preventDefault();
+        var colstringid = $("#colid").val();
+        if(colstringid !== ""){
+            window.location.replace(homedir + "col/" + colstringid);
+        }
+        //return false;
+    });
+    
     calculatemapheight();
 
     /*select menu headeritem*/
@@ -73,44 +88,25 @@ $(document).ready(function() {
     $('.helptemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
     $('.abouttemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
 
-    //searchsuggestion home only.
-    //if ($('body').hasClass('home')) {
-
-
-        /*
-        var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-            'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-            'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-            'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-            'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-            'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-            'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-            'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-            'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-        ];*/
-
 // constructs the suggestion engine
 var countries = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('colname'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   // `states` is an array of state names defined in "The Basics"
   //local: $.map(states, function(state) { return { value: state }; })
   limit:10,
   prefetch: {
-      url: 'http://localhost/laravel/public/ajax/getcolsforsearch.php',
+      url: homedir +'ajax/getcolsforsearch.php'
     // the json file contains an array of strings, but the Bloodhound
     // suggestion engine expects JavaScript objects so this converts all of
     // those strings
-      filter: function(list) {
+      /*filter: function(list) {
         return $.map(list, function(country) {
-            country = country.replace('-', ' ');
+            //country = country.replace('-', ' ');
             return { name: country }; 
         });
-    }
-  }/*,
-  remote: {
-      url: 'http://localhost/laravel/public/ajax/getcols.php'
-  }*/
+    }*/
+  }
 });
  
 // kicks off the loading/processing of `local` and `prefetch`
@@ -125,11 +121,13 @@ $('#bloodhound .typeahead').typeahead({
   },
   {
   name: 'countries',
-  displayKey: 'name',
+  displayKey: 'colname',
   // `ttAdapter` wraps the suggestion engine in an adapter that
   // is compatible with the typeahead jQuery plugin
   source: countries.ttAdapter()
+}).bind("typeahead:selected", function(obj, datum, name) {
+    $("#colid").val(datum.colidstring);
+    console.log(datum);
 });
 
-    //}
 });
