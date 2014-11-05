@@ -22,7 +22,7 @@
   //--------------------------------------------------------------------------
   // 2) Query database for data
   //--------------------------------------------------------------------------
-  $result = mysql_query("SELECT ColIDstring, Col FROM cols ORDER BY Col");          //query
+  $result = mysql_query("SELECT ColIDString, Col FROM colsearch ORDER BY Priority");          //query
   $cols = array();
   while($res = mysql_fetch_array($result)) {
       if($res[1] != null){
