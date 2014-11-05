@@ -11,9 +11,8 @@ class Col extends Eloquent
 		'ColTypeID','ColType',
 		'Height',
 		'Latitude','Longitude',
-		'Aliases',
 		'CoverPhoto','CoverPhotoPosition',
 		'Panel','PanelSource','PanelSourceURL',
-		'URL'		
+		'URL','Number'
 	);
 }

@@ -6,7 +6,7 @@
 	/*sets the height of the map-canvas so that it always fills the screen height*/
 	function calculateslideshowheight() {
 		if ($('body').hasClass('slideshowpage')) {
-			$h = $(window).height() - $('.footer').height() - $('.overmain').height() - $('#no-template-pager').height() - $('#back').height() - 15;
+			$h = $(window).height() - $('.footer').height() - $('.overmain').height() - $('#no-template-pager').height() - $('#back').height() - 35;
 			$hi = $h - 20; 
 			$('#slideshow').height($h);
 			$('.slide').height($hi);

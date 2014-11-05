@@ -39,6 +39,8 @@ Route::get('help', function()
 Route::get('col/{colIDString}', function($colIDString)
 {
 	$col = Col::where('ColIDString',$colIDString)->first();
+	$col_prev = Col::where('Number',$col->Number - 1)->first();
+	$col_next = Col::where('Number',$col->Number + 1)->first();
 	
 	if (is_null($col))
 	{
@@ -50,6 +52,8 @@ Route::get('col/{colIDString}', function($colIDString)
 	return View::make('pages.col')
 		->with('col',$col)
 		->with('profiles',$profiles)
+		->with('col_prev',$col_prev)
+		->with('col_next',$col_next)
 		->with('pagetype','coltemplate');
 });
 

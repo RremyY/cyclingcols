@@ -113,12 +113,21 @@
 			$country1 .= ", " . $subregion2;
 		}		
 	}
+	
+	$cover = 'images/covers/' . $col->ColIDString . '.jpg';
+	$cover_url = URL::asset($cover);
+	$backgroundpos = 30;
+	if ($col->CoverPhotoPosition) { $backgroundpos = $col->CoverPhotoPosition; }
 ?>
 <div class="colpage">
-    <div class="colimage" style='background-image: url( {{URL::asset("images/cols/chasseral/P1010004.JPG") }} );'>
+	@if(file_exists(public_path($cover))) 
+    <div class="colimage" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $backgroundpos}}%'>
 		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
 	</div>
-
+	@else
+    <div class="colimage" style='background-image: url( {{URL::asset("images/covers/_Dummy.jpg")}} ); background-position: 0% 28%'>
+	</div>	
+	@endif
     <div class="coltitlesection">
         <div class="col-md-12">
             <div class="col-md-6 col-md-offset-2 coltitle">
@@ -140,22 +149,22 @@
             </div>
         </div>
         <div class="col-md-12 buttons">
+			@if (!is_null($col_prev))
             <div class="col-xs-4 col-md-2">
-                <div class='prevbutton'>
-
+                <div class='prevbutton' onclick="location.href='{{$col_prev->ColIDString}}'">
                     <i class="glyphicon glyphicon-arrow-left"></i>
-                    <p>previous col in Switzerland (Alfabetic)</p>
-
+                    <p>{{$col_prev->Col}}</p>
                 </div>
             </div>
+			@endif
+			@if (!is_null($col_next))
             <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-8">
-                <div class='nextbutton'>
-
-                    <p>next col in Switzerland (Alfabetic)</p>
+                <div class='nextbutton' onclick="location.href='{{$col_next->ColIDString}}'">
+                    <p>{{$col_next->Col}}</p>
                     <i class="glyphicon glyphicon-arrow-right"></i>
-
                 </div>
-            </div>    
+            </div> 
+			@endif  
         </div>
     </div>
 
@@ -316,6 +325,7 @@ foreach($profiles as $profile) {
 			$flag = true;
 			if ($passage->Neutralized) {$person = "-neutralized-"; $flag = false;}
 			elseif ($passage->Cancelled) {$person = "-cancelled-"; $flag = false;}
+			elseif ($passage->NatioAbbr == "") {$person = "-cancelled-"; $flag = false;}
 			
 			$hidden = "profrow_hidden";
 			if ($i < 5) {$hidden = "";}
