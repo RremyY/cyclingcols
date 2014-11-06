@@ -1,6 +1,6 @@
 
-var homedir = "http://localhost:8000/";
-
+//var homedir = "http://localhost:8000/"; 
+var homedir = "http://localhost/laravel/public/";
 
 //country selection was removed
 /*function countryclick(country) {
@@ -68,19 +68,28 @@ $(window).scroll(function() {
 
 $(document).ready(function() {
     
+    calculatemapheight();    
     
+    /*on keyboard enter press*/
+    $(document).keypress(function(e) {
+        if(e.which === 13) {
+            var colstringid = $("#colid").val();
+            if(colstringid !== ""){
+                e.preventDefault();
+                window.location.replace(homedir + "col/" + colstringid);
+            }
+        }
+    });
+    
+    /*on search button click event*/
     $('#bloodhound .search').click(function(event) {
-        //console.log( "Handler for .click() called." );
         event.preventDefault();
         var colstringid = $("#colid").val();
         if(colstringid !== ""){
             window.location.replace(homedir + "col/" + colstringid);
         }
-        //return false;
     });
     
-    calculatemapheight();
-
     /*select menu headeritem*/
     $(".tabrow li").removeClass("selectedtab"); //remove     
     $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
@@ -127,7 +136,7 @@ $('#bloodhound .typeahead').typeahead({
   source: countries.ttAdapter()
 }).bind("typeahead:selected", function(obj, datum, name) {
     $("#colid").val(datum.colidstring);
-    console.log(datum);
+    //console.log(datum);
 });
 
 });

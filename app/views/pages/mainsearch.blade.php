@@ -26,7 +26,7 @@
                     <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="colid" id="searchbox">
                     <div class="input-group-btn">
                         <div class="btn btn-default search" title="Search"><i class="glyphicon glyphicon-search"></i></div>
-                        <button class="btn btn-default globe" type="submit" title="Search on the map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></button>
+                        <a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Display map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
                     </div>
                 </div>
                 <input id="colid" type="hidden" name="colid" value=""/>
