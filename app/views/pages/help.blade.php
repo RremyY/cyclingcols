@@ -4,11 +4,11 @@
 <div clas="col-md-12">
     <div class="plaintext">
     <h1>
-        Cyclingcols Help
+        CyclingCols Help
     </h1>
-        <p>This page will help explain the graphs of a col. As an example image we use La berarde, a col of 27,3 km length in France.</p>
+        <p>This page will help explain the graphs of a col. As an example image we use <a href="{{ URL::asset('col/Berarde') }}">La Bérarde</a>, a col of 27,3 km length in France.</p>
     
-        <img src="{{ URL::asset('images/cols/berarde/Berarde.gif') }}"/>
+        <img src="{{ URL::asset('images/Help_Berarde.gif') }}"/>
         
         <h1>Legend</h1>
         <ul>

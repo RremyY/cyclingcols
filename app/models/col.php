@@ -13,6 +13,7 @@ class Col extends Eloquent
 		'Latitude','Longitude',
 		'CoverPhoto','CoverPhotoPosition',
 		'Panel','PanelSource','PanelSourceURL',
-		'URL','Number'
+		'URL','Number',
+		'HasImages'
 	);
 }

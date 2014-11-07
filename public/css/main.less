@@ -400,50 +400,71 @@ input:focus {
     background: #cbcbcb;
     width: 100%;
 }
+
 .prevbutton, .nextbutton {
   position: relative;
   display: inline-block;
   .gradient(#f7f7f7, #e7e7e7);
-  padding: 10px;
+  padding: 5px;
   width: 100%;
   max-width: 200px;
-  height: 50px;
-  position: relative;
-  line-height: 20px;
-  border-radius: 5%;
+  border-radius: 10px;
   box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
 }
+
 .buttons {
-    position:relative;
+    height: 40px;
+	padding: 0px;
 }
+
 .prevbutton:hover, .nextbutton:hover {
-  text-decoration: none;
-  color: @orangecolor;
-  background: #f5f5f5;
+	text-decoration: none;
+	color: @orangecolor;
+	background: #f5f5f5;
     cursor: pointer;
 }
 
-.nextbutton p {
-    width: 85%;
-    float: left;
-    .vertical-align();
+.nextbutton {
+	float: right;
+	max-width: 200px;
+	//.vertical-align();
 	text-align: right;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    .glyphicon {
+		float: right;
+		width: 20px;
+		//.vertical-align();
+		//border: 1px solid black;	
+	}
 }
-.nextbutton i {
-    width: 15%;
-    float: right;
-    .vertical-align();
-}
-.prevbutton p {
-    width: 85%;
-    float: right;
-    .vertical-align();
+
+.prevbutton {
+	float: left;
+	max-width: 200px;
+	//.vertical-align();
 	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    .glyphicon {
+		float: left;
+		width: 20px;
+		//.vertical-align();
+		//border: 1px solid black;	
+	}
 }
-.prevbutton i {
-    width: 15%;
-    float: left;
-    .vertical-align();
+
+@media (min-width:992px)
+{
+	.buttons {
+		height: 0px;
+	}
+	
+	.nextbutton, .prevbutton {
+		bottom: 40px;
+	}
 }
 
 .coltitle {
@@ -454,6 +475,8 @@ input:focus {
     h3 {
        margin: 0px 0px 5px 0px;
 	   font-style: italic;
+	   font-size: 20px;
+	   vertical-align: middle;
     }
     img {
         max-width: 35px;
@@ -634,31 +657,46 @@ input:focus {
 	background: #fff;
 }
 
+@media (max-width: 500px), (min-width: 991px) and (max-width: 1119px) {
+	.race {
+		display: none
+	}
+}
+@media (min-width: 501px) and (max-width: 991px), (min-width: 1120px) {
+	.race_short {
+		display: none
+	}
+}
+
 .profrow {
 	border-top: 1px solid #aaaaaa;
-    padding:5px 10px;
-    width:100%;
+    padding: 5px 10px;
+    width: 100%;
     .year{
-        float:left;
-        width:15%;
+        float: left;
+        width: 40px;
     }
     .race {
-        float:left;
-        width:35%;
+        float: left;
+        width: 120px;
+    }
+    .race_short {
+        float: left;
+        width: 40px;
     }
     .rider{
-        float:left;
-        width:35%;
-        font-weight:bold;
+        float: left;
+		font-weight: bold;
     }
     .profcountry{
-        float:left;
-        width:15%;
+        float: right;
+        width: 20px;
+		text-align: middle;
         img{
-            max-width:36px;
-            display:block;
-            margin:0 auto;
-            padding:2px;
+            max-width: 36px;
+            display: block;
+            margin: 10 auto;
+            padding: 2px;
         }
     }
 }
@@ -779,48 +817,31 @@ input:focus {
         border-right: 1px solid black;
     }
 
-
     .thecountries {
-        display:block;
-        position:relative;
-        left:0px;
+        display: block;
+        position: relative;
+        left: 0px;
     }
     .countries, scenery {
-        min-height:100%;
+        min-height: 100%;
     }
+	
     .randomcol .item {
-        width:50%;
+        width: 50%;
     }
-/*    .phototext, .scenery, .view_slideshow {
-        position:fixed;
-    }*/
-	
-    .prevbutton {
-		text-align: left;
-		position: absolute;
-        left: 0px;
-        bottom: 20px;
-    }
-	
-	.nextbutton {
-		text-align: right;
-		position: absolute;
-		right: 0px;
-        bottom: 20px;
-	}
     
     .interaction {
-        position:relative;
-        width:40%;
-        margin:0 25%;
-        margin-top:20%;
+        position: relative;
+        width: 40%;
+        margin: 0 25%;
+        margin-top: 20%;
     }
 
 /* mainheader menu items*/
 /* mainheader searchbar */
 
     .navbar-form .input-group{
-        width:100%;
+        width: 100%;
     }
 
 

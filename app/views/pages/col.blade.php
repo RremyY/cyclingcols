@@ -122,10 +122,15 @@
 <div class="colpage">
 	@if(file_exists(public_path($cover))) 
     <div class="colimage" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $backgroundpos}}%'>
+		@if($col->HasImages)
 		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
+		@endif
 	</div>
 	@else
     <div class="colimage" style='background-image: url( {{URL::asset("images/covers/_Dummy.jpg")}} ); background-position: 0% 28%'>
+		@if($col->HasImages)
+		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
+		@endif
 	</div>	
 	@endif
     <div class="coltitlesection">
@@ -148,20 +153,18 @@
 				@endif
             </div>
         </div>
-        <div class="col-md-12 buttons">
+        <div class="col-xs-12 buttons">
 			@if (!is_null($col_prev))
-            <div class="col-xs-4 col-md-2">
-                <div class='prevbutton' onclick="location.href='{{$col_prev->ColIDString}}'">
-                    <i class="glyphicon glyphicon-arrow-left"></i>
-                    <p>{{$col_prev->Col}}</p>
+            <div class="col-xs-6 col-md-2">
+                <div class='prevbutton' onclick="location.href='{{$col_prev->ColIDString}}'" title="go to previous col (alphabetical): {{$col_prev->Col}}">
+                    <i class="glyphicon glyphicon-arrow-left"></i>{{$col_prev->Col}}
                 </div>
             </div>
 			@endif
 			@if (!is_null($col_next))
-            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-8">
-                <div class='nextbutton' onclick="location.href='{{$col_next->ColIDString}}'">
-                    <p>{{$col_next->Col}}</p>
-                    <i class="glyphicon glyphicon-arrow-right"></i>
+            <div class="col-xs-6 col-md-2 col-md-offset-8">
+                <div class='nextbutton' onclick="location.href='{{$col_next->ColIDString}}'" title="go to next col (alphabetical): {{$col_next->Col}}">
+                    <i class="glyphicon glyphicon-arrow-right"></i>{{$col_next->Col}}            
                 </div>
             </div> 
 			@endif  
@@ -313,11 +316,13 @@ foreach($profiles as $profile) {
 <?php
 		for ($i = 0; $i < count($passages); $i++) {
 			$passage = $passages[$i];
-			$event = "";
+			$race = ""; 
+			$race_short = "";
+			
 			switch($passage->EventID) {
-				case 1: $event = "Tour de France"; break;
-				case 2: $event = "Giro d'Italia"; break;
-				case 3: $event = "Vuelta a España"; break;
+				case 1: $race = "Tour de France"; $race_short = "Tour"; break;
+				case 2: $race = "Giro d'Italia"; $race_short = "Giro"; break;
+				case 3: $race = "Vuelta a España"; $race_short = "Vuelta"; break;
 			}
 			
 			$person = $passage->Person;
@@ -332,7 +337,8 @@ foreach($profiles as $profile) {
 ?>	
 					<div class="profrow {{$hidden}} clearfix">
 						<div class="year">{{$passage->Edition}}</div> 
-						<div class="race"><i>{{$event}}</i></div> 
+						<div class="race"><i>{{$race}}</i></div> 
+						<div class="race_short" title="{{$race}}"><i>{{$race_short}}</i></div> 
 						<div class="rider">{{$person}}</div>
 					@if ($flag)
 						<div class="profcountry"><img src="{{ URL::asset('images/flags/small/'. $passage->NatioAbbr . '.gif') }}"></div>

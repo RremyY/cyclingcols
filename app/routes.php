@@ -69,7 +69,7 @@ Route::get('slideshow/{colIDString}', function($colIDString)
 		return "Col does not exist.";
 	}
 
-	$images = "";//Image::where('ColID',$col->ColID)->get();
+	$images = Image::where('ColID',$col->ColID)->get();
 	
 	return View::make('pages.slideshow')
 		->with('col',$col)

@@ -1,7 +1,3 @@
-
-
-
-
 <div class="overmain">
     <div class="homemenu">
         <div class="homelogo">
