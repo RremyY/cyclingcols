@@ -3,15 +3,14 @@
         <div class="homelogo">
             <a href="{{ URL::asset('/') }}"><img src="{{ URL::asset('images/logo.png') }}" /></a>
         </div>
-        <ul class='tabrow'>
+        <ul class="tabrow">
             <a href="{{url('/')}}"><li class='selectedtab'>Home</li></a>
-            <a href="{{url('/random')}}"><li>Random cols</li></a>
+            <a href="{{url('/random')}}"><li>Random Cols</li></a>
             <a href="{{url('/help')}}"><li>Help<i class="glyphicon glyphicon-question-sign"></i></li></a>
             <a href="{{url('/about')}}"><li>About<i class="glyphicon glyphicon-info-sign"></i></li></a>
             <!--<a id="countrytab" href="#"><li class="countrymenuitem">Countries</li></a>-->
         </ul>
         <div class="headersearch">
-            <div class="limitsearchflag"></div>
             <form class="navbar-form" role="search">
                 <div id="bloodhound" class="add-on">
                     <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe.." name="colid" id="searchbox">
