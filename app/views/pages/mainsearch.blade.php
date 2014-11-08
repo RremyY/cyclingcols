@@ -18,12 +18,12 @@
 </div>
 
 <div class="overcontent">
-    <div class="col-md-12 scenery">
+    <div class="col-md-12 scenery" style="padding:0px">
         <div class='col-md-12 interaction'>
             <div class="limitsearchflag"></div>
             <form class="navbar-form" role="search">
                 <div id="bloodhound" class="add-on">
-                    <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="colid" id="searchbox">
+                    <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="colid" id="searchbox" style="z-index:1000">
                     <div class="input-group-btn">
                         <div class="btn btn-default search" title="Search"><i class="glyphicon glyphicon-search"></i></div>
                         <a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Display map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
@@ -32,26 +32,54 @@
                 <input id="colid" type="hidden" name="colid" value=""/>
             </form>
         </div>
-        <div class="phototext"><a href="{{ URL::asset('col/Ventoux')}}">Visit Chasseral, Switserland</a></div>
-        <div id="maximage">
-            <img src="{{ URL::asset('images/slideshow/Italy/P6170155.JPG') }}" alt="" />	
-            <img src="{{ URL::asset('images/slideshow/Spain/P3020093.JPG') }}" alt="" />
-            <img src="{{ URL::asset('images/slideshow/Spain/P3020096.JPG') }}" alt="" />
-            <img src="{{ URL::asset('images/slideshow/Spain/P3020102.JPG') }}" alt="" />
+        <div id="phototext" class="phototext" style="z-index:1000"><a href=""></a></div>
+        <div id="slide" style="margin:0px;width: 100%;height:800px;background-repeat:no-repeat">
         </div>
 
         <script type="text/javascript" charset="utf-8">
-                    $(function() {
-                        // Trigger maximage
-                        $('#maximage').maximage({
-                            cycleOptions: {
-                                fx: 'fade',
-                                speed: 5000 // Has to match the speed for CSS transitions in jQuery.maximage.css (lines 30 - 33)
-                                        //prev: '#arrow_left',
-                                        //next: '#arrow_right'
-                            }
-                        });
-                    });
+			var images;
+
+			function showSlide(images,nr) {
+				setSlide("{{ URL::asset('images/covers')}}/" + images[nr][0] + ".jpg","{{ URL::asset('col')}}/" + images[nr][0],images[nr][1]);
+				if (nr<images.length-1) {
+					setTimeout(function(){showSlide(images,nr+1)},5000);
+				}
+			}
+			
+			setSlide = function(slide_url,href,colname) {
+				console.log(slide_url);
+				//$("#slide").css("background-image",  "url('" + slide_url + "')");
+				//$("#slide").css("background-position",  "30%");
+				setTimeout(function(){$("#phototext a").attr("href",href)},500);//$("#phototext a").attr("href",href);
+				setTimeout(function(){$("#phototext a").text("Visit " + colname);},500);//$("#phototext a").text("Visit " + colname);
+				$("#slide").backstretch(slide_url, {fade: 750});
+			}
+			
+			$.ajax({
+				url : "{{ URL::asset('ajax/getphotos.php') }}",
+				data : "",
+				dataType : 'json',
+				success : function(data) {
+					images = data;
+				
+					//init();
+					showSlide(images,0);
+				}
+			})
+
+			function calculateslideshowheight() {
+				$h = $(window).height() - $('.footer').height() - $('.overmain').height();
+				$('#slide').height($h);
+			}
+			
+			$(document).ready(function() {
+				calculateslideshowheight();
+			});
+			
+			$(window).resize(function() {
+				calculateslideshowheight(); 
+			});
+
         </script>
     </div>    
 </div>

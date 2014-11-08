@@ -14,10 +14,10 @@
 /* Homepage */
 Route::get('/', function()
 {
-	$countries = Country::orderBy('CountrySort', 'ASC')->get();
+	//$countries = Country::orderBy('CountrySort', 'ASC')->get();
 	
 	return View::make('pages.mainsearch')
-	->with('countries',$countries)
+	//->with('countries',$countries)
 	->with('pagetype','home');
 });
 
