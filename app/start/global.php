@@ -50,7 +50,7 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 	
-	return "An error occurred. Please check the url or try again.";
+	//return "An error occurred. Please check the url or try again.";
 });
 
 /*

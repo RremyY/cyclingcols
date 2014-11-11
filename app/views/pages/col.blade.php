@@ -70,6 +70,21 @@
 </script>
 <?php 
 	$colname = str_replace('/','<br/>',$col->Col);
+	
+	//aliases
+	$aliases = explode(';',$col->Aliases);
+	$aliases_str = "";
+	for($i = 0; $i < count($aliases); $i++)
+	{
+		if (strlen($aliases[$i]) > 0)
+		{
+			if (!strstr($col->Col,$aliases[$i]))
+			{
+				if (strlen($aliases_str) > 0) { $aliases_str .= ", "; }
+				$aliases_str .= $aliases[$i];
+			}
+		}
+	}
 
 	//create country string(s)
 	$country1 = $col->Country1;
@@ -89,7 +104,7 @@
 			
 			if ($subregion2)
 			{
-				$country2 .= ", " . $subregion2;
+				$country2 .= " (" . $subregion2 . ")";
 			}
 		}
 	}
@@ -97,20 +112,29 @@
 	if ($region1)
 	{
 		$country1 .= ", " . $region1;
+	
+		if ($subregion1)
+		{
+			$country1 .= " (" . $subregion1;
+			
+			if ($subregion2 && !$region2)
+			{
+				$country1 .= ", ". $subregion2 . ")";
+			}
+			else
+			{
+				$country1 .= ")";
+			}
+		}
 		
 		if ($region2 && !$country2)
 		{
 			$country1 .= ", " . $region2;
 		}
-	
-		if ($subregion1)
-		{
-			$country1 .= ", " . $subregion1;
-		}
 		
 		if ($subregion2 && !$country2)
 		{
-			$country1 .= ", " . $subregion2;
+			$country1 .= " (" . $subregion2 . ")";
 		}		
 	}
 	
@@ -137,6 +161,9 @@
         <div class="col-md-12">
             <div class="col-md-6 col-md-offset-2 coltitle">
                 <h1>{{$colname}}</h1>
+	@if (strlen($aliases_str) > 0)
+				<h4>({{$aliases_str}})</h4>
+	@endif
 				<h3><img src="{{ URL::asset('images/flags/' . $col->Country1 . '.gif') }}"/> {{$country1}}</h3>
                 @if ($country2)
                 <h3><img src="{{ URL::asset('images/flags/' . $col->Country2 . '.gif') }}"> {{$country2}}</h3>

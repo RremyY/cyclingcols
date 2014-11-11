@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}" type="text/css">
 
-        <link rel="stylesheet" href="{{ URL::asset('css/jquery.maximage.css') }}" type="text/css" media="screen" charset="utf-8" />
+        <!--<link rel="stylesheet" href="{{ URL::asset('css/jquery.maximage.css') }}" type="text/css" media="screen" charset="utf-8" />-->
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         
        <script src="{{ URL::asset('js/jquery-latest.min.js') }}" type="text/javascript"></script>

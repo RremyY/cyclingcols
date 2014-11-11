@@ -22,7 +22,7 @@
   //--------------------------------------------------------------------------
   // 2) Query database for data
   //--------------------------------------------------------------------------
-  $result = mysql_query("SELECT ColIDString,Col,CoverPhotoPosition FROM cols WHERE CoverPhotoPosition IS NOT NULL ORDER BY RAND() LIMIT 20");          //query
+  $result = mysql_query("SELECT ColIDString,Col,CoverPhotoPosition,Country1,Country2 FROM cols WHERE CoverPhotoMainPage = 1 AND CoverPhotoPosition IS NOT NULL ORDER BY RAND() LIMIT 50");          //query
   $cols = array();
   while($res = mysql_fetch_array($result)) {
 	$cols[] = $res;
