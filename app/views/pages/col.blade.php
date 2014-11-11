@@ -130,12 +130,12 @@
 		if ($region2 && !$country2)
 		{
 			$country1 .= ", " . $region2;
-		}
-		
-		if ($subregion2 && !$country2)
-		{
-			$country1 .= " (" . $subregion2 . ")";
-		}		
+			
+			if ($subregion2)
+			{
+				$country1 .= " (" . $subregion2 . ")";
+			}		
+		}	
 	}
 	
 	$cover = 'images/covers/' . $col->ColIDString . '.jpg';
@@ -171,7 +171,7 @@
             </div>
 
             <div class="col-md-2 col-xs-12 altitude">
-                <div class="col-xs-6 col-md-6 altitudetext"><h1>{{$col->Height}}m</h1></div>
+                <div class="col-xs-6 col-md-6 altitudetext">{{$col->Height}}m</div>
 				@if ($col->PanelURL)
 				<div class="col-xs-6 col-md-7 colpanel"">
                     <!--<img src="{{ URL::asset('images/cols/chasseral/Chasseral.jpg') }}" />-->

@@ -253,16 +253,16 @@ input:focus {
 .mappage .footer,
 .randomtemplate .footer, 
 .home .footer {
-    position:fixed;
+    position: fixed;
 }
 .footerblack {
-    background:#111;
+    background: #111;
 }
 
 .footercredits {
-        display:inline-block;
-        width:100%;
-        padding:10px 20px 0px 10px;
+        display: inline-block;
+        width: 100%;
+        padding: 10px 20px 0px 10px;
         text-align: right;
 }
 
@@ -278,22 +278,27 @@ input:focus {
     position:relative;
     text-align: center;
     list-style: none;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     line-height: 24px;
 }
 
 .tabrow li {
     position: relative;
     z-index: 0;
-    margin: 0 0;
+    margin: 0px;
+	margin-right: -5px;
     padding: 5px 2px 5px 2px;
-    border: 0px solid #000;
+    border-left: 1px solid #aaa;
+    //border-right: 1px solid red;
     display: inline-block;
-    margin: 0 -1px;
-    z-index:1;
+    z-index: 1;
 }
 
+.tabrow li.about {
+		border-right: 1px solid #aaa;
+}
+	
 .tabrow a:hover {
     text-decoration: none;
 	color: #fff;
@@ -316,7 +321,7 @@ input:focus {
     top: 0;
     left: 0;
     right: 0;
-    margin-top: -2px;
+    //margin-top: -2px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
     background: #111;
     a {
@@ -341,7 +346,7 @@ input:focus {
 .headersearch {
 	width: 100%;
 	//background:#333;
-	display:block;
+	display: block;
 	//padding:2px 0;
 }
 
@@ -362,8 +367,8 @@ input:focus {
 .homemenu .tabrow li {
     //padding: 15px 2px 15px 2px;
     /*box-shadow: 0 -2px 3px rgba(255, 255, 255, 0.4);*/
-    display:inline;
-    background:none;
+    display: inline;
+    background: none;
 }
 
 .tabrow li.selectedtab {
@@ -386,20 +391,20 @@ input:focus {
 
 .plaintext {
     clear:both;
-    margin:0 auto;
-    font-size:18px;
-    padding:20px 10%;
-       padding-bottom:99px;
-       margin-bottom:30px;
+    margin: 0 auto;
+    font-size: 18px;
+    padding: 20px 10%;
+       padding-bottom: 99px;
+       margin-bottom: 30px;
     h1 {
         text-align: center;
-        color:@orangecolor;
+        color: @orangecolor;
     }
     img {
         padding: 10px 0 20px 0;
-        max-width:100%;
-        display:block;
-        margin:0 auto;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
     }
 }
 /******************** colpage section ********************/
@@ -515,7 +520,9 @@ input:focus {
 }
 
 .altitudetext{
-    padding: 0px 0px 0px 0px;
+	font-size: 26px;
+	font-weight: bold;
+    padding: 10px 0px 0px 0px;
     h1 {
         margin: 10px 0px 5px 0px;
         padding: 0px 0px 0px 0px;
@@ -773,8 +780,9 @@ input:focus {
         padding-right: 2px;
     }
     .tabrow li {
-         box-shadow: none;
-     }
+         //box-shadow: none;
+		 font-size: 12px;
+    }
 }
 
 @media (max-width:499px) {
@@ -784,7 +792,7 @@ input:focus {
 	}
     .homemenu .tabrow li {
         padding: 14px 4px 12px 4px;
-        box-shadow: 0 -2px 3px rgba(255, 255, 255, 0.4);
+        //box-shadow: 0 -2px 3px rgba(255, 255, 255, 0.4);
     }
 	.category {
         margin: 10px 10px 10px -10px;
@@ -797,7 +805,7 @@ input:focus {
 @media (min-width:500px) {
     .homemenu .tabrow li {
         padding: 19px 14px;
-        box-shadow: 0 -2px 3px rgba(255, 255, 255, 0.4);
+        //box-shadow: 0 -2px 3px rgba(255, 255, 255, 0.4);
     }
 }
 
@@ -827,22 +835,22 @@ input:focus {
     }
 
 	.overmain .homemenu .tabrow {
-		width:40%;
+		width: 40%;
 	}
 	.headersearch {
-		width:38%;
-		display:inline-block;
-		background:none;
+		width: 38%;
+		display: inline-block;
+		background: none;
 	}
 
 	.navarrow {
-		display:inline-block;
+		display: inline-block;
 	}
 	.tabrow {
-		text-align:left;
+		text-align: left;
 	}
 	.homemenu #countrytab{
-		display:none;
+		display: none;
 	}
 	.countries {
 		.box-shadow(5px, 0px, 6px, 0.5);
