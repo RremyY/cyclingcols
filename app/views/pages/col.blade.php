@@ -310,19 +310,19 @@ foreach($profiles as $profile) {
 				</div>
 				<div id="reclame" class="reclame">
 @if(in_array($col->ColID,array(198)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_grossglockner.gif" border="0"/></a>
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Grossglockner.gif" border="0"/></a>
 @endif
 @if(in_array($col->ColID,array(485,519,577)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_ventoux.gif" border="0"/></a>
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Ventoux.gif" border="0"/></a>
 @endif
 @if(in_array($col->ColID,array(520,570)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond.gif" border="0"/></a>
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond.gif" border="0"/></a>
 @endif
 @if(in_array($col->ColID,array(634)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/logochaletbeyond_stelvio.gif" border="0"/></a>
+					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Stelvio.gif" border="0"/></a>
 @endif
 @if(in_array($col->ColID,array(398,399,444,475,485,519,526,542,570,577,578,634,655,1549,1553)))
-					<a href="http://www.cyclosouvenir.be" target="_blank"><img src="../images/banners/bannercyclosouvenir.png" border="0"/></a>
+					<a href="http://www.cyclosouvenir.be" target="_blank"><img src="../images/banners/BannerCyclosouvenir.png" border="0"/></a>
 @endif
 				</div>
 <?php
@@ -368,7 +368,7 @@ foreach($profiles as $profile) {
 						<div class="race_short" title="{{$race}}"><i>{{$race_short}}</i></div> 
 						<div class="rider">{{$person}}</div>
 					@if ($flag)
-						<div class="profcountry"><img src="{{ URL::asset('images/flags/small/'. $passage->NatioAbbr . '.gif') }}"></div>
+						<div class="profcountry"><img src="{{ URL::asset('images/flags/small/'. strtolower($passage->NatioAbbr) . '.gif') }}"></div>
 					@endif
 					</div>       
 <?php		

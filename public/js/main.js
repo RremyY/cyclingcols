@@ -1,4 +1,5 @@
 
+//var homedir = "http://cyclingcols.rmjg.nl/"; 
 var homedir = "http://localhost:8000/"; 
 //var homedir = "http://localhost/laravel/public/";
 
@@ -105,7 +106,7 @@ var countries = new Bloodhound({
   //local: $.map(states, function(state) { return { value: state }; })
   limit:10,
   prefetch: {
-      url: homedir +'ajax/getcolsforsearch.php'
+      url: homedir + 'ajax/getcolsforsearch.php'
     // the json file contains an array of strings, but the Bloodhound
     // suggestion engine expects JavaScript objects so this converts all of
     // those strings

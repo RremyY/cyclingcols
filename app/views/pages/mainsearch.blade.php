@@ -47,11 +47,11 @@
 				}
 				setSlide("{{ URL::asset('images/covers')}}/" + images[nr][0] + ".jpg","{{ URL::asset('col')}}/" + images[nr][0],col);
 				if (nr<images.length-1) {
-					setTimeout(function(){showSlide(images,nr+1)},5000);
+					setTimeout(function(){showSlide(images,nr+1)},7000);
 				}
 				else
 				{
-					setTimeout(function(){startSlideShow()},5000); //restart slideshow with new slides
+					setTimeout(function(){startSlideShow()},7000); //restart slideshow with new slides
 				}
 			}
 			
