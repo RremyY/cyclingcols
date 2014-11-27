@@ -308,23 +308,37 @@ foreach($profiles as $profile) {
 					If you appreciate the services of CyclingCols, you could thank by doing a donation. This will promote the continuity and development of CyclingCols.
 					</div>
 				</div>
-				<div id="reclame" class="reclame">
-@if(in_array($col->ColID,array(198)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Grossglockner.gif" border="0"/></a>
-@endif
-@if(in_array($col->ColID,array(485,519,577)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Ventoux.gif" border="0"/></a>
-@endif
-@if(in_array($col->ColID,array(520,570)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond.gif" border="0"/></a>
-@endif
-@if(in_array($col->ColID,array(634)))
-					<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Stelvio.gif" border="0"/></a>
-@endif
-@if(in_array($col->ColID,array(398,399,444,475,485,519,526,542,570,577,578,634,655,1549,1553)))
-					<a href="http://www.cyclosouvenir.be" target="_blank"><img src="../images/banners/BannerCyclosouvenir.png" border="0"/></a>
-@endif
-				</div>
+<?php
+	$reclame_count = 0;
+	$reclame = "";
+
+	if(in_array($col->ColID,array(198))) {
+		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Grossglockner.gif"/></a>';
+		$reclame_count++;
+	}
+	if(in_array($col->ColID,array(485,519,577))) {
+		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Ventoux.gif"/></a>';
+		$reclame_count++;
+	}
+	if(in_array($col->ColID,array(520,570))) {
+		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond.gif"/></a>';
+		$reclame_count++;
+	}
+	if(in_array($col->ColID,array(634))) {
+		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Stelvio.gif"/></a>';
+		$reclame_count++;
+	}
+	if(in_array($col->ColID,array(398,399,444,475,485,519,526,542,570,577,578,634,655,1549,1553))) {
+		$reclame .= '<a href="http://www.cyclosouvenir.be" target="_blank"><img src="../images/banners/BannerCyclosouvenir.png"/></a>';
+		$reclame_count++;
+	}
+?>	
+	@if ($reclame_count > 0)
+	<div id="reclame" class="reclame">
+	{{$reclame}}
+	</div>
+	@endif
+
 <?php
 	$passages = Passage::where('ColID',$col->ColID)->orderBy('Edition','DESC')->get();
 	

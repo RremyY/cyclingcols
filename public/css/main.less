@@ -118,7 +118,7 @@ h1 {
 	
 	img {
 		height: 16px;
-		border-radius: 4px;
+		border-radius: 2px;
         box-shadow: 2px 2px 2px #000000;
 	}
 }
@@ -172,8 +172,8 @@ form .twitter-typeahead .searchfield {
     z-index:100;
 }
 .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) {
-    border-top-right-radius:4px;
-    border-bottom-right-radius:4px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 .add-on .input-group-btn >.btn {
     border-left:1px solid #ccc;
@@ -182,30 +182,30 @@ form .twitter-typeahead .searchfield {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .btn.globe {
-    margin-left:10px;
-    border-radius: 4px;
+    margin-left: 10px;
+    border-radius: 2px;
 }
 .globe img{
-    width:14px;
-    padding-bottom:3px;
+    width: 14px;
+    padding-bottom: 3px;
 }
 .input-group-btn {
-    display:block;
+    display: block;
 }
 
 /*search suggestion*/
 .tt-dropdown-menu {
-    width:100%;
+    width: 100%;
 }
 
 .tt-dataset-states {
-    width:100%;
+    width: 100%;
 }
 .tt-suggestions {
-    width:100%;
+    width: 100%;
     background: rgba(255, 255, 255, 0.9);
-    padding:2px 25px 5px 5px;
-    border-radius: 0 0 4px 4px;
+    padding: 2px 25px 5px 5px;
+    border-radius: 0 0 2px 2px;
 }
 
 .tt-suggestion {
@@ -433,7 +433,7 @@ input:focus {
   padding: 5px;
   width: 100%;
   max-width: 200px;
-  border-radius: 10px;
+  border-radius: 2px;
   box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
 }
 
@@ -543,13 +543,13 @@ input:focus {
 .profileimage
 {
 	background: #fff;
-	border-radius: 0px 0px 9px 9px;
+	border-radius: 0px 0px 2px 2px;
 	padding: 3px 5px 3px 5px;
 	align: left;
 }
 
 .profile{
-    border-radius: 10px;
+    border-radius: 2px;
 	border-width: 1px;
 	border-color: gray;
 	border-style: solid;
@@ -568,7 +568,7 @@ input:focus {
 }
 
 .profiletitle{
-    border-radius: 9px 9px 0px 0px;
+    border-radius: 1px 1px 0px 0px;
 	display: inline-block;
     width: 100%;
     background: #cbcbcb;	
@@ -624,24 +624,24 @@ input:focus {
 .colmap
 {
     border: 1px solid gray;
-    border-radius: 10px;
+    border-radius: 2px;
     margin-bottom: 15px;
 }
 
 .randomimage img {
-    border-radius: 10px;
-    margin-bottom:15px;
+    border-radius: 2px;
+    margin-bottom: 15px;
 }
 
 .support {
-    border-radius: 10px;
+    border-radius: 2px;
     border: 1px solid gray;
     margin-bottom: 15px;
     display: inline-block;
     width: 100%;
     .supporttitle {
 		padding: 5px;
-        border-radius:8px 8px 0 0;
+        border-radius: 2px 2px 0 0;
         background: #cbcbcb;
         /*h4 {
             margin: 0;
@@ -651,28 +651,32 @@ input:focus {
 	.supporttext {
 		text-align: justify;
         padding: 5px;
-		border-radius: 0 0 9px 9px;
+		border-radius: 0 0 2px 2px;
         background: #fff;
 	}
 }
 
 .reclame {
-	margin-bottom:15px;
-    padding:5px 10px;
+	margin-bottom: 15px;
+    padding: 5px 10px;
 	img {
-		border-radius:5px;
-		max-width:190px;
+		border: 0px;
+		border-radius: 2px;
+		max-width: 190px;
+	}
+	a {
+		padding-right: 5px;
 	}
 }
 
 .profs{
-    border-radius: 10px;
+    border-radius: 2px;
     border: 1px solid gray;
     margin-bottom: 15px;
     display: inline-block;
     width: 100%;
     .profstitle{
-        border-radius:8px 8px 0 0;
+        border-radius: 2px 2px 0 0;
         background: #cbcbcb;
         h4 {
             margin:0;
@@ -686,7 +690,7 @@ input:focus {
 }
 
 .profrows {
-	border-radius: 0 0 9px 9px;
+	border-radius: 0 0 2px 2px;
 	background: #fff;
 }
 
@@ -929,7 +933,7 @@ input:focus {
 }
 
 // mixins
-.border-radius (@radius: 5px) {
+.border-radius (@radius: 2px) {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
     border-radius: @radius;
@@ -1008,7 +1012,7 @@ div.geocode {
 .profilestat
 {
 	padding: 3px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border-width: 1px;
 	border-color: gray;
 	border-style: solid;

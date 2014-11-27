@@ -100,13 +100,25 @@ $(document).ready(function() {
 
 // constructs the suggestion engine
 var countries = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('colname'),
+  datumTokenizer: function(d) {
+    		            var test = Bloodhound.tokenizers.whitespace(d.colname);
+						alert(1);
+    		            $.each(test,function(k,v){
+    		                i = 0;
+    		                while( (i+1) < v.length ){
+    		                    test.push(v.substr(i,v.length));
+    		                    i++;
+    		                }
+    		            })
+    		            return test;
+    		        },//Bloodhound.tokenizers.obj.whitespace('colname'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   // `states` is an array of state names defined in "The Basics"
   //local: $.map(states, function(state) { return { value: state }; })
   limit:10,
   prefetch: {
-      url: homedir + 'ajax/getcolsforsearch.php'
+      ttl: 1,
+	  url: homedir + 'ajax/getcolsforsearch.php'
     // the json file contains an array of strings, but the Bloodhound
     // suggestion engine expects JavaScript objects so this converts all of
     // those strings
@@ -138,6 +150,7 @@ $('#bloodhound .typeahead').typeahead({
 }).bind("typeahead:selected", function(obj, datum, name) {
     $("#colid").val(datum.colidstring);
     //console.log(datum);
+	window.location.replace(homedir + "col/" + datum.colidstring);
 });
 
 });
