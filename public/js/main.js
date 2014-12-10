@@ -39,14 +39,15 @@ function calculatemapheight() {
  */
 
 $(window).resize(function() {
-    calculatemapheight();
-    windowwidth = $(document).width();
-    if (windowwidth > 992) {
-        $('#thecountries').hide(0).removeClass('activecountries').show(0);
-    }
-    else {
-        $('#thecountries').hide(0);
-    }
+	calculatemapheight();
+
+		/*if (windowwidth > 992) {
+			$('#thecountries').hide(0).removeClass('activecountries').show(0);
+		}
+		else {
+			$('#thecountries').hide(0);
+		}*/
+	
 });
 
 

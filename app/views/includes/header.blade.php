@@ -1,7 +1,7 @@
 <div class="overmain">
     <div class="homemenu">
         <div class="homelogo">
-            <a href="{{ URL::asset('/') }}"><img src="{{ URL::asset('images/logo.png') }}" /></a>
+            <a href="{{ URL::asset('/') }}"><img id="logo_img" src="{{ URL::asset('images/logo.png') }}" /></a>
         </div>
         <ul class="tabrow">
             <a href="{{url('/')}}"><li class="selectedtab">Home</li></a>
