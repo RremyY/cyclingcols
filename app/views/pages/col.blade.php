@@ -41,7 +41,8 @@
 		    mapTypeControl: false,
 		    scaleControl: false,
 		    streetViewControl: false,
-		    overviewMapControl: false
+		    overviewMapControl: false,
+			scrollwheel: false
 		};
 		  
 		map = new google.maps.Map(document.getElementById('map'), options);
@@ -260,11 +261,17 @@ foreach($profiles as $profile) {
 	elseif($profile->ProfileIdx < 700) {$profileidx_cat = 3;} 
 	elseif($profile->ProfileIdx < 900) {$profileidx_cat = 2;} 
 	else {$profileidx_cat = 1;} 
+	
 ?>
 	        <div id="profile{{$profile_count}}">
                 <div class="profile">
                     <div class="profiletitle">
-                        <h4 class="col-xs-11">{{$col->Col}} <strong>{{$profile->Side}}</strong><br/><span style="font-size:12px;">from {{$profile->Start}}</span></h4>
+                        <h4 class="col-xs-11">{{$col->Col}}
+@if ($profile->SideID > 0)
+						<img src="{{URL::asset('images/')}}/{{$profile->Side}}.png")}}' title='{{$profile->Side}}'/><span class="profile_side">{{$profile->Side}}</span>
+@endif
+						<br/>
+						<span class="profile_start">from {{$profile->Start}}</span></h4>
                         <div class="col-xs-1" style="padding: 0px;">
                             <div class="category c{{$profile->Category}}">{{$profile->Category}}</div>
                         </div>
@@ -393,9 +400,9 @@ foreach($profiles as $profile) {
 	}
 ?>
 				</div>
-                <div class="randomimage">
+                <!--<div class="randomimage">
                     <img src="{{ URL::asset('images/cols/chasseral/P1010006.JPG') }}"/>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

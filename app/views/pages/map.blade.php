@@ -104,7 +104,8 @@
 				},
 			panControl: false,
 			scaleControl: true,
-			streetViewControl: false
+			streetViewControl: false,
+			scrollwheel: false
 		}
 		
         map = new google.maps.Map(document.getElementById("map-canvas"), options);
