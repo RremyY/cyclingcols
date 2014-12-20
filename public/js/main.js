@@ -143,3 +143,37 @@ $(document).ready(function() {
     });
 
 });
+
+showInfo = function () {
+    var id = "#div_" + $(this).find(".infotype").attr("id");
+    $(id).css("opacity", "0.5");
+    $(id).css("background", "green");
+
+}
+
+hideInfo = function () {
+    var id = "#div_" + $(this).find(".infotype").attr("id");
+    $(id).css("opacity", "1");
+    $(id).css("background", "transparent");
+
+}
+
+showInfoType = function () {
+    var id = "#" + $(this).attr("id").replace("div_", "");
+    $(id).parent().css("color", "red");
+    $(this).css("opacity", "0.5");
+    $(this).css("background", "green");
+
+}
+
+hideInfoType = function () {
+    var id = "#" + $(this).attr("id").replace("div_", "");;
+    $(id).parent().css("color", "");
+    $(this).css("opacity", "1");
+    $(this).css("background", "transparent");
+}
+
+$(document).ready(function () {
+    $(".infotype_row").hover(showInfo, hideInfo);
+    $(".info").hover(showInfoType, hideInfoType);
+})

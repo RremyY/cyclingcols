@@ -20,7 +20,7 @@
 // site wide styles
 body {
     font-family: "Leelawadee", Verdana;
-	background: #eeeeee;
+	background: #eee;
 }
 
 html, body {
@@ -163,9 +163,9 @@ h1 {
 
 /******************* searchbar styling ********************/
 
-.navbar-form .input-group{
+/*.navbar-form .input-group{
     width: 100%;
-}
+}*/
 
 #bloodhound{ 
     position: relative;
@@ -237,7 +237,6 @@ form .twitter-typeahead .searchfield {
     box-shadow: none;
     .box-white-shadow(0px, 0px, 10px, 0.9);
     border-color: #cccccc; 
-    
 }
 
 input:focus {
@@ -418,17 +417,127 @@ input:focus {
 
 
 /******************** plain text page *****************/
+.header{
+    background: @header2color;
+    color: @textcolor;
+    width: 100%;
+    border-top: 2px solid @headercolor;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.content{
+    padding: 20px 10%;
+}
+
+.profileinfo_header,
+.profileinfo,
+.profileexample {
+    //float: left;
+    padding: 0px 10px 10px 10px;
+    //max-width: 40%;
+    position: relative;
+
+    img {
+        border: 1px solid @headercolor;
+        border-radius: 2px;
+    }
+}
+
+.profileexample {
+}
+
+.info {
+    cursor: pointer;
+    position: absolute;
+    background: transparent;
+    border: 2px dotted green;
+    border-radius: 2px;
+}
+
+#div_info_side { top: 7px; left: 197px; height: 25px; width: 53px;}
+#div_info_start { top: 37px; left: 19px; height: 16px; width: 173px;}
+#div_info_category { top: 8px; left: 465px; height: 40px; width: 40px;}
+#div_info_stat_d { top: 63px; left: 19px; height: 20px; width: 102px;}
+#div_info_stat_h { top: 63px; left: 123px; height: 20px; width: 116px;}
+#div_info_stat_avg { top: 63px; left: 243px; height: 20px; width: 116px;}
+#div_info_stat_max { top: 93px; left: 19px; height: 21px; width: 130px;}
+#div_info_stat_idx { top: 93px; left: 151px; height: 21px; width: 105px;}
+#div_info_height { top: 404px; left: 295px; height: 30px; width: 13px;}
+#div_info_slope { top: 274px; left: 380px; height: 14px; width: 14px;}
+#div_info_distance { top: 455px; left: 231px; height: 16px; width: 16px;}
+#div_info_geo { top: 202px; left: 286px; height: 91px; width: 14px;}
+#div_info_tunnel {top: 289px; left: 187px; height: 15px; width: 25px;}
+#div_info_hairpin {top: 324px; left: 142px; height: 15px; width: 14px;}
+#div_info_steep {top: 354px; left: 32px; height: 15px; width: 15px;}
+#div_info_steepest {top: 430px; left: 115px; height: 24px; width: 90px;}
+#div_info_summary {top: 432px; left: 29px; height: 20px; width: 37px;}
+
+.info_header{
+    background: @header2color;
+    //color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 2px;
+    }
+
+.infotype_row {   
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.infotype{   
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+ }
+ 
+.infotype:after{   
+    content: " . . . . . . . . . . . . . . . . . . . . . .";
+    color: @orangecolor;
+    //float: left;
+    width: 0;
+    white-space: nowrap;
+ }
+
+.infotype_row:hover{ 
+    color: @redcolor;
+}
+
+.infotype:before{
+    
+    content: ">";
+    color: @redcolor;
+}
+
+.infoexplained{
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+#footnotes{
+    font-size: 12px;
+}
+
+.footnote {
+    font-size: smaller; 
+    margin-left: .5em;
+    vertical-align: super;
+}
 
 .plaintext {
-    clear:both;
+    clear: both;
     margin: 0 auto;
     font-size: 18px;
     padding: 20px 10%;
-       padding-bottom: 99px;
-       margin-bottom: 30px;
+    padding-bottom: 99px;
+    margin-bottom: 30px;
+
     h1 {
         text-align: center;
         color: @orangecolor;
+        background: #333;
     }
     img {
         padding: 10px 0 20px 0;
@@ -605,6 +714,7 @@ input:focus {
     width: 100%;
     color: @textcolor;
     background: @header2color;	
+    padding: 0px;
     h4 {
         margin:0;
         padding:10px;
@@ -612,12 +722,12 @@ input:focus {
 }
 
 .profiletitle img {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     padding: 0px;
     margin: 0px 5px 0px 5px;
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 50%;
     background: white;
     border: 1px solid gray;
     position: relative;
@@ -640,9 +750,8 @@ input:focus {
 .profilestats{
     background: @header3color;
     font-size: 12px;
-    height: 25px;
     line-height: 25px;
-    top: -5px;
+    padding-left: 10px;
 }
 
 .profilestat_wrapper{
@@ -656,17 +765,18 @@ input:focus {
   float: right;
   /*display: block;*/
   margin: 7px;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   /*position: relative;*/
   text-align: center;
   font-weight: bold;
-  line-height: 40px;
+  line-height: 35px;
   border-radius: 50%;
   //box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
   background: @color1;
-  border: 1px solid gray;
+  border: 2px solid gray;
   //.gradient(@color1, darken(@color1,10%));
+  
 }
 
 
@@ -677,32 +787,42 @@ input:focus {
       width: 30px;
       height: 30px;
      }
-    }
+}
 
 .category.c1{
     //.gradient(@color1, darken(@color1,10%));
     background: @color1;
     color: #333;
+    text-shadow: 2px 2px 3px  darken(@color1,20%);
+    border-color: darken(@color1,10%);
 }
 .category.c2{
     //.gradient(@color2, darken(@color2,10%));
     background: @color2;
     color: #333;
+    text-shadow: 2px 2px 3px  darken(@color2,20%);
+    border-color: darken(@color2,10%);
 }
 .category.c3{
     //.gradient(@color3, darken(@color3,10%));
     background: @color3;
     color: #333;
+    text-shadow: 2px 2px 3px  darken(@color3,20%);
+    border-color: darken(@color3,10%);
 }
 .category.c4{
     //.gradient(@color4, darken(@color4,10%));
     background: @color4;
     color: #333;
+    text-shadow: 2px 2px 3px  darken(@color4,20%);
+    border-color: darken(@color4,20%);
 }
 .category.c5{
     //.gradient(@color5, darken(@color5,10%));
     background: @color5;
     color: #333;
+    text-shadow: 2px 2px 3px  darken(@color5,20%);
+    border-color: darken(@color5,40%);
 }
 
 /**    right part colpage    */
@@ -972,20 +1092,21 @@ input:focus {
 	/* mainheader menu items*/
 	/* mainheader searchbar */
 
-	.navbar-form .input-group{
+	/*.navbar-form .input-group{
 		width: 100%;
-	}
+	}*/
 
-
+    /*
 	.colimage_color {
 		display: block;
-	}
+	}*/
 	.colimage {
 		display: block;
 		//filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
 		//filter: gray; /* IE6-9 */
 		//-webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
 	}
+    /*
 	.randomimage {
 		display:none;
 	}
@@ -993,7 +1114,7 @@ input:focus {
        padding:20px 30%;
        padding-bottom:99px;
        margin-bottom:30px;
-    }
+    }*/
 }
 
 /*bootstrap large*/
