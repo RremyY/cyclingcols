@@ -403,7 +403,22 @@ input:focus {
 }
 
 .tabrow li.selectedtab {
-    background: #333;
+    background: @header1color   ;
+}
+
+#twitter{
+    float: right;
+    padding: 21px;
+    border-left: 1px solid @header1color;
+
+    img{
+        width: 40px;
+    }
+}
+
+#twitter:hover{
+    cursor: pointer;
+    background: @header1color;
 }
 
 /******************** countries section *****************/
@@ -428,7 +443,11 @@ input:focus {
 }
 
 .content{
-    padding: 20px 10%;
+    //padding: 5px 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    min-width: 350px;
 }
 
 .profileinfo_header,
@@ -443,9 +462,6 @@ input:focus {
         border: 1px solid @headercolor;
         border-radius: 2px;
     }
-}
-
-.profileexample {
 }
 
 .info {
@@ -526,25 +542,113 @@ input:focus {
     vertical-align: super;
 }
 
-.plaintext {
-    clear: both;
-    margin: 0 auto;
-    font-size: 18px;
-    padding: 20px 10%;
-    padding-bottom: 99px;
-    margin-bottom: 30px;
+#imgMichiel {
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 100%;
+}
 
-    h1 {
-        text-align: center;
-        color: @orangecolor;
-        background: #333;
+.new_header,
+.new_table {
+    padding: 0px 10px 10px 10px;
+    position: relative;
+
+    div{
+        
+        float: left;
+        padding: 0px;
+        }
+
+    table{
+        width: 95%;
+
+        //display: block;
     }
+
+    td{
+        padding: 2px;
+    }
+}
+
+.new_date{
+    background: @header2color;
+    //color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.new_row {   
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+}
+
+.new_row:hover{ 
+    color: @redcolor;
+}
+
+.new_col{   
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+ }
+ 
+.new_col:after{   
+    content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+    color: @orangecolor;
+    //float: left;
+    width: 0;
+    white-space: nowrap;
+ }
+
+.new_col:before{
+    
+    content: ">";
+    color: @redcolor;
+}
+
+.new_country{
+    img{
+        max-width: 30px;
+        }
+    }
+
+.new_side {
+    color: @orangecolor;
+    font-size: 12px;
+
     img {
-        padding: 10px 0 20px 0;
-        max-width: 100%;
-        display: block;
-        margin: 0 auto;
+        width: 22px;
+        height: 22px;
+        padding: 0px;
+        margin: 0px 5px 0px 5px;
+        display: inline-block;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid gray;
+        position: relative;
     }
+}
+
+@media (max-width:1100px){
+    .new_side span{
+        display: none;
+    }
+}
+
+.new_category {    //overrules .category
+  font-size: 12px!important;
+  margin: 2px!important;
+  width: 25px!important;
+  height: 25px!important;
+  line-height: 20px!important;
+}
+
+.new_revised {
+    font-style: italic;
 }
 /******************** colpage section ********************/
 .colpage {
@@ -684,13 +788,14 @@ input:focus {
 /**    left part colpage    */
 .profileimage
 {
-	background: #fff;
+	//background: #fff;
 	border-radius: 0px 0px 2px 2px;
 	padding: 3px 5px 3px 5px;
 }
 
 .profile{
-    border-radius: 2px;
+    background: #fff;
+	border-radius: 2px;
 	border-width: 1px;
 	border-color: @headercolor;
 	border-style: solid;
@@ -699,8 +804,8 @@ input:focus {
     margin-bottom: 15px;
     width: 100%;
     img {
-        display:block;
-        margin:10px 0 10px auto;
+        display: block;
+        margin: 5px 0 5px auto;
         padding-right:10px;
     }
     p {
@@ -876,11 +981,66 @@ input:focus {
 	}
 }
 
-.profs{
+.colsnearby{
     border-radius: 2px;
     border: 1px solid @headercolor;
     margin-bottom: 15px;
     display: inline-block;
+    width: 100%;
+    .colsnearbytitle{
+        border-radius: 2px 2px 0 0;
+        color: @textcolor;
+        background: @header2color;
+        h4 {
+            margin:0;
+            padding:10px;
+        }
+    }
+}
+
+.colsnearbyrows {
+	border-radius: 0 0 2px 2px;
+	background: #fff;
+}
+
+.colsnearbyrow {
+	border-top: 1px solid #aaaaaa;
+    padding: 5px 10px;
+    width: 100%;
+    clear: left;
+    .colnearby_col{
+        float: left;
+        //width: 40px;
+    }
+    .colnearby_distance {
+        float: right;
+        width: 40px;
+    }
+    .colnearby_direction {
+        float: right;
+        //width: 40px;
+        
+        img {
+            width: 20px;
+            height: 20px;
+            padding: 0px;
+            margin: 0px 5px 0px 5px;
+            display: inline-block;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid gray;
+            position: relative;
+            top: -3px;
+        }
+
+    }
+}
+
+.profs{
+    border-radius: 2px;
+    border: 1px solid @headercolor;
+    margin-bottom: 15px;
+    display: none;
     width: 100%;
     .profstitle{
         border-radius: 2px 2px 0 0;
@@ -1243,4 +1403,42 @@ div.geocode {
 .profilestat.c5
 {
 	background-color: @color5;
+}
+
+.profileimage{
+    //float: none;
+}
+
+.stats_wrapper{
+    border:1px solid @header1color;
+    border-radius:3px;
+    background: @header3color;
+    margin: 0px 5px 5px 5px;
+    float:right;
+    padding: 0px 1px 1px 1px;
+    width: 125px;
+
+    /*position: absolute;
+    top: 62px;
+    z-index: 1000;*/
+}
+
+.stat_value{
+    float:left;
+    clear:left;
+    height:15px;
+    width: 45px;
+    text-align: right;
+    font-size: 12px;
+    padding-right: 2px;
+}
+
+.stat_bar{
+    float:left;
+    height:15px;
+    border-radius: 3px;
+    margin-top: 1px;
+    text-align: right;
+    padding: 0px 1px 0px 0px;
+    font-size: 10px;
 }

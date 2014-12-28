@@ -73,7 +73,7 @@
 					</tr>
 					<tr class="infotype_row">
 						<td id="info_hairpin" class="infotype" valign="top">Hairpin curves</td>
-						<td class="infoexplained">Only some hairpin curves are depicted in the profile. Characteristic ones or just to able to locate within sections with rare geo information.</td>
+						<td class="infoexplained">Only some hairpin curves are depicted in the profile. Characteristic ones or just to be able to locate within sections with rare geo information.</td>
 					</tr>
 					<tr class="infotype_row">
 						<td id="info_steep" class="infotype" valign="top">Steep sections</td>
@@ -92,7 +92,7 @@
 			<p/>
 			<div id="footnotes">
 				<span class="footnote">1</span> Total height difference will be bigger than height difference between start and summit in case of descends within the route.<br/>
-				<span class="footnote">2</span> Most profiles have 1 k sections, some more detailed profiles have shorter sections (<a href='{{URL::asset("col/Covadonga")}}'>500m</a> or <a href='{{URL::asset("col/Cipressa")}}'>200m</a>).
+				<span class="footnote">2</span> Most profiles have 1 k sections, some more detailed profiles have shorter sections (<a href='{{URL::asset("col/Covadonga#profile1074")}}'>500m</a> or <a href='{{URL::asset("col/Cipressa#profile4671")}}'>200m</a>).
 			</div>
 		</div> 
 		

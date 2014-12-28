@@ -22,6 +22,18 @@ function calculatemapheight() {
     }
 }
 
+/*sets the height of the new page wrapper so that it always fills the screen height*/
+function calculatenewheight() {
+    if ($('body').hasClass('newtemplate')) {
+		var height = $(window).height() - $('.footer').height() - $('#new-canvas').offset().top;
+	
+		if ($('#new-canvas').height() < height)
+		{
+			$('#new-canvas').height(height);
+		}
+    }
+}
+
 /*
  $(function() {
  $('#countrytab').on('click', function(e) {
@@ -40,6 +52,7 @@ function calculatemapheight() {
 
 $(window).resize(function() {
 	calculatemapheight();
+	calculatenewheight();
 
 		/*if (windowwidth > 992) {
 			$('#thecountries').hide(0).removeClass('activecountries').show(0);
@@ -51,10 +64,10 @@ $(window).resize(function() {
 });
 
 
-$(window).scroll(function() {
+/*$(window).scroll(function() {
     var s = $(".rightinfo");
     //fixing the googlemaps column on the col page
-    /*if (($('body').hasClass('coltemplate')) && ($(document).width() > 992)) {
+    if (($('body').hasClass('coltemplate')) && ($(document).width() > 992)) {
      var windowpos = $(window).scrollTop();
      
      if (windowpos >= $(".rightposition").offset().top) {
@@ -65,12 +78,13 @@ $(window).scroll(function() {
      }
      else if (($('body').hasClass('coltemplate')) && ($(document).width() < 992)) {
      s.removeClass("fixed");
-     }*/
-});
+     }
+});*/
 
 $(document).ready(function() {
 
     calculatemapheight();
+	calculatenewheight();
 
     /*on keyboard enter press*/
     $(document).keypress(function(e) {
@@ -95,9 +109,10 @@ $(document).ready(function() {
     /*select menu headeritem*/
     $(".tabrow li").removeClass("selectedtab"); //remove     
     $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
-    $('.randomtemplate .tabrow a:nth-child(2) li').addClass("selectedtab");
-    $('.helptemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
-    $('.abouttemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
+    $('.newtemplate .tabrow a:nth-child(2) li').addClass("selectedtab");
+    $('.statstemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
+    $('.helptemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
+    $('.abouttemplate .tabrow a:nth-child(5) li').addClass("selectedtab");
 
 // constructs the suggestion engine
     var countries = new Bloodhound({
@@ -173,7 +188,14 @@ hideInfoType = function () {
     $(this).css("background", "transparent");
 }
 
+showNewItem = function() {
+	var id = $(this).attr("id");
+	window.location.href = "col/" + id;
+}
+
 $(document).ready(function () {
     $(".infotype_row").hover(showInfo, hideInfo);
     $(".info").hover(showInfoType, hideInfoType);
+	$(".new_row").click(showNewItem);
+	$("#twitter").click(function() {window.location.href = "https://twitter.com/cyclingcols"; } );
 })

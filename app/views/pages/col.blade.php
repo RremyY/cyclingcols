@@ -150,15 +150,15 @@
 <div class="colpage">
 	@if(file_exists(public_path($cover)))
 	<div class="colimage" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $backgroundpos}}%'>
-		@if($col->HasImages)
+		<!--@if($col->HasImages)
 		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
-		@endif
+		@endif-->
 	</div>
 	@else
     <div class="colimage" style='background-image: url( {{URL::asset("images/covers/_Dummy.jpg")}} ); background-position: 0% 28%'>
-		@if($col->HasImages)
+		<!--@if($col->HasImages)
 		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
-		@endif
+		@endif-->
 	</div>	
 	@endif
     <div class="coltitlesection">
@@ -169,7 +169,7 @@
 				<h4>({{$aliases_str}})</h4>
 	@endif
 				<h3><img src="{{ URL::asset('images/flags/' . $col->Country1 . '.gif') }}"/> {{$country1}}</h3>
-                @if ($country2)
+                @if ($country2)	
                 <h3><img src="{{ URL::asset('images/flags/' . $col->Country2 . '.gif') }}"> {{$country2}}</h3>
 				@endif
             </div>
@@ -211,7 +211,7 @@ $profile_string = "";
 foreach($profiles as $profile) {
 	$profile_count = $profile_count + 1;
 	if ($profile_count > 1) {$profile_string .= " | ";}
-	$profile_string .= "<a href='#profile" . $profile_count . "'>" . $profile->Side . " (from " . $profile->Start . ")</a>";
+	$profile_string .= "<a href='#profile" . $profile->ProfileID . "'>" . $profile->Side . " (from " . $profile->Start . ")</a>";
 }
 
 $profile_string = ": " . $profile_string;
@@ -221,7 +221,7 @@ $profile_string = $profile_count . " profile" . $profile_string;
         <p>{{$profile_string}}</p>
     </div>
 
-	<div class="profileinfo">
+	<div>
         <div class="col-md-8 leftinfo">
 <?php
 $profile_count = 0;
@@ -266,9 +266,9 @@ foreach($profiles as $profile) {
 	else {$profileidx_cat = 1;} 
 	
 ?>
-	        <div id="profile{{$profile_count}}">
+	        <div id="profile{{$profile->ProfileID}}">
                 <div class="profile">
-                    <div class="profiletitle col-xs-12">
+                    <div class="profiletitle">
                         <h4 class="col-xs-11">{{$col->Col}}
 @if ($profile->SideID > 0)
 						<img src="{{URL::asset('images/')}}/{{$profile->Side}}.png")}}' title='{{$profile->Side}}'/><span class="profile_side">{{$profile->Side}}</span>
@@ -276,19 +276,31 @@ foreach($profiles as $profile) {
 						<br/>
 						<span class="profile_start">from {{$profile->Start}}</span></h4>
                         <div class="col-xs-1" style="padding: 0px;">
-                            <div class="category c{{$profile->Category}}">{{$profile->Category}}</div>
+                            <div class="category c{{$profile->Category}}" title="Category {{$profile->Category}}">{{$profile->Category}}</div>
                         </div>
                     </div>
-                    <div class="col-xs-12 profilestats">
+                    <!--<div class="col-xs-12 profilestats">
 						<div class="profilestat_wrapper">Distance <span class="profilestat c{{$distance_cat}}">{{number_format($profile->Distance/10,1)}} km</span></div>
                         <div class="profilestat_wrapper">Altitude Gain <span class="profilestat c{{$heightdiff_cat}}">{{$profile->HeightDiff}}m</span></div>
                         <div class="profilestat_wrapper">Average Slope <span class="profilestat c{{$avgperc_cat}}">{{number_format($profile->AvgPerc/10,1)}}%</span></div>
                         <div class="profilestat_wrapper">Maximum Slope <span class="profilestat c{{$maxperc_cat}}">{{number_format($profile->MaxPerc/10,1)}}%</span></div>
                         <div class="profilestat_wrapper">Profile Index <span class="profilestat c{{$profileidx_cat}}">{{$profile->ProfileIdx}}</span></div>
-                    </div>
-					<div class="col-xs-12 profileimage">
+                    </div>-->
+					<div class="stats_wrapper">
+						<div class="stat_value">{{number_format($profile->Distance/10,1)}} km</div>
+						<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{90-$distance_cat*15}}px;" title="Distance">{{$distance_cat}}</div>
+						<div class="stat_value">{{$profile->HeightDiff}}m</div>
+						<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{90-$heightdiff_cat*15}}px;" title="Altitude Gain">{{$heightdiff_cat}}</div>
+						<div class="stat_value">{{number_format($profile->AvgPerc/10,1)}}%</div>
+						<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{90-$avgperc_cat*15}}px;" title="Average Slope">{{$avgperc_cat}}</div>
+						<div class="stat_value">{{number_format($profile->MaxPerc/10,1)}}%</div>
+						<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{90-$maxperc_cat*15}}px;" title="Maximum Slope">{{$maxperc_cat}}</div>
+						<div class="stat_value">{{$profile->ProfileIdx}}</div>
+						<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{90-$profileidx_cat*15}}px;" title="Profile Index">{{$profileidx_cat}}</div>
+					</div>
+					<div class="profileimage clearfix">
 						<!--<img align="left" style="margin: 0px 0px 0px 0px" src="{{ URL::asset('profiles/' . $profile->FileName . '.gif') }}"/>-->
-						<img align="left" style="margin: 0px 0px 0px 0px" src="http://www.cyclingcols.com/profiles/{{$profile->FileName}}.gif" />
+						<img align="left" src="http://www.cyclingcols.com/profiles/{{$profile->FileName}}.gif" />
 					</div>
                 </div>
             </div>
@@ -335,7 +347,7 @@ foreach($profiles as $profile) {
 		$reclame_count++;
 	}
 	if(in_array($col->ColID,array(634))) {
-		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Stelvio.gif"/></a>';
+		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Stelvio.jpg"/></a>';
 		$reclame_count++;
 	}
 	if(in_array($col->ColID,array(398,399,444,475,485,519,526,542,570,577,578,634,655,1549,1553))) {
@@ -343,14 +355,30 @@ foreach($profiles as $profile) {
 		$reclame_count++;
 	}
 ?>	
+	<div class="colsnearby" id="colsnearby">
+		<div class="colsnearbytitle">
+			<h4>Cols Nearby</h4>
+		</div>
+		<div id="colsnearbyrows" class="colsnearbyrows">
+		</div>
+	</div>
+	
 	@if ($reclame_count > 0)
 	<div id="reclame" class="reclame">
 	{{$reclame}}
 	</div>
 	@endif
+	
+	<div class="profs" id="profs">
+	<div class="profstitle">
+		<h4>First On Top
+		<a id="show_or_hide_a" href="javascript:showAllPassages()"><img align="right" id="show_or_hide" width="20" src="{{ URL::asset('images/expand.png') }}" title="expand list"/></a>						
+		</h4>
+	</div>
+	<div id="profrows" class="profrows">
 
 <?php
-	$passages = Passage::where('ColID',$col->ColID)->orderBy('Edition','DESC')->get();
+	/*$passages = Passage::where('ColID',$col->ColID)->orderBy('Edition','DESC')->get();
 	
 	if (count($passages) > 0) {
 		$count = 0;
@@ -363,7 +391,7 @@ foreach($profiles as $profile) {
 @endif
 						</h4>
 					</div>
-					<div class="profrows">
+					<div id="profrows" class="profrows">
 <?php
 		for ($i = 0; $i < count($passages); $i++) {
 			$passage = $passages[$i];
@@ -400,7 +428,7 @@ foreach($profiles as $profile) {
 ?>	
 				</div>
 <?php		
-	}
+	}*/
 ?>
 				</div>
                 <!--<div class="randomimage">
@@ -412,27 +440,118 @@ foreach($profiles as $profile) {
 </div>
 
 <script type="text/javascript">	
-	var showAllPassages = function() {
-		$(".profrow_hidden").css("display","block");
-		$("#show_or_hide").attr("src","{{ URL::asset('images/collapse.png') }}");
-		$("#show_or_hide").attr("title","collapse list");
-		$("#show_or_hide_a").attr("href","javascript:hideAllPassages()");
-		if ($(window).width() >= 992)
-		{
-			$("#map").css("display","none");
-			$("#donate").css("display","none");
-			$("#reclame").css("display","none");
+showAllPassages = function() {
+	$(".profrow_hidden").css("display","block");
+	$("#show_or_hide").attr("src","{{ URL::asset('images/collapse.png') }}");
+	$("#show_or_hide").attr("title","collapse list");
+	$("#show_or_hide_a").attr("href","javascript:hideAllPassages()");
+	if ($(window).width() >= 992)
+	{
+		$("#map").css("display","none");
+		$("#donate").css("display","none");
+		$("#reclame").css("display","none");
+	}
+}
+
+hideAllPassages = function() {
+	$("#map").css("display","block");
+	$("#donate").css("display","block");
+	$("#reclame").css("display","block");
+	$(".profrow_hidden").css("display","none");
+	$("#show_or_hide").attr("src","{{ URL::asset('images/expand.png') }}");
+	$("#show_or_hide").attr("title","expand list");
+	$("#show_or_hide_a").attr("href","javascript:showAllPassages()");
+}
+
+$(document).ready(function() {
+	showColsNearby();
+	showPassages();
+});
+	
+showPassages = function() {
+	$.ajax({
+		url : "{{ URL::asset('ajax/')}}/getpassages.php?colid={{$col->ColID}}",
+		data : "",
+		dataType : 'json',
+		success : function(data) {
+			if (data.length > 0) {
+			
+				for(var i = 0; i < data.length; i++) {	
+					var	race = ""; 
+					var race_short = "";
+				
+					switch(parseInt(data[i].EventID)) {
+						case 1: race = "Tour de France"; race_short = "Tour"; break;
+						case 2: race = "Giro d'Italia"; race_short = "Giro"; break;
+						case 3: race = "Vuelta a España"; race_short = "Vuelta"; break;
+					}
+					
+					var person = data[i].Person;
+					var person_class = "rider";
+					var flag = true;
+					if (data[i].Neutralized == "1") {person = "-neutralized-"; flag = false;}
+					else if (data[i].Cancelled == "1") {person = "-cancelled-"; flag = false;}
+					else if (data[i].NatioAbbr == "") {person = "-cancelled-"; flag = false;}
+					
+					if (person == null) {person = ""; flag = false;}
+					
+					var hidden = "profrow_hidden";
+					if (i < 5) {hidden = "";}
+					
+					var html = '<div class="profrow ' + hidden + ' clearfix">';
+					html += '<div class="year">' + data[i].Edition + '</div>';
+					html += '<div class="race"><i>' + race + '</i></div>'; 
+					html += '<div class="race_short" title="' + race + '"><i>' + race_short + '</i></div>'; 
+					html += '<div class="rider">' + person + '</div>';
+					if (flag == true) {
+						html += "<div class='profcountry'><img src='{{ URL::asset('images/flags/small/')}}/" + data[i].NatioAbbr + ".gif'/></div>";
+					}
+					html += '</div>'; 
+					
+					$("#profrows").append(html);
+				}
+					
+				if (data.length <= 5) {
+					$("#show_or_hide_a").hide();
+				}
+				$("#profs").show();
+			}
 		}
-	}
-	var hideAllPassages = function() {
-		$("#map").css("display","block");
-		$("#donate").css("display","block");
-		$("#reclame").css("display","block");
-		$(".profrow_hidden").css("display","none");
-		$("#show_or_hide").attr("src","{{ URL::asset('images/expand.png') }}");
-		$("#show_or_hide").attr("title","expand list");
-		$("#show_or_hide_a").attr("href","javascript:showAllPassages()");
-	}
+	})
+}
+	
+showColsNearby = function() {
+	$.ajax({
+		url : "{{ URL::asset('ajax/')}}/getcolsnearby.php?colid={{$col->ColID}}",
+		data : "",
+		dataType : 'json',
+		success : function(data) {
+			for(var i = 0; i < data.length; i++) {	
+				var dis = parseInt(Math.round(parseFloat(data[i].Distance/1000)));
+				var int_dir = parseInt(data[i].Direction); 
+				var dir;
+				
+				if (int_dir <= 22) { dir = "South"; }
+				else if (int_dir <= 67) { dir = "South-West"; }
+				else if (int_dir <= 112) { dir = "West"; }
+				else if (int_dir <= 157) { dir = "North-West"; }
+				else if (int_dir <= 202) { dir = "North"; }
+				else if (int_dir <= 247) { dir = "North-East"; }
+				else if (int_dir <= 292) { dir = "East"; }
+				else if (int_dir <= 337) { dir = "South-East"; }
+				else { dir = "South"; }
+			
+				var html = '<div class="colsnearbyrow">';
+				html += '<div class="colnearby_col"><a href="' + data[i].ColIDString + '">' + data[i].Col + '</a></div>';
+				html += '<div class="colnearby_distance">' + dis + ' km</div>';				
+				html += '<div class="colnearby_direction"><img src="{{ URL::asset('images/')}}/' + dir + '.png"/></div>';				
+				html += '</div>';
+				
+				$("#colsnearbyrows").append(html);
+			}
+		}
+	})
+}
 </script>
 
 @stop

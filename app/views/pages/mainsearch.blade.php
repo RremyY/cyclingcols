@@ -8,11 +8,16 @@
             <a href="{{ URL::asset('/') }}"><img id="logo_img" src="{{ URL::asset('images/logo.png') }}" /></a>
         </div>
         <ul class='tabrow'>
-            <a href="{{url('/')}}"><li class='selectedtab'>Home</li></a>
-            <a href="{{url('/random')}}"><li>Random Cols</li></a>
-            <a href="{{url('/help')}}"><li>Help<i class="glyphicon glyphicon-question-sign"></i></li></a>
-            <a href="{{url('/about')}}"><li class="about">About<i class="glyphicon glyphicon-info-sign"></i>&nbsp;</li></a>
+            <a href="{{url('/')}}"><li class="selectedtab"><i class="glyphicon glyphicon-home"></i>Home</li></a>
+            <a href="{{url('/new')}}"><li><i class="glyphicon glyphicon-asterisk"></i>New</li></a>
+            <a href="{{url('/stats')}}"><li><i class="glyphicon glyphicon-stats"></i>Stats</li></a>
+            <!--<a href="{{url('/random')}}"><li><i class="glyphicon glyphicon-random"></i>Random Cols</li></a>-->
+            <a href="{{url('/help')}}"><li><i class="glyphicon glyphicon-question-sign"></i>Help</li></a>
+            <a href="{{url('/about')}}"><li class="about"><i class="glyphicon glyphicon-info-sign"></i>About</li></a>
         </ul>
+		<div id="twitter">
+			<img src="{{ URL::asset('images/twitter.png') }}" title="Follow CyclingCols on twitter!"/>
+		</div>
     </div>
 </div>
 
@@ -46,11 +51,11 @@
 				}
 				setSlide("{{ URL::asset('images/covers')}}/" + images[nr][0] + ".jpg","{{ URL::asset('col')}}/" + images[nr][0],col);
 				if (nr<images.length-1) {
-					setTimeout(function(){showSlide(images,nr+1)},7000);
+					setTimeout(function(){showSlide(images,nr+1)},10000);
 				}
 				else
 				{
-					setTimeout(function(){startSlideShow()},7000); //restart slideshow with new slides
+					setTimeout(function(){startSlideShow()},10000); //restart slideshow with new slides
 				}
 			}
 			

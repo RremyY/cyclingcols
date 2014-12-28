@@ -5,7 +5,9 @@
         </div>
         <ul class="tabrow">
             <a href="{{url('/')}}"><li class="selectedtab"><i class="glyphicon glyphicon-home"></i>Home</li></a>
-            <a href="{{url('/random')}}"><li><i class="glyphicon glyphicon-random"></i>Random Cols</li></a>
+            <a href="{{url('/new')}}"><li><i class="glyphicon glyphicon-asterisk"></i>New</li></a>
+            <a href="{{url('/stats')}}"><li><i class="glyphicon glyphicon-stats"></i>Stats</li></a>
+            <!--<a href="{{url('/random')}}"><li><i class="glyphicon glyphicon-random"></i>Random Cols</li></a>-->
             <a href="{{url('/help')}}"><li><i class="glyphicon glyphicon-question-sign"></i>Help</li></a>
             <a href="{{url('/about')}}"><li class="about"><i class="glyphicon glyphicon-info-sign"></i>About</li></a>
         </ul>
@@ -20,6 +22,9 @@
                 <input id="colid" type="hidden" name="colid" value=""/>
             <!--</form>-->
         </div>
+		<div id="twitter">
+			<img src="{{ URL::asset('images/twitter.png') }}" title="Follow CyclingCols on twitter!"/>
+		</div>
     </div>
 </div>
 

@@ -21,11 +21,26 @@ Route::get('/', function()
 	->with('pagetype','home');
 });
 
+/* New page*/
+Route::get('new', function()
+{
+	$newitems = NewItem::orderBy('DateSort','DESC')->get();
+	
+	return View::make('pages.new')
+		->with('newitems',$newitems)
+		->with('pagetype','newtemplate');
+});
+
+/* Stats page*/
+Route::get('stats', function()
+{
+	return View::make('pages.stats', array('pagetype'=>'statstemplate'));
+});
+
 /* About page*/
 Route::get('about', function()
 {
-	$count = Col::where('ColID', '>', 0)->count();
-	return View::make('pages.about', array('pagetype'=>'abouttemplate'))->with('number_of_cols', $count);
+	return View::make('pages.about', array('pagetype'=>'abouttemplate'));
 });
 
 /* Help page */
