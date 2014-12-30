@@ -69,8 +69,15 @@
 
 	google.maps.event.addDomListener(window, 'load', initialize);	
 </script>
-<?php 
-	$colname = str_replace('/','<br/>',$col->Col);
+<?php
+	$double_name = false;
+	$colname = $col->Col;
+	
+	// if slash is multi-language separator then replace slash by break
+	if (strpos($col->Aliases,$col->Col) == false) {
+		$colname = str_replace('/','<br/>',$colname);
+		$double_name = true;
+	}
 	
 	//aliases
 	$aliases = explode(';',$col->Aliases);
@@ -161,45 +168,44 @@
 		@endif-->
 	</div>	
 	@endif
-    <div class="coltitlesection">
-        <div class="col-md-12">
-            <div class="col-md-6 col-md-offset-2 coltitle">
-                <h1>{{$colname}}</h1>
-	@if (strlen($aliases_str) > 0)
-				<h4>({{$aliases_str}})</h4>
-	@endif
-				<h3><img src="{{ URL::asset('images/flags/' . $col->Country1 . '.gif') }}"/> {{$country1}}</h3>
-                @if ($country2)	
-                <h3><img src="{{ URL::asset('images/flags/' . $col->Country2 . '.gif') }}"> {{$country2}}</h3>
-				@endif
-            </div>
-
-            <div class="col-md-2 col-xs-12 altitude">
-                <div class="col-xs-6 col-md-6 altitudetext">{{$col->Height}}m</div>
-				@if ($col->PanelURL)
-				<div class="col-xs-6 col-md-7 colpanel"">
-                    <!--<img src="{{ URL::asset('images/cols/chasseral/Chasseral.jpg') }}" />-->
-                    <img src="http://www.cyclingcols.com/photos/{{$col->PanelURL}}" />
-                </div>
-				@endif
-            </div>
-        </div>
-        <div class="col-xs-12 buttons">
+    <div class="coltitlesection col-xs-12">
+		<div class="col-md-3 col-sm-3 colleft">
+			@if ($col->PanelURL)
+			<div class="colpanel"">
+				<!--<img src="{{ URL::asset('images/cols/chasseral/Chasseral.jpg') }}" />-->
+				<img src="http://www.cyclingcols.com/photos/{{$col->PanelURL}}" />
+			</div>
+			@endif
+		</div>
+		<div class="col-md-6 col-sm-9 col-xs-12 coltitle">
+			<h2 class="colname">{{$colname}}</h2>
+			@if ($double_name)	
+			<span class="colheight moveup">
+			@else
+			<span class="colheight">
+			@endif
+			{{$col->Height}}m</span>
+			@if (strlen($aliases_str) > 0)
+			<h4>({{$aliases_str}})</h4>
+			@endif
+			<h3><img src="{{ URL::asset('images/flags/' . $col->Country1 . '.gif') }}"/> {{$country1}}</h3>
+			@if ($country2)	
+			<h3><img src="{{ URL::asset('images/flags/' . $col->Country2 . '.gif') }}"> {{$country2}}</h3>
+			@endif
+		</div>
+		<div class="col-md-3 col-sm-12 colright">
+			<div class="colcount col-md-12 col-sm-4">Col # {{$col->Number}} of 2909 (alphabetical)</div>
 			@if (!is_null($col_prev))
-            <div class="col-xs-6 col-md-2">
-                <div class='prevbutton' onclick="location.href='{{$col_prev->ColIDString}}'" title="go to previous col (alphabetical): {{$col_prev->Col}}">
-                    <i class="glyphicon glyphicon-arrow-left"></i>{{$col_prev->Col}}
-                </div>
-            </div>
+			<div class="prevbutton col-md-12 col-sm-4" onclick="location.href='{{$col_prev->ColIDString}}'" title="go to previous col (alphabetical): {{$col_prev->Col}}">
+				<div class="glyphicon glyphicon-arrow-left"></div>{{$col_prev->Col}}
+			</div>
 			@endif
 			@if (!is_null($col_next))
-            <div class="col-xs-6 col-md-2 col-md-offset-8">
-                <div class='nextbutton' onclick="location.href='{{$col_next->ColIDString}}'" title="go to next col (alphabetical): {{$col_next->Col}}">
-                    <i class="glyphicon glyphicon-arrow-right"></i>{{$col_next->Col}}            
-                </div>
-            </div> 
-			@endif  
-        </div>
+			<div class="nextbutton col-md-12 col-sm-4" onclick="location.href='{{$col_next->ColIDString}}'" title="go to next col (alphabetical): {{$col_next->Col}}">
+				<div class="glyphicon glyphicon-arrow-right"></div>{{$col_next->Col}}            
+			</div>
+			@endif 
+		</div>
     </div>
 
     <div class="col-md-12 nrprofiles">
@@ -222,7 +228,7 @@ $profile_string = $profile_count . " profile" . $profile_string;
     </div>
 
 	<div>
-        <div class="col-md-8 leftinfo">
+        <div class="col-sm-8 leftinfo">
 <?php
 $profile_count = 0;
 
@@ -238,10 +244,10 @@ foreach($profiles as $profile) {
 	else {$distance_cat = 1;} 
 	
 	$heightdiff_cat = 0;
-	if($profile->HeightDiff < 500) {$heightdiff_cat = 5;} 
-	elseif($profile->HeightDiff < 1000) {$heightdiff_cat = 4;} 
-	elseif($profile->HeightDiff < 1500) {$heightdiff_cat = 3;} 
-	elseif($profile->HeightDiff < 2000) {$heightdiff_cat = 2;} 
+	if($profile->HeightDiff < 400) {$heightdiff_cat = 5;} 
+	elseif($profile->HeightDiff < 800) {$heightdiff_cat = 4;} 
+	elseif($profile->HeightDiff < 1300) {$heightdiff_cat = 3;} 
+	elseif($profile->HeightDiff < 1800) {$heightdiff_cat = 2;} 
 	else {$heightdiff_cat = 1;} 
 	
 	$avgperc_cat = 0;
@@ -310,13 +316,17 @@ foreach($profiles as $profile) {
         </div>
 
 
-        <div class="col-md-4 rightposition">
+        <div class="col-sm-4 rightposition">
             <div class="rightinfo">
-                <div id="map" class="colmap" style="width: 100%; height: 400px; ">
-                    <!--<iframe width="100%" height="400px" frameborder="0" style="border:0" 
-                            src="https://www.google.com/maps/embed/v1/place?q=chasseral&key=AIzaSyAygOiuwB64V3LNNXX5i6p-gRArxV1-P94"></iframe>-->
-					
+                <div id="map" class="colmap">
                 </div>
+				<div class="colsnearby" id="colsnearby">
+					<div class="colsnearbytitle">
+						Cols Nearby
+					</div>
+					<div id="colsnearbyrows" class="colsnearbyrows clearfix">
+					</div>
+				</div>
                 <div id="donate" class="support">
                     <div class="supporttitle">
 					<form class="donate" align="center" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -327,7 +337,7 @@ foreach($profiles as $profile) {
 </form>
 					</div>
 					<div class="supporttext">
-					If you appreciate the services of CyclingCols, you could thank by doing a donation. This will promote the continuity and development of CyclingCols.
+					If you enjoy the services of CyclingCols, you can thank by making a donation. This will promote the continuity and development of CyclingCols.
 					</div>
 				</div>
 <?php
@@ -355,14 +365,7 @@ foreach($profiles as $profile) {
 		$reclame_count++;
 	}
 ?>	
-	<div class="colsnearby" id="colsnearby">
-		<div class="colsnearbytitle">
-			<h4>Cols Nearby</h4>
-		</div>
-		<div id="colsnearbyrows" class="colsnearbyrows">
-		</div>
-	</div>
-	
+
 	@if ($reclame_count > 0)
 	<div id="reclame" class="reclame">
 	{{$reclame}}
@@ -504,7 +507,7 @@ showPassages = function() {
 					html += '<div class="race_short" title="' + race + '"><i>' + race_short + '</i></div>'; 
 					html += '<div class="rider">' + person + '</div>';
 					if (flag == true) {
-						html += "<div class='profcountry'><img src='{{ URL::asset('images/flags/small/')}}/" + data[i].NatioAbbr + ".gif'/></div>";
+						html += "<div class='profcountry'><img src='{{ URL::asset('images/flags/small/')}}/" + data[i].NatioAbbr + ".gif' title='" + data[i].Natio + "'/></div>";
 					}
 					html += '</div>'; 
 					

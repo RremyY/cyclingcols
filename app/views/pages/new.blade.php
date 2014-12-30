@@ -56,7 +56,7 @@ foreach($newitems as $newitem) {
 @else
 						<td>&nbsp;</td>	
 @endif
-						<td class="new_category category c{{$newitem->Category}}" title="category {{$newitem->Category}}">{{$newitem->Category}}</td>
+						<td class="new_category category c{{$newitem->Category}}" title="Category {{$newitem->Category}}">{{$newitem->Category}}</td>
 @if ($newitem->IsRevised)
 						<td class="new_revised">revised</td>
 @else

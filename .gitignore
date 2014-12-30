@@ -11,3 +11,7 @@ public/images/covers/
 app/views/pages/old/
 public/css/old/
 public/js/old/
+public/ajax/rmjg/getcols.php
+public/ajax/rmjg/
+app/views/includes/old/header2.blade.php
+app/views/includes/old/header3.blade.php
