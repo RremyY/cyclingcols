@@ -195,16 +195,12 @@
 		</div>
 		<div class="col-md-3 col-sm-12 colright">
 			<div class="colcount col-md-12 col-sm-4">Col # {{$col->Number}} of 2909 (alphabetical)</div>
-			@if (!is_null($col_prev))
-			<div class="prevbutton col-md-12 col-sm-4" onclick="location.href='{{$col_prev->ColIDString}}'" title="go to previous col (alphabetical): {{$col_prev->Col}}">
-				<div class="glyphicon glyphicon-arrow-left"></div>{{$col_prev->Col}}
+			<div class="prevbutton col-md-12 col-sm-4">
+				<div class="glyphicon glyphicon-arrow-left"></div>
 			</div>
-			@endif
-			@if (!is_null($col_next))
-			<div class="nextbutton col-md-12 col-sm-4" onclick="location.href='{{$col_next->ColIDString}}'" title="go to next col (alphabetical): {{$col_next->Col}}">
-				<div class="glyphicon glyphicon-arrow-right"></div>{{$col_next->Col}}            
+			<div class="nextbutton col-md-12 col-sm-4">
+				<div class="glyphicon glyphicon-arrow-right"></div>          
 			</div>
-			@endif 
 		</div>
     </div>
 
@@ -467,13 +463,14 @@ hideAllPassages = function() {
 }
 
 $(document).ready(function() {
-	showColsNearby();
-	showPassages();
+	showColsNearby({{$col->ColID}});
+	showPassages({{$col->ColID}});
+	getPrevNextCol({{$col->Number}});
 });
 	
-showPassages = function() {
+showPassages = function(colid) {
 	$.ajax({
-		url : "{{ URL::asset('ajax/')}}/getpassages.php?colid={{$col->ColID}}",
+		url : "{{ URL::asset('ajax/')}}/getpassages.php?colid=" + colid,
 		data : "",
 		dataType : 'json',
 		success : function(data) {
@@ -523,9 +520,9 @@ showPassages = function() {
 	})
 }
 	
-showColsNearby = function() {
+showColsNearby = function(colid) {
 	$.ajax({
-		url : "{{ URL::asset('ajax/')}}/getcolsnearby.php?colid={{$col->ColID}}",
+		url : "{{ URL::asset('ajax/')}}/getcolsnearby.php?colid=" + colid,
 		data : "",
 		dataType : 'json',
 		success : function(data) {
@@ -551,6 +548,44 @@ showColsNearby = function() {
 				html += '</div>';
 				
 				$("#colsnearbyrows").append(html);
+			}
+		}
+	})
+}
+
+getPrevNextCol = function(number) {
+	$.ajax({
+		url : "{{ URL::asset('ajax/')}}/getprevnextcol.php?number=" + number,
+		data : "",
+		dataType : 'json',
+		success : function(data) {
+			var prevIDString;
+			var prevCol;
+			var nextIDString;
+			var nextCol;
+			for(var i = 0; i < data.length; i++) {	
+				if (data[i].Number == number - 1) {
+					prevIDString = data[i].ColIDString;
+					prevCol = data[i].Col;
+				}
+				else if (data[i].Number == number + 1) {
+					nextIDString = data[i].ColIDString;
+					nextCol = data[i].Col;
+				}
+			}
+			
+			if (prevIDString) {
+				$(".prevbutton").click(function() { location.href = prevIDString;} );
+				$(".prevbutton").append(prevCol);
+				$(".prevbutton").attr("title","Go to previous col (alphabetical): " + prevCol);
+				$(".prevbutton").show();
+			}
+			
+			if (nextIDString) {
+				$(".nextbutton").click(function() { location.href = nextIDString;} );
+				$(".nextbutton").append(nextCol);
+				$(".nextbutton").attr("title","Go to next col (alphabetical): " + nextCol);
+				$(".nextbutton").show();
 			}
 		}
 	})
