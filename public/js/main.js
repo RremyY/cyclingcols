@@ -188,14 +188,41 @@ hideInfoType = function () {
     $(this).css("background", "transparent");
 }
 
-showNewItem = function() {
+showTableProfile = function() {
 	var id = $(this).attr("id");
-	window.location.href = "col/" + id;
+	window.location.href = "../col/" + id;
 }
 
 $(document).ready(function () {
     $(".infotype_row").hover(showInfo, hideInfo);
     $(".info").hover(showInfoType, hideInfoType);
-	$(".new_row").click(showNewItem);
+	$(".table_row").click(showTableProfile);
 	$("#twitter").click(function() {window.location.href = "https://twitter.com/cyclingcols"; } );
+	$(".profile_print").click(function() { 
+		var title = $(this).parent().attr("id");
+		printContent($(this).parent().parent(), title); 
+	} );
 })
+
+printContent = function (el, title){
+	var divContents = $(el).html();
+	var printWindow = window.open('', '', 'height=400,width=800');
+	printWindow.document.write('<html><head><title>' + title + '</title>');
+	printWindow.document.write('<link rel="stylesheet" href="http://localhost:8000/css/bootstrap.min.css" type="text/css">');
+	printWindow.document.write('<link rel="stylesheet" href="http://localhost:8000/css/main.css" type="text/css">');
+	printWindow.document.write('</head><body>');
+	//printWindow.document.write('<div>');
+	printWindow.document.write(divContents);
+	//printWindow.document.write('</div>');
+	printWindow.document.write('</body></html>');
+	//printWindow.document.write('<script>');
+	//printWindow.document.write('$(document).ready(function() { window.print(); });');
+	//printWindow.document.write('</script>');
+	printWindow.document.close();
+	printWindow.focus();
+	
+	setTimeout(function() { 
+		printWindow.print(); 
+		printWindow.close();
+	}, 300)
+}

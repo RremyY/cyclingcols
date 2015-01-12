@@ -31,12 +31,6 @@ Route::get('new', function()
 		->with('pagetype','newtemplate');
 });
 
-/* Stats page*/
-Route::get('stats', function()
-{
-	return View::make('pages.stats', array('pagetype'=>'statstemplate'));
-});
-
 /* About page*/
 Route::get('about', function()
 {
@@ -113,6 +107,8 @@ Route::get('map/country/{country}', function($country)
 		->with('pagetype','mappage');
 });
 
+/*col page*/
+
 Route::get('map/col/{col}', function($col)
 {   
 	$col = Col::where('ColIDString',$col)->first();
@@ -125,6 +121,39 @@ Route::get('map/col/{col}', function($col)
     return View::make('pages.map')
 		->with('col',$col)
 		->with('pagetype','mappage');
+});
+
+
+/*stats page*/
+
+Route::get('stats', function()
+{   
+	$stats = Stat::whereRaw('GeoID = 0 AND Rank <= 5')->get();
+	
+	if (is_null($stats))
+	{
+		return "Page does not exist.";
+	}
+	
+    return View::make('pages.stats')
+		->with('stats',$stats)
+		->with('singlestat',false)
+		->with('pagetype','statstemplate');
+});
+
+Route::get('stats/{statid}', function($statid)
+{   
+	$stats = Stat::whereRaw('StatID = ' . $statid . ' AND GeoID = 0')->get();
+	
+	if (is_null($stats))
+	{
+		return "Page does not exist.";
+	}
+	
+    return View::make('pages.stats')
+		->with('stats',$stats)
+		->with('singlestat',true)
+		->with('pagetype','statstemplate');
 });
 
 /*random cols*/

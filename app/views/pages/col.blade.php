@@ -1,8 +1,13 @@
 @extends('layouts.master')
 
+@include('includes.functions')
+
 @section('content')
+<script src="{{ URL::asset('js/col.js') }}" type="text/javascript"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">	
+	var root = '{{ URL::asset("/")}}';
+	
 	var map;
 	function initialize(){
 		// Create an array of styles.
@@ -68,6 +73,14 @@
 	}			
 
 	google.maps.event.addDomListener(window, 'load', initialize);	
+
+	$(document).ready(function() {
+		getColsNearby({{$col->ColID}});
+		getPassages({{$col->ColID}});
+		getPrevNextCol({{$col->Number}});
+		getTopStats({{$col->ColID}});
+	});
+
 </script>
 <?php
 	$double_name = false;
@@ -193,8 +206,19 @@
 			<h3><img src="{{ URL::asset('images/flags/' . $col->Country2 . '.gif') }}"> {{$country2}}</h3>
 			@endif
 		</div>
+<?php	
+	session_start();
+	
+	if(isset($_SESSION['colcount'])) {
+		$colcount = $_SESSION['colcount'];
+	}
+	else {
+		$colcount = Col::all()->count();
+		$_SESSION['colcount'] = $colcount;
+	}		
+?>
 		<div class="col-md-3 col-sm-12 colright">
-			<div class="colcount col-md-12 col-sm-4">Col # {{$col->Number}} of 2909 (alphabetical)</div>
+			<div class="colcount col-md-12 col-sm-4">Col # {{$col->Number}} of {{$colcount}} (alphabetical)</div>
 			<div class="prevbutton col-md-12 col-sm-4">
 				<div class="glyphicon glyphicon-arrow-left"></div>
 			</div>
@@ -267,9 +291,13 @@ foreach($profiles as $profile) {
 	elseif($profile->ProfileIdx < 900) {$profileidx_cat = 2;} 
 	else {$profileidx_cat = 1;} 
 	
+	$profileIDString = $col->ColIDString;
+	if ($profile->Side) {
+		$profileIDString .= "_" . $profile->Side;
+	}	
 ?>
 	        <div id="profile{{$profile->ProfileID}}">
-                <div class="profile">
+                <div id="{{$profileIDString}}" class="profile">
                     <div class="profiletitle">
                         <h4 class="col-xs-11">{{$col->Col}}
 @if ($profile->SideID > 0)
@@ -289,16 +317,29 @@ foreach($profiles as $profile) {
                         <div class="profilestat_wrapper">Profile Index <span class="profilestat c{{$profileidx_cat}}">{{$profile->ProfileIdx}}</span></div>
                     </div>-->
 					<div class="stats_wrapper">
-						<div class="stat_value">{{number_format($profile->Distance/10,1)}} km</div>
-						<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{90-$distance_cat*15}}px;" title="Distance">{{$distance_cat}}</div>
-						<div class="stat_value">{{$profile->HeightDiff}}m</div>
-						<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{90-$heightdiff_cat*15}}px;" title="Altitude Gain">{{$heightdiff_cat}}</div>
-						<div class="stat_value">{{number_format($profile->AvgPerc/10,1)}}%</div>
-						<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{90-$avgperc_cat*15}}px;" title="Average Slope">{{$avgperc_cat}}</div>
-						<div class="stat_value">{{number_format($profile->MaxPerc/10,1)}}%</div>
-						<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{90-$maxperc_cat*15}}px;" title="Maximum Slope">{{$maxperc_cat}}</div>
-						<div class="stat_value">{{$profile->ProfileIdx}}</div>
-						<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{90-$profileidx_cat*15}}px;" title="Profile Index">{{$profileidx_cat}}</div>
+						<div class="stat_value">{{formatStat(1,$profile->Distance)}}</div>
+						<a href="{{URL::asset('stats/1')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(1) . '.png')}}" title="{{statName(1)}}" /></a>
+						<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{90-$distance_cat*15}}px;" title="{{statName(1)}}">{{$distance_cat}}</div>
+						<div class="stat_top stat_top_1"></div>	
+						<div class="stat_value">{{formatStat(2,$profile->HeightDiff)}}</div>
+						<a href="{{URL::asset('stats/2')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(2) . '.png')}}" title="{{statName(2)}}" /></a>
+						<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{90-$heightdiff_cat*15}}px;" title="{{statName(2)}}">{{$heightdiff_cat}}</div>
+						<div class="stat_top stat_top_2"></div>	
+						<div class="stat_value">{{formatStat(3,$profile->AvgPerc)}}</div>
+						<a href="{{URL::asset('stats/3')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(3) . '.png')}}" title="{{statName(3)}}" /></a>
+						<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{90-$avgperc_cat*15}}px;" title="{{statName(3)}}">{{$avgperc_cat}}</div>
+						<div class="stat_top stat_top_3"></div>	
+						<div class="stat_value">{{formatStat(4,$profile->MaxPerc)}}</div>
+						<a href="{{URL::asset('stats/4')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(4) . '.png')}}" title="{{statName(4)}}" /></a>
+						<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{90-$maxperc_cat*15}}px;" title="{{statName(4)}}">{{$maxperc_cat}}</div>
+						<div class="stat_top stat_top_4"></div>	
+						<div class="stat_value">{{formatStat(5,$profile->ProfileIdx)}}</div>
+						<a href="{{URL::asset('stats/5')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(5) . '.png')}}" title="{{statName(5)}}" /></a>
+						<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{90-$profileidx_cat*15}}px;" title="{{statName(5)}}">{{$profileidx_cat}}</div>		
+						<div class="stat_top stat_top_5"></div>	
+					</div>
+					<div class="profile_print">
+						<span class="glyphicon glyphicon-print" title="print"></span>
 					</div>
 					<div class="profileimage clearfix">
 						<!--<img align="left" style="margin: 0px 0px 0px 0px" src="{{ URL::asset('profiles/' . $profile->FileName . '.gif') }}"/>-->
@@ -437,159 +478,5 @@ foreach($profiles as $profile) {
         </div>
     </div>
 </div>
-
-<script type="text/javascript">	
-showAllPassages = function() {
-	$(".profrow_hidden").css("display","block");
-	$("#show_or_hide").attr("src","{{ URL::asset('images/collapse.png') }}");
-	$("#show_or_hide").attr("title","collapse list");
-	$("#show_or_hide_a").attr("href","javascript:hideAllPassages()");
-	if ($(window).width() >= 992)
-	{
-		$("#map").css("display","none");
-		$("#donate").css("display","none");
-		$("#reclame").css("display","none");
-	}
-}
-
-hideAllPassages = function() {
-	$("#map").css("display","block");
-	$("#donate").css("display","block");
-	$("#reclame").css("display","block");
-	$(".profrow_hidden").css("display","none");
-	$("#show_or_hide").attr("src","{{ URL::asset('images/expand.png') }}");
-	$("#show_or_hide").attr("title","expand list");
-	$("#show_or_hide_a").attr("href","javascript:showAllPassages()");
-}
-
-$(document).ready(function() {
-	showColsNearby({{$col->ColID}});
-	showPassages({{$col->ColID}});
-	getPrevNextCol({{$col->Number}});
-});
-	
-showPassages = function(colid) {
-	$.ajax({
-		url : "{{ URL::asset('ajax/')}}/getpassages.php?colid=" + colid,
-		data : "",
-		dataType : 'json',
-		success : function(data) {
-			if (data.length > 0) {
-			
-				for(var i = 0; i < data.length; i++) {	
-					var	race = ""; 
-					var race_short = "";
-				
-					switch(parseInt(data[i].EventID)) {
-						case 1: race = "Tour de France"; race_short = "Tour"; break;
-						case 2: race = "Giro d'Italia"; race_short = "Giro"; break;
-						case 3: race = "Vuelta a España"; race_short = "Vuelta"; break;
-					}
-					
-					var person = data[i].Person;
-					var person_class = "rider";
-					var flag = true;
-					if (data[i].Neutralized == "1") {person = "-neutralized-"; flag = false;}
-					else if (data[i].Cancelled == "1") {person = "-cancelled-"; flag = false;}
-					else if (data[i].NatioAbbr == "") {person = "-cancelled-"; flag = false;}
-					
-					if (person == null) {person = ""; flag = false;}
-					
-					var hidden = "profrow_hidden";
-					if (i < 5) {hidden = "";}
-					
-					var html = '<div class="profrow ' + hidden + ' clearfix">';
-					html += '<div class="year">' + data[i].Edition + '</div>';
-					html += '<div class="race"><i>' + race + '</i></div>'; 
-					html += '<div class="race_short" title="' + race + '"><i>' + race_short + '</i></div>'; 
-					html += '<div class="rider">' + person + '</div>';
-					if (flag == true) {
-						html += "<div class='profcountry'><img src='{{ URL::asset('images/flags/small/')}}/" + data[i].NatioAbbr + ".gif' title='" + data[i].Natio + "'/></div>";
-					}
-					html += '</div>'; 
-					
-					$("#profrows").append(html);
-				}
-					
-				if (data.length <= 5) {
-					$("#show_or_hide_a").hide();
-				}
-				$("#profs").show();
-			}
-		}
-	})
-}
-	
-showColsNearby = function(colid) {
-	$.ajax({
-		url : "{{ URL::asset('ajax/')}}/getcolsnearby.php?colid=" + colid,
-		data : "",
-		dataType : 'json',
-		success : function(data) {
-			for(var i = 0; i < data.length; i++) {	
-				var dis = parseInt(Math.round(parseFloat(data[i].Distance/1000)));
-				var int_dir = parseInt(data[i].Direction); 
-				var dir;
-				
-				if (int_dir <= 22) { dir = "South"; }
-				else if (int_dir <= 67) { dir = "South-West"; }
-				else if (int_dir <= 112) { dir = "West"; }
-				else if (int_dir <= 157) { dir = "North-West"; }
-				else if (int_dir <= 202) { dir = "North"; }
-				else if (int_dir <= 247) { dir = "North-East"; }
-				else if (int_dir <= 292) { dir = "East"; }
-				else if (int_dir <= 337) { dir = "South-East"; }
-				else { dir = "South"; }
-			
-				var html = '<div class="colsnearbyrow">';
-				html += '<div class="colnearby_col"><a href="' + data[i].ColIDString + '">' + data[i].Col + '</a></div>';
-				html += '<div class="colnearby_distance">' + dis + ' km</div>';				
-				html += '<div class="colnearby_direction"><img src="{{ URL::asset('images/')}}/' + dir + '.png"/></div>';				
-				html += '</div>';
-				
-				$("#colsnearbyrows").append(html);
-			}
-		}
-	})
-}
-
-getPrevNextCol = function(number) {
-	$.ajax({
-		url : "{{ URL::asset('ajax/')}}/getprevnextcol.php?number=" + number,
-		data : "",
-		dataType : 'json',
-		success : function(data) {
-			var prevIDString;
-			var prevCol;
-			var nextIDString;
-			var nextCol;
-			for(var i = 0; i < data.length; i++) {	
-				if (data[i].Number == number - 1) {
-					prevIDString = data[i].ColIDString;
-					prevCol = data[i].Col;
-				}
-				else if (data[i].Number == number + 1) {
-					nextIDString = data[i].ColIDString;
-					nextCol = data[i].Col;
-				}
-			}
-			
-			if (prevIDString) {
-				$(".prevbutton").click(function() { location.href = prevIDString;} );
-				$(".prevbutton").append(prevCol);
-				$(".prevbutton").attr("title","Go to previous col (alphabetical): " + prevCol);
-				$(".prevbutton").show();
-			}
-			
-			if (nextIDString) {
-				$(".nextbutton").click(function() { location.href = nextIDString;} );
-				$(".nextbutton").append(nextCol);
-				$(".nextbutton").attr("title","Go to next col (alphabetical): " + nextCol);
-				$(".nextbutton").show();
-			}
-		}
-	})
-}
-</script>
 
 @stop
