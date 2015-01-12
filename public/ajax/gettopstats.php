@@ -25,7 +25,7 @@
   $cols = array();
   if (isset($_GET["colid"])) {
 	  $colid = $_GET["colid"];
-	  $result = mysql_query("SELECT * FROM stats WHERE ColID = " . $colid . " ORDER BY StatID, Rank, GeoID");          //query
+	  $result = mysql_query("SELECT * FROM stats WHERE ColID = " . $colid . " ORDER BY StatID, GeoID, Rank");          //query
 	  while($res = mysql_fetch_array($result)) {
 		$cols[] = $res;
 	  }

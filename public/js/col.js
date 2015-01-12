@@ -154,17 +154,28 @@ getTopStats = function(colid) {
 		dataType : 'json',
 		success : function(data) {
 			var statid = 0;
+			var rank = 0;
 		
 			for(var i = 0; i < data.length; i++) {
-				if (statid != data[i].StatID) {
+				if (statid != data[i].StatID || (rank > 1 && data[i].Rank < rank)) {
+					rank = data[i].Rank;
 					var rankAdd = 'th';
-					if (data[i].Rank == 1) rankAdd = 'st';
-					if (data[i].Rank == 2) rankAdd = 'nd';
-					if (data[i].Rank == 3) rankAdd = 'rd';
-					var html = '<span class="glyphicon glyphicon-flash" aria-hidden="true"></span>' + data[i].Rank + rankAdd + ' of Europe';
+					if (rank == 1) rankAdd = 'st';
+					if (rank == 2) rankAdd = 'nd';
+					if (rank == 3) rankAdd = 'rd';
+					
+					var geo = "Europe";
+					if (data[i].GeoID > 0) {
+						if (data[i].GeoID == data[i].Country1ID) geo = data[i].Country1;
+						else if (data[i].GeoID == data[i].Country2ID) geo = data[i].Country2;
+					}
 					var el = $("#profile" + data[i].ProfileID).find(".stat_top_" + data[i].StatID);
-					$(el).html(html);
-					if (data[i].Rank <= 10) $(el).addClass("stat_top_bold");
+					var el2 = document.createElement("div");
+					$(el).append($(el2));
+					var html = '<a href="' + root + 'stats/' + data[i].StatID + '/' + data[i].GeoID + '"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span>' + data[i].Rank + rankAdd + ' of ' + geo + '</a>';
+					$(el2).html(html);
+					if (rank <= 10) $(el2).addClass("stat_top_bold");
+					if (data[i].GeoID == 0) $(el2).addClass("stat_top_overall");
 					$(el).show();
 				
 					statid = data[i].StatID;

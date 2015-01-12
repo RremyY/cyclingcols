@@ -128,7 +128,8 @@ Route::get('map/col/{col}', function($col)
 
 Route::get('stats', function()
 {   
-	$stats = Stat::whereRaw('GeoID = 0 AND Rank <= 5')->get();
+	return Redirect::to('stats/0/0');
+	/*$stats = Stat::whereRaw('GeoID = 0 AND Rank <= 5')->get();
 	
 	if (is_null($stats))
 	{
@@ -138,12 +139,16 @@ Route::get('stats', function()
     return View::make('pages.stats')
 		->with('stats',$stats)
 		->with('singlestat',false)
-		->with('pagetype','statstemplate');
+		->with('pagetype','statstemplate');*/
 });
 
-Route::get('stats/{statid}', function($statid)
+Route::get('stats/{statid}/{geoid}', function($statid,$geoid)
 {   
-	$stats = Stat::whereRaw('StatID = ' . $statid . ' AND GeoID = 0')->get();
+	if ($statid > 0) {
+		$stats = Stat::whereRaw('StatID = ' . $statid . ' AND GeoID = ' . $geoid)->get();
+	} else {
+		$stats = Stat::whereRaw('GeoID = ' . $geoid . ' AND Rank <= 5')->get();
+	}
 	
 	if (is_null($stats))
 	{
@@ -152,7 +157,8 @@ Route::get('stats/{statid}', function($statid)
 	
     return View::make('pages.stats')
 		->with('stats',$stats)
-		->with('singlestat',true)
+		->with('statid',$statid)
+		->with('geoid',$geoid)
 		->with('pagetype','statstemplate');
 });
 

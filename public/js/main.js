@@ -34,35 +34,28 @@ function calculatenewheight() {
     }
 }
 
-/*
- $(function() {
- $('#countrytab').on('click', function(e) {
- $("li").removeClass("selectedtab");
- $(this).parent().addClass("selectedtab");
- $('#thecountries').show(0).addClass('activecountries');
- return false;//Returning false prevents the event from continuing up the chain
- });
- 
- 
- $(window).load(function() {
- 
- });
- });
- */
+/*sets the height of the stats page wrapper so that it always fills the screen height*/
+function calculatestatsheight() {
+    if ($('body').hasClass('statstemplate')) {
+		var height = $(window).height() - $('.footer').height() - $('#stats-canvas').offset().top;
+	
+		if ($('#stats-canvas').height() < height)
+		{
+			$('#stats-canvas').height(height);
+		}
+    }
+}
 
 $(window).resize(function() {
 	calculatemapheight();
 	calculatenewheight();
-
-		/*if (windowwidth > 992) {
-			$('#thecountries').hide(0).removeClass('activecountries').show(0);
-		}
-		else {
-			$('#thecountries').hide(0);
-		}*/
-	
+	calculatestatsheight();
 });
 
+
+$(document).ready(function() {
+	calculatestatsheight();
+});
 
 /*$(window).scroll(function() {
     var s = $(".rightinfo");
@@ -190,7 +183,7 @@ hideInfoType = function () {
 
 showTableProfile = function() {
 	var id = $(this).attr("id");
-	window.location.href = "../col/" + id;
+	window.location.href = homedir + "col/" + id;
 }
 
 $(document).ready(function () {

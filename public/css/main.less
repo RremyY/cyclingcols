@@ -580,6 +580,53 @@ input:focus {
     }
 }
 
+.table_header {
+    line-height: 40px;
+
+    div{
+        margin-right: 10px;
+    }
+
+    a{
+        display: inline-block;
+    }
+}
+
+.stat_icon_header {
+    width: 20px;
+    opacity: 0.3;
+    display: inline-block;
+    margin: 0px 2px 2px 2px;
+    padding: 0px;
+}
+
+.stat_icon_header:hover {
+    opacity: 1.0;
+}
+
+.stat_icon_selected {
+    width: 30px;
+    opacity: 1.0;
+}
+
+.flag_header {
+    width: 30px;
+    opacity: 0.3;
+    display: inline-block;
+    margin: 0px 2px 2px 2px;
+    padding: 0px;
+    border-radius: 2px;
+}
+
+.flag_header:hover {
+    opacity: 1.0;
+}
+
+.flag_selected {
+    width: 45px;
+    opacity: 1.0;
+}
+
 .table_table_wrapper{
 
     //width: 100%;
@@ -606,12 +653,12 @@ input:focus {
 }
 
 .table_rank{   
-    //max-width: 20px;
+    width: 20px;
     text-align: right;
  }
 
 .table_value{   
-    //max-width: 40px;
+    width: 40px;
     text-align: right;
  }
 
@@ -622,7 +669,7 @@ input:focus {
  }
  
 .table_col:after{   
-    content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+    content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
     color: @orangecolor;
     //float: left;
     width: 0;
@@ -636,6 +683,7 @@ input:focus {
 }
 
 .table_country{
+    width: 70px;
     white-space: nowrap;
     img{
         max-width: 30px;
@@ -1563,13 +1611,20 @@ div.geocode {
     clear:both;
     font-size: 12px;
     margin-left: 5px;
-    color: #ff0000;
     display: none;
     text-align: center; 
+
+    a {
+        color: #ff8000;
+    }
 }
 
 .stat_top_bold{
     font-weight: bold;
+}
+
+.stat_top_overall a{
+    color: #ff0000;
 }
 
 .profile_print {
