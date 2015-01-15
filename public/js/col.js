@@ -59,7 +59,7 @@ getPassages = function(colid) {
 					html += '<div class="race_short" title="' + race + '"><i>' + race_short + '</i></div>'; 
 					html += '<div class="rider">' + person + '</div>';
 					if (flag == true) {
-						html += "<div class='profcountry'><img src='" + root + "images/flags/small/" + data[i].NatioAbbr + ".gif' title='" + data[i].Natio + "'/></div>";
+						html += "<div class='profcountry'><img src='" + root + "images/flags/small/" + data[i].NatioAbbr.toLowerCase() + ".gif' title='" + data[i].Natio + "'/></div>";
 					}
 					html += '</div>'; 
 					

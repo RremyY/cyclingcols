@@ -38,6 +38,40 @@
         </div>
         <div id="phototext" class="phototext"><a href=""></a></div>
         <div id="slide">
+		
+<?php
+	$banners = Banner::whereRaw('ColID = 0 AND Active = 1')->orderBy(DB::raw('RAND()'))->get();
+
+	$reclame_count = 0;
+	$reclame_left = "";
+	$reclame_right = "";
+
+	foreach($banners as $banner) {
+		if ($reclame_count < 2) {
+			$reclame_left .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
+				<img src="../images/banners/' . $banner->BannerFileName . '"/>
+			</a>
+			<div class="reclame_close left" title="close ad">x</div>';
+		} elseif ($reclame_count < 4) {
+			$reclame_right .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
+				<img src="../images/banners/' . $banner->BannerFileName . '"/>
+			</a>
+			<div class="reclame_close right" title="close ad">x</div>';
+		}
+		$reclame_count++;
+	}
+?>	
+		@if ($reclame_left != "")
+		<div id="reclame_left" class="reclame left" style="top:70px">
+		{{$reclame_left}}
+		</div>
+		@endif
+		@if ($reclame_right != "")
+		<div id="reclame_right" class="reclame right" style="top:70px">
+		{{$reclame_right}}
+		</div>
+		@endif
+		
         </div>
 
         <script type="text/javascript" charset="utf-8">

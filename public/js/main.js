@@ -1,7 +1,8 @@
 
 //var homedir = "http://cyclingcols.rmjg.nl/"; 
-var homedir = "http://localhost:8000/"; 
+//var homedir = "http://localhost:8000/"; 
 //var homedir = "http://localhost/laravel/public/";
+var homedir = "http://" + document.location.host + "/";
 
 //country selection was removed
 /*function countryclick(country) {
@@ -55,6 +56,15 @@ $(window).resize(function() {
 
 $(document).ready(function() {
 	calculatestatsheight();
+	
+	setTimeout(function(){
+		$(".reclame_close").on("click",function(){
+			$(this).prev().remove();
+			$(this).remove();
+		});
+		
+		$(".reclame_close").css("opacity","1.0");
+	},5000);
 });
 
 /*$(window).scroll(function() {

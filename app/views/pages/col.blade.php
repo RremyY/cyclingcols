@@ -164,23 +164,53 @@
 	$backgroundpos = 30;
 	if ($col->CoverPhotoPosition) { $backgroundpos = $col->CoverPhotoPosition; }
 	
-	//@if($col->CoverPhotoPosition) -> deze code ipv file_exists
 	
+	//@if($col->CoverPhotoPosition) : deze code ipv file_exists
 ?>
 <div class="colpage">
 	@if(file_exists(public_path($cover)))
 	<div class="colimage" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $backgroundpos}}%'>
-		<!--@if($col->HasImages)
-		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
-		@endif-->
-	</div>
 	@else
     <div class="colimage" style='background-image: url( {{URL::asset("images/covers/_Dummy.jpg")}} ); background-position: 0% 28%'>
-		<!--@if($col->HasImages)
+	@endif		
+	<!--@if($col->HasImages)
 		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
 		@endif-->
+		
+<?php
+	$banners = Banner::whereRaw('ColID = ' . $col->ColID . ' AND Active = 1')->orderBy(DB::raw('RAND()'))->get();
+
+	$reclame_count = 0;
+	$reclame_left = "";
+	$reclame_right = "";
+
+	foreach($banners as $banner) {
+		if ($reclame_count < 2) {
+			$reclame_left .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
+				<img src="../images/banners/' . $banner->BannerFileName . '"/>
+			</a>
+			<div class="reclame_close left" title="close ad">x</div>';
+		} elseif ($reclame_count < 4) {
+			$reclame_right .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
+				<img src="../images/banners/' . $banner->BannerFileName . '"/>
+			</a>
+			<div class="reclame_close right" title="close ad">x</div>';
+		}
+		$reclame_count++;
+	}
+?>	
+		@if ($reclame_left != "")
+		<div id="reclame_left" class="reclame left">
+		{{$reclame_left}}
+		</div>
+		@endif
+		@if ($reclame_right != "")
+		<div id="reclame_right" class="reclame right">
+		{{$reclame_right}}
+		</div>
+		@endif
 	</div>	
-	@endif
+
     <div class="coltitlesection col-xs-12">
 		<div class="col-md-3 col-sm-3 colleft">
 			@if ($col->PanelURL)
@@ -377,45 +407,13 @@ foreach($profiles as $profile) {
 					If you enjoy the services of CyclingCols, you can thank by making a donation. This will promote the continuity and development of CyclingCols.
 					</div>
 				</div>
-<?php
-	$reclame_count = 0;
-	$reclame = "";
-
-	if(in_array($col->ColID,array(198))) {
-		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Grossglockner.gif"/></a>';
-		$reclame_count++;
-	}
-	if(in_array($col->ColID,array(485,519,577))) {
-		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Ventoux.gif"/></a>';
-		$reclame_count++;
-	}
-	if(in_array($col->ColID,array(520,570))) {
-		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond.gif"/></a>';
-		$reclame_count++;
-	}
-	if(in_array($col->ColID,array(634))) {
-		$reclame .= '<a href="http://www.chaletbeyond.nl?page=fietsarrangementen" target="_blank"><img src="../images/banners/LogoChaletBeyond_Stelvio.jpg"/></a>';
-		$reclame_count++;
-	}
-	if(in_array($col->ColID,array(398,399,444,475,485,519,526,542,570,577,578,634,655,1549,1553))) {
-		$reclame .= '<a href="http://www.cyclosouvenir.be" target="_blank"><img src="../images/banners/BannerCyclosouvenir.png"/></a>';
-		$reclame_count++;
-	}
-?>	
-
-	@if ($reclame_count > 0)
-	<div id="reclame" class="reclame">
-	{{$reclame}}
-	</div>
-	@endif
-	
-	<div class="profs" id="profs">
-	<div class="profstitle">
-		<h4>First On Top
-		<a id="show_or_hide_a" href="javascript:showAllPassages()"><img align="right" id="show_or_hide" width="20" src="{{ URL::asset('images/expand.png') }}" title="expand list"/></a>						
-		</h4>
-	</div>
-	<div id="profrows" class="profrows">
+				<div class="profs" id="profs">
+					<div class="profstitle">
+						<h4>First On Top
+						<a id="show_or_hide_a" href="javascript:showAllPassages()"><img align="right" id="show_or_hide" width="20" src="{{ URL::asset('images/expand.png') }}" title="expand list"/></a>						
+						</h4>
+					</div>
+				<div id="profrows" class="profrows">
 
 <?php
 	/*$passages = Passage::where('ColID',$col->ColID)->orderBy('Edition','DESC')->get();
