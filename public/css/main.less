@@ -349,9 +349,11 @@ input:focus {
         color: white;
     }
     .tabrow .glyphicon {
-        display:none;
+        margin-right: 5px;
     }
-}
+    .tabrow .headertext {
+        display: none;
+    }}
 
 .homemenu .tabrow {
     //width:50%;
@@ -912,13 +914,6 @@ input:focus {
 }
 
 /**    left part colpage    */
-.profileimage
-{
-	//background: #fff;
-	border-radius: 0px 0px 2px 2px;
-	padding: 3px 5px 3px 5px;
-}
-
 .profile{
     position: relative;
     background: #fff;
@@ -1176,6 +1171,12 @@ input:focus {
     right: 0px;
 }
 
+@media (max-width: 589px){
+    .reclame.right{
+        display: none;
+    }
+}
+
 .reclame_close{
     position: relative;
     background: white;
@@ -1375,9 +1376,8 @@ input:focus {
         padding: 21px 16px;
         img {width: 40px;}
     }
-    .homemenu .tabrow .glyphicon {
+    .homemenu .tabrow .headertext {
         display: inline-block;
-        margin-right: 5px;
     }
 }
 
@@ -1593,11 +1593,22 @@ div.geocode {
 }
 
 .profileimage{
+	//background: #fff;
+	border-radius: 0px 0px 2px 2px;
+	padding: 3px 5px 3px 5px;
+    float:left;
+    //overflow-y: scroll;
+
     img {
-        display: block;
+        //display: block;
         margin: 5px 0 5px auto;
         padding-right:10px;
+        //max-width: 500px;
     }
+}
+
+.profilestats{
+    float: right;
 }
 
 .stats_wrapper{
@@ -1657,6 +1668,13 @@ div.geocode {
 
 .stat_top_overall a{
     color: #ff0000;
+}
+
+.fb-like {
+    position: absolute!important;
+    bottom: 5px;
+    right: 25px;
+    //cursor: pointer;
 }
 
 .profile_print {

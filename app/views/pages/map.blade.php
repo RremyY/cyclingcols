@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+CyclingCols - Search On Map
+@stop
+
 @section('content')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script type="text/javascript" src="{{ URL::asset('js/markermanager.js') }}"></script>

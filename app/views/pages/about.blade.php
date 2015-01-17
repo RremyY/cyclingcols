@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+CyclingCols - About
+@stop
+
 @section('content')
 <div clas="col-md-12">
     <div class="header">

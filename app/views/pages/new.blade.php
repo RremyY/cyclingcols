@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+CyclingCols - New
+@stop
+
 @section('content')
 <div id="new-canvas" class="col-xs-12">
     <div class="header">

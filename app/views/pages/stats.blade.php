@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+CyclingCols - Stats
+@stop
+
 @include('includes.functions')
 
 @section('content')

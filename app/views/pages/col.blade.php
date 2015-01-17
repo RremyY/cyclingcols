@@ -1,5 +1,25 @@
 @extends('layouts.master')
 
+@section('title')
+CyclingCols - {{$col->Col}}
+@stop
+
+@section('og_title')
+CyclingCols - {{$col->Col}}
+@stop
+
+@section('og_site_name')
+CyclingCols
+@stop
+
+@section('og_url')
+http://www.cyclingcols.com
+@stop
+
+@section('og_image')
+http://www.cyclingcols.com/profiles/{{$profiles->first()->FileName}}.gif
+@stop
+
 @include('includes.functions')
 
 @section('content')
@@ -81,6 +101,15 @@
 		getTopStats({{$col->ColID}});
 	});
 
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=388989554589033&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 </script>
 <?php
 	$double_name = false;
@@ -165,8 +194,9 @@
 	if ($col->CoverPhotoPosition) { $backgroundpos = $col->CoverPhotoPosition; }
 	
 	
-	//@if($col->CoverPhotoPosition) : deze code ipv file_exists
+	
 ?>
+<!-- @ if($col->CoverPhotoPosition) : deze code ipv file_exist-->
 <div class="colpage">
 	@if(file_exists(public_path($cover)))
 	<div class="colimage" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $backgroundpos}}%'>
@@ -189,12 +219,12 @@
 			$reclame_left .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
 				<img src="../images/banners/' . $banner->BannerFileName . '"/>
 			</a>
-			<div class="reclame_close left" title="close ad">x</div>';
+			<div class="reclame_close left">x</div>';
 		} elseif ($reclame_count < 4) {
 			$reclame_right .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
 				<img src="../images/banners/' . $banner->BannerFileName . '"/>
 			</a>
-			<div class="reclame_close right" title="close ad">x</div>';
+			<div class="reclame_close right">x</div>';
 		}
 		$reclame_count++;
 	}
@@ -346,34 +376,46 @@ foreach($profiles as $profile) {
                         <div class="profilestat_wrapper">Maximum Slope <span class="profilestat c{{$maxperc_cat}}">{{number_format($profile->MaxPerc/10,1)}}%</span></div>
                         <div class="profilestat_wrapper">Profile Index <span class="profilestat c{{$profileidx_cat}}">{{$profile->ProfileIdx}}</span></div>
                     </div>-->
-					<div class="stats_wrapper">
-						<div class="stat_value">{{formatStat(1,$profile->Distance)}}</div>
-						<a href="{{URL::asset('stats/1')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(1) . '.png')}}" title="{{statName(1)}}" /></a>
-						<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{90-$distance_cat*15}}px;" title="{{statName(1)}}">{{$distance_cat}}</div>
-						<div class="stat_top stat_top_1"></div>	
-						<div class="stat_value">{{formatStat(2,$profile->HeightDiff)}}</div>
-						<a href="{{URL::asset('stats/2')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(2) . '.png')}}" title="{{statName(2)}}" /></a>
-						<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{90-$heightdiff_cat*15}}px;" title="{{statName(2)}}">{{$heightdiff_cat}}</div>
-						<div class="stat_top stat_top_2"></div>	
-						<div class="stat_value">{{formatStat(3,$profile->AvgPerc)}}</div>
-						<a href="{{URL::asset('stats/3')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(3) . '.png')}}" title="{{statName(3)}}" /></a>
-						<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{90-$avgperc_cat*15}}px;" title="{{statName(3)}}">{{$avgperc_cat}}</div>
-						<div class="stat_top stat_top_3"></div>	
-						<div class="stat_value">{{formatStat(4,$profile->MaxPerc)}}</div>
-						<a href="{{URL::asset('stats/4')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(4) . '.png')}}" title="{{statName(4)}}" /></a>
-						<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{90-$maxperc_cat*15}}px;" title="{{statName(4)}}">{{$maxperc_cat}}</div>
-						<div class="stat_top stat_top_4"></div>	
-						<div class="stat_value">{{formatStat(5,$profile->ProfileIdx)}}</div>
-						<a href="{{URL::asset('stats/5')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(5) . '.png')}}" title="{{statName(5)}}" /></a>
-						<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{90-$profileidx_cat*15}}px;" title="{{statName(5)}}">{{$profileidx_cat}}</div>		
-						<div class="stat_top stat_top_5"></div>	
-					</div>
-					<div class="profile_print">
-						<span class="glyphicon glyphicon-print" title="print"></span>
-					</div>
+
 					<div class="profileimage clearfix">
 						<!--<img align="left" style="margin: 0px 0px 0px 0px" src="{{ URL::asset('profiles/' . $profile->FileName . '.gif') }}"/>-->
 						<img align="left" src="http://www.cyclingcols.com/profiles/{{$profile->FileName}}.gif" />
+					</div>
+					<div class="profilestats clearfix">
+						<div class="stats_wrapper">
+							<div class="stat_value">{{formatStat(1,$profile->Distance)}}</div>
+							<a href="{{URL::asset('stats/1')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(1) . '.png')}}" title="{{statName(1)}}" /></a>
+							<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{90-$distance_cat*15}}px;" title="{{statName(1)}}">{{$distance_cat}}</div>
+							<div class="stat_top stat_top_1"></div>	
+							<div class="stat_value">{{formatStat(2,$profile->HeightDiff)}}</div>
+							<a href="{{URL::asset('stats/2')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(2) . '.png')}}" title="{{statName(2)}}" /></a>
+							<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{90-$heightdiff_cat*15}}px;" title="{{statName(2)}}">{{$heightdiff_cat}}</div>
+							<div class="stat_top stat_top_2"></div>	
+							<div class="stat_value">{{formatStat(3,$profile->AvgPerc)}}</div>
+							<a href="{{URL::asset('stats/3')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(3) . '.png')}}" title="{{statName(3)}}" /></a>
+							<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{90-$avgperc_cat*15}}px;" title="{{statName(3)}}">{{$avgperc_cat}}</div>
+							<div class="stat_top stat_top_3"></div>	
+							<div class="stat_value">{{formatStat(4,$profile->MaxPerc)}}</div>
+							<a href="{{URL::asset('stats/4')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(4) . '.png')}}" title="{{statName(4)}}" /></a>
+							<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{90-$maxperc_cat*15}}px;" title="{{statName(4)}}">{{$maxperc_cat}}</div>
+							<div class="stat_top stat_top_4"></div>	
+							<div class="stat_value">{{formatStat(5,$profile->ProfileIdx)}}</div>
+							<a href="{{URL::asset('stats/5')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(5) . '.png')}}" title="{{statName(5)}}" /></a>
+							<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{90-$profileidx_cat*15}}px;" title="{{statName(5)}}">{{$profileidx_cat}}</div>		
+							<div class="stat_top stat_top_5"></div>	
+						</div>
+						<!--<div class="fb-like" data-href="{{URL::asset('col/'. $col->ColIDString . '')}}" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>-->
+						<div class="fb-like" 
+							data-href="http://www.cyclingcols.com" 
+							data-layout="button" 
+							data-action="like" 
+							data-show-faces="false" 
+							data-share="true"
+						>
+						</div>
+						<div class="profile_print">
+							<span class="glyphicon glyphicon-print" title="print"></span>
+						</div>
 					</div>
                 </div>
             </div>

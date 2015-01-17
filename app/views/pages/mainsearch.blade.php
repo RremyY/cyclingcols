@@ -8,12 +8,12 @@
             <a href="{{ URL::asset('/') }}"><img id="logo_img" src="{{ URL::asset('images/logo.png') }}" /></a>
         </div>
         <ul class='tabrow'>
-            <a href="{{url('/')}}"><li class="selectedtab"><i class="glyphicon glyphicon-home"></i>Home</li></a>
-            <a href="{{url('/new')}}"><li><i class="glyphicon glyphicon-asterisk"></i>New</li></a>
-            <a href="{{url('/stats')}}"><li><i class="glyphicon glyphicon-stats"></i>Stats</li></a>
+            <a href="{{url('/')}}"><li class="selectedtab"><i class="glyphicon glyphicon-home" title="Home"></i><span class="headertext">Home</span></li></a>
+            <a href="{{url('/new')}}"><li><i class="glyphicon glyphicon-asterisk" title="New"></i><span class="headertext">New</span></li></a>
+            <a href="{{url('/stats')}}"><li><i class="glyphicon glyphicon-stats" title="Stats"></i><span class="headertext">Stats</span></li></a>
             <!--<a href="{{url('/random')}}"><li><i class="glyphicon glyphicon-random"></i>Random Cols</li></a>-->
-            <a href="{{url('/help')}}"><li><i class="glyphicon glyphicon-question-sign"></i>Help</li></a>
-            <a href="{{url('/about')}}"><li class="about"><i class="glyphicon glyphicon-info-sign"></i>About</li></a>
+            <a href="{{url('/help')}}"><li><i class="glyphicon glyphicon-question-sign" title="Help"></i><span class="headertext">Help</span></li></a>
+            <a href="{{url('/about')}}"><li class="about"><i class="glyphicon glyphicon-info-sign" title="About"></i><span class="headertext">About</span></li></a>
 			<div id="twitter">
 				<img src="{{ URL::asset('images/twitter.png') }}" title="Follow CyclingCols on twitter!"/>
 			</div>         
@@ -51,12 +51,12 @@
 			$reclame_left .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
 				<img src="../images/banners/' . $banner->BannerFileName . '"/>
 			</a>
-			<div class="reclame_close left" title="close ad">x</div>';
+			<div class="reclame_close left">x</div>';
 		} elseif ($reclame_count < 4) {
 			$reclame_right .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
 				<img src="../images/banners/' . $banner->BannerFileName . '"/>
 			</a>
-			<div class="reclame_close right" title="close ad">x</div>';
+			<div class="reclame_close right">x</div>';
 		}
 		$reclame_count++;
 	}

@@ -2,7 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>CyclingCols</title>
+        <title>@yield('title')</title>
+		<meta property="og:title" content="@yield('og_title')"/>
+		<meta property="og:type" content="article"/>
+		<meta property="og:url" content="@yield('og_url')"/>
+		<meta property="og:image" content="@yield('og_image')"/>
+		<meta property="og:site_name" content="CyclingCols"/>
+		<meta property="og:description" content="@yield('og_description')"/>
 		
 		<link rel="shortcut icon" href="{{ URL::asset('images/cyclingcols2014_klein.ico') }}">
    
