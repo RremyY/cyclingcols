@@ -47,24 +47,20 @@ function calculatestatsheight() {
     }
 }
 
+function calculateprofilemaxwidth() {
+    if ($('body').hasClass('coltemplate')) {
+		$(".profileimage").each(function(){
+			$(this).css('max-width',$(this).parent().parent().width() - 135);
+			$(this).find("img").css('max-width',$(this).parent().parent().width() - 135);
+		});
+    }
+}
+
 $(window).resize(function() {
 	calculatemapheight();
 	calculatenewheight();
 	calculatestatsheight();
-});
-
-
-$(document).ready(function() {
-	calculatestatsheight();
-	
-	setTimeout(function(){
-		$(".reclame_close").on("click",function(){
-			$(this).prev().remove();
-			$(this).remove();
-		});
-		
-		$(".reclame_close").css("opacity","1.0");
-	},5000);
+	calculateprofilemaxwidth();
 });
 
 /*$(window).scroll(function() {
@@ -85,10 +81,20 @@ $(document).ready(function() {
 });*/
 
 $(document).ready(function() {
-
     calculatemapheight();
 	calculatenewheight();
-
+	calculatestatsheight();
+	calculateprofilemaxwidth();
+	
+	setTimeout(function(){
+		$(".reclame_close").on("click",function(){
+			$(this).prev().remove();
+			$(this).remove();
+		});
+		
+		$(".reclame_close").css("opacity","1.0");
+	},5000);
+	
     /*on keyboard enter press*/
     $(document).keypress(function(e) {
         if (e.which === 13) {

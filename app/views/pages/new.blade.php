@@ -5,7 +5,7 @@ CyclingCols - New
 @stop
 
 @section('content')
-<div id="new-canvas" class="col-xs-12">
+<div id="new-canvas" class="canvas col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="header">
         <h1>New at CyclingCols</h1>
 	</div>

@@ -21,7 +21,7 @@ CyclingCols - Stats
 <?php
 	
 ?>
-<div id="stats-canvas" class="col-xs-12">
+<div id="stats-canvas" class="canvas col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="header">
         <h1>CyclingCols Stats</h1>
 	</div>

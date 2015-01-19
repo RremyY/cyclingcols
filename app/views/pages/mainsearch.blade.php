@@ -18,28 +18,17 @@
 				<img src="{{ URL::asset('images/twitter.png') }}" title="Follow CyclingCols on twitter!"/>
 			</div>         
         </ul>
-    </div>
-</div>
-
-<div class="overcontent">
-    <div class="col-md-12 scenery" style="padding:0px">
-        <div class='col-md-12 interaction'>
-            <div class="limitsearchflag"></div>
-            <!--<form class="navbar-form" role="search">-->
-                <div id="bloodhound" class="add-on" style="opacity:0.7">
-                    <input type="text" class="searchfield form-control typeahead search_main" placeholder="Search a col in Europe..." name="colid" id="searchbox">
-                    <div class="input-group-btn">
-                        <!--<div class="btn btn-default search" title="Search"><i class="glyphicon glyphicon-search"></i></div>-->
-                        <a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Display map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
-                    </div>
-                </div>
-                <input id="colid" type="hidden" name="colid" value=""/>
-            <!--</form>-->
-        </div>
-        <div id="phototext" class="phototext"><a href=""></a></div>
-        <div id="slide">
+		<div class='col-md-12 interaction2'>
+			<div id="bloodhound" class="add-on" style="opacity:0.7">
+				<input type="text" class="searchfield form-control typeahead search_main" placeholder="Search a col in Europe..." name="colid" id="searchbox">
+				<div class="input-group-btn">
+					<a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Display map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
+				</div>
+			</div>
+			<input id="colid" type="hidden" name="colid" value=""/>
+		</div>
 		
-<?php
+		<?php
 	$banners = Banner::whereRaw('ColID = 0 AND Active = 1')->orderBy(DB::raw('RAND()'))->get();
 
 	$reclame_count = 0;
@@ -62,16 +51,32 @@
 	}
 ?>	
 		@if ($reclame_left != "")
-		<div id="reclame_left" class="reclame left" style="top:70px">
+		<div id="reclame_left" class="reclame left">
 		{{$reclame_left}}
 		</div>
 		@endif
 		@if ($reclame_right != "")
-		<div id="reclame_right" class="reclame right" style="top:70px">
+		<div id="reclame_right" class="reclame right">
 		{{$reclame_right}}
 		</div>
 		@endif
-		
+	</div>
+
+</div>
+
+<div class="overcontent">
+    <div class="col-md-12 scenery" style="padding:0px">
+        <!--<div class='col-md-12 interaction'>
+			<div id="bloodhound" class="add-on" style="opacity:0.7">
+				<input type="text" class="searchfield form-control typeahead search_main" placeholder="Search a col in Europe..." name="colid" id="searchbox">
+				<div class="input-group-btn">
+					<a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Display map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
+				</div>
+			</div>
+			<input id="colid" type="hidden" name="colid" value=""/>
+        </div>-->
+        <div id="phototext" class="phototext"><a href=""></a></div>
+        <div id="slide">		
         </div>
 
         <script type="text/javascript" charset="utf-8">

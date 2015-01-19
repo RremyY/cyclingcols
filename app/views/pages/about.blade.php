@@ -5,7 +5,7 @@ CyclingCols - About
 @stop
 
 @section('content')
-<div clas="col-md-12">
+<div clas="canvas col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="header">
         <h1>
             About CyclingCols

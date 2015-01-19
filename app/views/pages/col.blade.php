@@ -385,37 +385,38 @@ foreach($profiles as $profile) {
 						<div class="stats_wrapper">
 							<div class="stat_value">{{formatStat(1,$profile->Distance)}}</div>
 							<a href="{{URL::asset('stats/1')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(1) . '.png')}}" title="{{statName(1)}}" /></a>
-							<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{90-$distance_cat*15}}px;" title="{{statName(1)}}">{{$distance_cat}}</div>
+							<div class="stat_bar profilestat c{{$distance_cat}}" style="width:{{60-$distance_cat*10}}px;" title="{{statName(1)}}">{{$distance_cat}}</div>
 							<div class="stat_top stat_top_1"></div>	
 							<div class="stat_value">{{formatStat(2,$profile->HeightDiff)}}</div>
 							<a href="{{URL::asset('stats/2')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(2) . '.png')}}" title="{{statName(2)}}" /></a>
-							<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{90-$heightdiff_cat*15}}px;" title="{{statName(2)}}">{{$heightdiff_cat}}</div>
+							<div class="stat_bar profilestat c{{$heightdiff_cat}}" style="width:{{60-$heightdiff_cat*10}}px;" title="{{statName(2)}}">{{$heightdiff_cat}}</div>
 							<div class="stat_top stat_top_2"></div>	
 							<div class="stat_value">{{formatStat(3,$profile->AvgPerc)}}</div>
 							<a href="{{URL::asset('stats/3')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(3) . '.png')}}" title="{{statName(3)}}" /></a>
-							<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{90-$avgperc_cat*15}}px;" title="{{statName(3)}}">{{$avgperc_cat}}</div>
+							<div class="stat_bar profilestat c{{$avgperc_cat}}" style="width:{{60-$avgperc_cat*10}}px;" title="{{statName(3)}}">{{$avgperc_cat}}</div>
 							<div class="stat_top stat_top_3"></div>	
 							<div class="stat_value">{{formatStat(4,$profile->MaxPerc)}}</div>
 							<a href="{{URL::asset('stats/4')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(4) . '.png')}}" title="{{statName(4)}}" /></a>
-							<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{90-$maxperc_cat*15}}px;" title="{{statName(4)}}">{{$maxperc_cat}}</div>
+							<div class="stat_bar profilestat c{{$maxperc_cat}}" style="width:{{60-$maxperc_cat*10}}px;" title="{{statName(4)}}">{{$maxperc_cat}}</div>
 							<div class="stat_top stat_top_4"></div>	
 							<div class="stat_value">{{formatStat(5,$profile->ProfileIdx)}}</div>
 							<a href="{{URL::asset('stats/5')}}"><img class="stat_icon" src="{{URL::asset('images/' . statNameShort(5) . '.png')}}" title="{{statName(5)}}" /></a>
-							<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{90-$profileidx_cat*15}}px;" title="{{statName(5)}}">{{$profileidx_cat}}</div>		
+							<div class="stat_bar profilestat c{{$profileidx_cat}}" style="width:{{60-$profileidx_cat*10}}px;" title="{{statName(5)}}">{{$profileidx_cat}}</div>		
 							<div class="stat_top stat_top_5"></div>	
 						</div>
-						<!--<div class="fb-like" data-href="{{URL::asset('col/'. $col->ColIDString . '')}}" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>-->
-						<div class="fb-like" 
-							data-href="http://www.cyclingcols.com" 
-							data-layout="button" 
-							data-action="like" 
-							data-show-faces="false" 
-							data-share="true"
-						>
-						</div>
-						<div class="profile_print">
-							<span class="glyphicon glyphicon-print" title="print"></span>
-						</div>
+
+					</div>
+					<!--<div class="fb-like" data-href="{{URL::asset('col/'. $col->ColIDString . '')}}" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>-->
+					<div class="fb-like" 
+						data-href="http://www.cyclingcols.com" 
+						data-layout="button" 
+						data-action="like" 
+						data-show-faces="false" 
+						data-share="true"
+					>
+					</div>
+					<div class="profile_print">
+						<span class="glyphicon glyphicon-print" title="print"></span>
 					</div>
                 </div>
             </div>

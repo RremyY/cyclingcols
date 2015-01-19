@@ -1,3 +1,38 @@
+
+$(document).ready(function() {
+	$(".profileimage img").on("click",function(){
+		var div = document.createElement("div");
+		$(div).addClass("profile_popup");
+		$(div).height($(window).height());
+		document.body.appendChild(div);
+		var img = document.createElement("img");
+		$(img).attr("src",$(this).attr("src"));
+		$(img).addClass("profile_popup_img");
+		
+		document.body.appendChild(img);
+		
+		var width = img.clientWidth;
+		var height = img.clientHeight;
+		if (width > $(window).width()) width = $(window).width();
+		if (height > $(window).height()) height = $(window).height();
+		
+		$(img).css("top",($(window).height()-height)/2);
+		$(img).css("left",($(window).width()-width)/2);
+		$(img).css("max-height",$(window).height());
+		$(img).css("max-width",$(window).width());
+		
+		$('body').addClass('stop-scrolling');
+		
+		$(img).on("click",function(){
+			$(img).remove();
+			$(div).remove();
+			$('body').removeClass('stop-scrolling');
+		});
+		
+		//$(div).append(img);		
+
+	});
+});
 			
 showAllPassages = function() {
 	$(".profrow_hidden").css("display","block");
@@ -98,10 +133,10 @@ getColsNearby = function(colid) {
 				else { dir = "South"; }
 			
 				var html = '<div class="colsnearbyrow">';
-				html += '<div class="colnearby_col"><a href="' + data[i].ColIDString + '">' + data[i].Col + '</a></div>';
+				html += '<div class="colnearby_col"><a href="' + data[i].ColIDString + '">' + data[i].Col + '</a>';
 				html += '<div class="colnearby_distance">' + dis + ' km</div>';				
 				html += '<div class="colnearby_direction"><img src="' + root + 'images/' + dir + '.png"/></div>';				
-				html += '</div>';
+				html += '</div></div>';
 				
 				$("#colsnearbyrows").append(html);
 			}
@@ -169,6 +204,7 @@ getTopStats = function(colid) {
 						if (data[i].GeoID == data[i].Country1ID) geo = data[i].Country1;
 						else if (data[i].GeoID == data[i].Country2ID) geo = data[i].Country2;
 					}
+					geo = "<img src='"+ root + "images/flags/" + geo + ".gif' title='" + geo + "'/>";
 					var el = $("#profile" + data[i].ProfileID).find(".stat_top_" + data[i].StatID);
 					var el2 = document.createElement("div");
 					$(el).append($(el2));
