@@ -219,23 +219,23 @@ http://www.cyclingcols.com/profiles/{{$profiles->first()->FileName}}.gif
 			$reclame_left .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
 				<img src="../images/banners/' . $banner->BannerFileName . '"/>
 			</a>
-			<div class="reclame_close left">x</div>';
+			<div class="reclame_close left">&times;</div>';
 		} elseif ($reclame_count < 4) {
 			$reclame_right .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
 				<img src="../images/banners/' . $banner->BannerFileName . '"/>
 			</a>
-			<div class="reclame_close right">x</div>';
+			<div class="reclame_close right">&times;</div>';
 		}
 		$reclame_count++;
 	}
 ?>	
 		@if ($reclame_left != "")
-		<div id="reclame_left" class="reclame left">
+		<div id="reclame_left" class="reclame reclame_left">
 		{{$reclame_left}}
 		</div>
 		@endif
 		@if ($reclame_right != "")
-		<div id="reclame_right" class="reclame right">
+		<div id="reclame_right" class="reclame reclame_right">
 		{{$reclame_right}}
 		</div>
 		@endif

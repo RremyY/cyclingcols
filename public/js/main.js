@@ -15,6 +15,8 @@ var homedir = "http://" + document.location.host + "/";
  //todo: change dataset for in slideshow.
  return false;
  }*/
+ 
+
 
 /*sets the height of the map-canvas so that it always fills the screen height*/
 function calculatemapheight() {
@@ -57,6 +59,7 @@ function calculateprofilemaxwidth() {
 }
 
 $(window).resize(function() {
+	calculatephotogridheight();
 	calculatemapheight();
 	calculatenewheight();
 	calculatestatsheight();
@@ -107,13 +110,13 @@ $(document).ready(function() {
     });
 
     /*on search button click event*/
-    $('#bloodhound .search').click(function(event) {
+    /*$('#bloodhound .search').click(function(event) {
         event.preventDefault();
         var colstringid = $("#colid").val();
         if (colstringid !== "") {
             window.location.replace(homedir + "col/" + colstringid);
         }
-    });
+    });*/
 
     /*select menu headeritem*/
     $(".tabrow li").removeClass("selectedtab"); //remove     

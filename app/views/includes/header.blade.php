@@ -18,7 +18,7 @@
 		<div class="headersearch">
             <!--<form class="navbar-form" role="search">-->
                 <div id="bloodhound" class="add-on">
-                    <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe.." name="colid" id="searchbox">
+                    <input type="text" class="searchfield form-control typeahead" placeholder="Search a col in Europe..." name="colid" id="searchbox">
                     <!--<div class="input-group-btn">
                         <div class="btn btn-default search" title="Search"><i class="glyphicon glyphicon-search"></i></div>
                     </div>-->
