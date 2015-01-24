@@ -70,11 +70,13 @@
 
 <script type="text/javascript" charset="utf-8">
 	var photos = [];
+	var nrCols;
+	var nrRows;
+	var lastPhoto;
 	
 	$(document).ready(function() {	
 		calculatephotogridheight();
-		getPhotos();
-		
+		getPhotos();		
 	});
 	
 	$(window).resize(function() {
@@ -99,6 +101,62 @@
 		$('#photogrid').height(($('.footer').offset().top) - ($('#photogrid').offset().top));
 	}
 	
+	function changeRandomPhoto() {
+		setTimeout(function(){
+			if (lastPhoto < photos.length) {
+				//get random div
+				var nr = Math.floor(nrCols * nrRows * Math.random());
+				//nr = 1;
+				var div = $(".photo:eq(" + nr + ")");
+				var divHeader = $("#" + $(".photo:eq(" + nr + ")").attr("id").replace("photo","photoheader"));
+				//alert($(".photo:eq(" + nr + ")").attr("id"));
+				//alert($(divHeader).attr("id"));
+				
+				(function(lastPhoto2) {
+					var colName = photos[lastPhoto2][1];
+					colName += '<img src="{{ URL::asset('images/flags')}}/' + photos[lastPhoto2][3] + '.gif"></img>';
+
+					//hide previous photo
+					$(div).animate({opacity:0},1000,"linear",function(){
+						//set new photo & header
+						$(divHeader)						
+							.html(colName)
+							.attr("id","photoheader" + photos[lastPhoto2][0])
+							.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photos[lastPhoto2][0];})
+							.on("mouseenter",function(){
+								$("#photo" + photos[lastPhoto2][0]).css("opacity",0.4);
+								$("#photoheader" + photos[lastPhoto2][0]).show();
+							})
+							.on("mouseleave",function(){
+								$("#photo" + photos[lastPhoto2][0]).css("opacity",1.0);
+								$("#photoheader" + photos[lastPhoto2][0]).hide();
+							});
+							
+						$(div)
+							.attr("id","photo" + photos[lastPhoto2][0])
+							.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photos[lastPhoto2][0] + ".jpg" + ')')
+							.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photos[lastPhoto2][0];})
+							.on("mouseenter",function(){
+								$("#photo" + photos[lastPhoto2][0]).css("opacity",0.4);
+								$("#photoheader" + photos[lastPhoto2][0]).show();
+							})
+							.on("mouseleave",function(){
+								$("#photo" + photos[lastPhoto2][0]).css("opacity",1.0);
+								$("#photoheader" + photos[lastPhoto2][0]).hide();
+							});
+					});
+					
+					//show new photo
+					$(div).animate({opacity:1},2000,"swing");
+					
+				})(lastPhoto);
+					
+				lastPhoto++;
+				changeRandomPhoto();
+			}
+		}, 10000);
+	}
+	
 	function arrangePhotoGrid() {
 		$("#bloodhound").hide();
 		$("#searchonmap").hide();
@@ -110,8 +168,8 @@
 		var height = $('#photogrid').height();
 		var padding = 4;
 		
-		var nrCols = Math.ceil(width/320);
-		var nrRows = Math.ceil(height/210);
+		nrCols = Math.ceil(width/320);
+		nrRows = Math.ceil(height/210);
 		
 		//variables to make space for searchbox
 		var colSearchStart = 1;
@@ -210,6 +268,9 @@
 			left += photoWidth + padding;
 			top = padding;
 		}
+			
+		lastPhoto = count;
+		changeRandomPhoto();
 	}
 </script>
 @stop
