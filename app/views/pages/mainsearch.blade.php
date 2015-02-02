@@ -17,42 +17,7 @@
 				<img src="{{ URL::asset('images/twitter.png') }}" title="Follow CyclingCols on twitter!"/>
 			</div>         
         </ul>
-		
-		<?php
-	$banners = Banner::whereRaw('ColID = 0 AND Active = 1')->orderBy(DB::raw('RAND()'))->get();
-
-	$reclame_count = 0;
-	$reclame_left = "";
-	$reclame_right = "";
-
-	foreach($banners as $banner) {
-		break;
-		if ($reclame_count < 2) {
-			$reclame_left .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
-				<img src="../images/banners/' . $banner->BannerFileName . '"/>
-			</a>
-			<div class="reclame_close left">&times;</div>';
-		} elseif ($reclame_count < 4) {
-			$reclame_right .= '<a href="http://' . $banner->RedirectURL . '" target="_blank">
-				<img src="../images/banners/' . $banner->BannerFileName . '"/>
-			</a>
-			<div class="reclame_close right">&times;</div>';
-		}
-		$reclame_count++;
-	}
-?>	
-		@if ($reclame_left != "")
-		<div id="reclame_left" class="reclame_main reclame_left">
-		{{$reclame_left}}
-		</div>
-		@endif
-		@if ($reclame_right != "")
-		<div id="reclame_right" class="reclame_main reclame_right">
-		{{$reclame_right}}
-		</div>
-		@endif
 	</div>
-
 </div>
 
 <div id="bloodhound" class="abs" style="display:none">
@@ -70,13 +35,16 @@
 
 <script type="text/javascript" charset="utf-8">
 	var photos = [];
+	var photosShown = [];
+	var banners = [];
+	var bannersShown = [];
 	var nrCols;
 	var nrRows;
-	var lastPhoto;
 	
 	$(document).ready(function() {	
 		calculatephotogridheight();
-		getPhotos();		
+		getPhotos();
+		getBanners();
 	});
 	
 	$(window).resize(function() {
@@ -91,7 +59,27 @@
 			dataType : 'json',
 			success : function(data) {
 				photos = data;
-				arrangePhotoGrid();
+				if (photos.length > 0 && banners.length > 0) {
+					arrangePhotoGrid();
+					changeRandomPhoto();
+					changeRandomBanner();
+				}
+			}
+		})
+	}
+	
+	function getBanners() {
+		$.ajax({
+			url : "{{ URL::asset('ajax/getbanners.php?colid=0') }}",
+			data : "",
+			dataType : 'json',
+			success : function(data) {
+				banners = data;
+				if (photos.length > 0 && banners.length > 0) {
+					arrangePhotoGrid();
+					changeRandomPhoto();
+					changeRandomBanner();
+				}
 			}
 		})
 	}
@@ -103,58 +91,96 @@
 	
 	function changeRandomPhoto() {
 		setTimeout(function(){
-			if (lastPhoto < photos.length) {
-				//get random div
-				var nr = Math.floor(nrCols * nrRows * Math.random());
-				//nr = 1;
-				var div = $(".photo:eq(" + nr + ")");
-				var divHeader = $("#" + $(".photo:eq(" + nr + ")").attr("id").replace("photo","photoheader"));
-				//alert($(".photo:eq(" + nr + ")").attr("id"));
-				//alert($(divHeader).attr("id"));
-				
-				(function(lastPhoto2) {
-					var colName = photos[lastPhoto2][1];
-					colName += '<img src="{{ URL::asset('images/flags')}}/' + photos[lastPhoto2][3] + '.gif"></img>';
+			//get random div
+			var index = Math.floor(photosShown.length * Math.random());
+			
+			var photoHide = photosShown[index]; //pick random item of photosShown
+			photosShown.splice(index,1); //remove random item from photosShown
+			
+			var photo = photos[0]; //pick first item of photos(NotShown)
+			photos.shift(); //remove first item from photos(NotShown)
+			
+			photos.push(photoHide); //add random item to photo(NotShown)
+			photosShown.push(photo); //add item to photoShown
+			
+			var div = $("#photo" + photoHide[0]);
+			var divHeader = $("#photoheader" + photoHide[0]);
+			
+			//console.log("hidden:"+ photoHide[1]);
+			//console.log("shown:"+ photo[1]);
+					
+			var colName = photo[1];
+			colName += '<img src="{{ URL::asset('images/flags')}}/' + photo[3] + '.gif"></img>';
 
-					//hide previous photo
-					$(div).animate({opacity:0},1000,"linear",function(){
-						//set new photo & header
-						$(divHeader)						
-							.html(colName)
-							.attr("id","photoheader" + photos[lastPhoto2][0])
-							.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photos[lastPhoto2][0];})
-							.on("mouseenter",function(){
-								$("#photo" + photos[lastPhoto2][0]).css("opacity",0.4);
-								$("#photoheader" + photos[lastPhoto2][0]).show();
-							})
-							.on("mouseleave",function(){
-								$("#photo" + photos[lastPhoto2][0]).css("opacity",1.0);
-								$("#photoheader" + photos[lastPhoto2][0]).hide();
-							});
-							
-						$(div)
-							.attr("id","photo" + photos[lastPhoto2][0])
-							.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photos[lastPhoto2][0] + ".jpg" + ')')
-							.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photos[lastPhoto2][0];})
-							.on("mouseenter",function(){
-								$("#photo" + photos[lastPhoto2][0]).css("opacity",0.4);
-								$("#photoheader" + photos[lastPhoto2][0]).show();
-							})
-							.on("mouseleave",function(){
-								$("#photo" + photos[lastPhoto2][0]).css("opacity",1.0);
-								$("#photoheader" + photos[lastPhoto2][0]).hide();
-							});
+			//hide previous photo
+			$(div).animate({opacity:0},1000,"linear",function(){
+				//set new photo & header
+				$(divHeader)						
+					.html(colName)
+					.attr("id","photoheader" + photo[0])
+					.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
+					.on("mouseenter",function(){
+						$("#photo" + photo[0]).css("opacity",0.4);
+						$("#photoheader" + photo[0]).show();
+					})
+					.on("mouseleave",function(){
+						$("#photo" + photo[0]).css("opacity",1.0);
+						$("#photoheader" + photo[0]).hide();
 					});
 					
-					//show new photo
-					$(div).animate({opacity:1},2000,"swing");
-					
-				})(lastPhoto);
-					
-				lastPhoto++;
-				changeRandomPhoto();
-			}
+				$(div)
+					.attr("id","photo" + photo[0])
+					.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photo[0] + ".jpg" + ')')
+					.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
+					.on("mouseenter",function(){
+						$("#photo" + photo[0]).css("opacity",0.4);
+						$("#photoheader" + photo[0]).show();
+					})
+					.on("mouseleave",function(){
+						$("#photo" + photo[0]).css("opacity",1.0);
+						$("#photoheader" + photo[0]).hide();
+					});
+			});
+			
+			//show new photo
+			$(div).animate({opacity:1},2000,"swing");
+				
+			changeRandomPhoto();
 		}, 10000);
+	}
+	
+	function changeRandomBanner() {
+		if (banners.length == 0) return;
+		
+		setTimeout(function(){
+			//get random banner
+			var index = Math.floor(bannersShown.length * Math.random());
+			
+			var bannerHide = bannersShown[index]; //pick random item of bannersShown
+			bannersShown.splice(index,1); //remove random item from bannersShown
+			
+			var banner = banners[0]; //pick first item of banners(NotShown)
+			banners.shift(); //remove first item from banners(NotShown)
+			
+			banners.push(bannerHide); //add random item to banners(NotShown)
+			bannersShown.push(banner); //add item to bannersShown
+			
+			var div = $("#banner" + bannerHide.Nr);
+			
+			//hide previous banner
+			$(div).animate({opacity:0},1000,"linear",function(){
+				//set new banner
+				$(div)
+					.attr("id","banner" + banner.Nr)		
+					.css("background-image", 'url(' + "{{ URL::asset('images/banners')}}/" + banner.BannerFileName + ')')
+					.on("click",function(){document.location.href = "http:////" + banner.RedirectURL;});
+			});
+			
+			//show new photo
+			$(div).animate({opacity:1},2000,"swing");
+				
+			changeRandomBanner();
+		}, 20000);
 	}
 	
 	function arrangePhotoGrid() {
@@ -178,9 +204,34 @@
 			colSearchStart = 2;
 			colSearchEnd = 3;
 		}
-		var rowSearch = Math.floor(nrRows/2) + 1;	
+		var rowSearch = Math.floor(nrRows/2) + 1;
+		
+		//dedicate boxes for banners
+		var bannerCounts = [];
+		if (banners.length > 0) {
+			bannerCounts.push(Math.floor(nrCols * nrRows * Math.random()));
+		}
+		if (banners.length > 1) {
+			if (nrCols * nrRows >= 9) {
+				var cnt = Math.floor(nrCols * nrRows * Math.random());
+				while ($.inArray(cnt,bannerCounts) >= 0) {
+					cnt = Math.floor(nrCols * nrRows * Math.random());
+				}
+				bannerCounts.push(cnt);				
+			}
+		}
+		if (banners.length > 2) {
+			if (nrCols * nrRows >= 15) {
+				var cnt = Math.floor(nrCols * nrRows * Math.random());
+				while ($.inArray(cnt,bannerCounts) >= 0) {
+					cnt = Math.floor(nrCols * nrRows * Math.random());
+				}
+				bannerCounts.push(cnt);				
+			}
+		}
 		
 		var count = 0;
+		var showBanner = false;
 		var left = padding;
 		var top = padding;
 		var photoWidth = (width-padding*(nrCols+1))/nrCols;
@@ -188,10 +239,10 @@
 		
 		for (col = 1; col <= nrCols; col++) {
 			for (row = 1; row <= nrRows; row++) {
-				(function(count2) {
-					var colName = photos[count2][1];
-					colName += '<img src="{{ URL::asset('images/flags')}}/' + photos[count2][3] + '.gif"></img>';
-
+			
+				showBanner = ($.inArray(count,bannerCounts) >= 0);
+				
+				(function() {
 					var photoTop = 0;
 					var photoBottom = 0;
 			
@@ -220,57 +271,81 @@
 						$(searchonmap).show();
 					}
 					
-					var divHeader = document.createElement("div");
-					$(divHeader)
-						.addClass("photoheader")
-						.css("left", left + "px")
-						.css("top", (top + photoTop) + "px")
-						.width(photoWidth - 10 + "px")
-						.html(colName)
-						.attr("id","photoheader" + photos[count2][0])
-						.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photos[count2][0];})
-						.on("mouseenter",function(){
-							$("#photo" + photos[count2][0]).css("opacity",0.4);
-							$("#photoheader" + photos[count2][0]).show();
-						})
-						.on("mouseleave",function(){
-							$("#photo" + photos[count2][0]).css("opacity",1.0);
-							$("#photoheader" + photos[count2][0]).hide();
-						});
-					$('#photogrid').append(divHeader);		
-					
-					var div = document.createElement("div");
-					$(div)
-						.addClass("photo")
-						.css("left", left + "px")
-						.css("top", (top + photoTop) + "px")
-						.width(photoWidth + "px")
-						.height((photoHeight - photoTop - photoBottom) + "px")
-						.attr("id","photo" + photos[count2][0])
-						.css("background-size", photoWidth + "px " + photoHeight + "px")
-						.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photos[count2][0] + ".jpg" + ')')
-						.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photos[count2][0];})
-						.on("mouseenter",function(){
-							$("#photo" + photos[count2][0]).css("opacity",0.4);
-							$("#photoheader" + photos[count2][0]).show();
-						})
-						.on("mouseleave",function(){
-							$("#photo" + photos[count2][0]).css("opacity",1.0);
-							$("#photoheader" + photos[count2][0]).hide();
-						});
-					$('#photogrid').append(div);
-				})(count);
+					if (showBanner) {
+						//add banner
+						var banner = banners[0]; //pick first item of banners(NotShown)
+						banners.shift(); //remove item from banners(NotShown)
+						bannersShown.push(banner); //add item to bannersShown
+						
+						var div = document.createElement("div");
+						$(div)
+							.addClass("banner")
+							.css("left", left + "px")
+							.css("top", (top + photoTop) + "px")
+							.width(photoWidth + "px")
+							.height((photoHeight - photoTop - photoBottom))
+							.css("background-image", 'url(' + "{{ URL::asset('images/banners')}}/" + banner.BannerFileName + ')')
+							.attr("id","banner" + banner.Nr)
+							.on("click",function(){document.location.href = "http:////" + banner.RedirectURL;});
+						$('#photogrid').append(div);					
+					} else {
+						var photo = photos[0]; //pick first item of photos(NotShown)
+						photos.shift(); //remove item from photos(NotShown)
+						photosShown.push(photo); //add item to photoShown
+						
+						var colName = photo[1];
+						colName += '<img src="{{ URL::asset('images/flags')}}/' + photo[3] + '.gif"></img>';
+
+						var divHeader = document.createElement("div");
+						$(divHeader)
+							.addClass("photoheader")
+							.css("left", left + "px")
+							.css("top", (top + photoTop) + "px")
+							.width(photoWidth - 10 + "px")
+							.html(colName)
+							.attr("id","photoheader" + photo[0])
+							.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
+							.on("mouseenter",function(){
+								$("#photo" + photo[0]).css("opacity",0.4);
+								$("#photoheader" + photo[0]).show();
+							})
+							.on("mouseleave",function(){
+								$("#photo" + photo[0]).css("opacity",1.0);
+								$("#photoheader" + photo[0]).hide();
+							});
+						$('#photogrid').append(divHeader);		
+						
+						var div = document.createElement("div");
+						$(div)
+							.addClass("photo")
+							.css("left", left + "px")
+							.css("top", (top + photoTop) + "px")
+							.width(photoWidth + "px")
+							.height((photoHeight - photoTop - photoBottom) + "px")
+							.attr("id","photo" + photo[0])
+							.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photo[0] + ".jpg" + ')')
+							.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
+							.on("mouseenter",function(){
+								$("#photo" + photo[0]).css("opacity",0.4);
+								$("#photoheader" + photo[0]).show();
+							})
+							.on("mouseleave",function(){
+								$("#photo" + photo[0]).css("opacity",1.0);
+								$("#photoheader" + photo[0]).hide();
+							});
+						$('#photogrid').append(div);
+						
+					}
+				})();
 					
 				top += photoHeight + padding;
+				
 				count++;
 			}
 			
 			left += photoWidth + padding;
 			top = padding;
 		}
-			
-		lastPhoto = count;
-		changeRandomPhoto();
 	}
 </script>
 @stop

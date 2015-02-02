@@ -59,7 +59,7 @@ function calculateprofilemaxwidth() {
 }
 
 $(window).resize(function() {
-	calculatephotogridheight();
+	//calculatephotogridheight();
 	calculatemapheight();
 	calculatenewheight();
 	calculatestatsheight();

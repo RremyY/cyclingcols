@@ -21,8 +21,8 @@
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         
        <script src="{{ URL::asset('js/jquery-latest.min.js') }}" type="text/javascript"></script>
-       <script src="{{ URL::asset('js/jquery.cycle2.min.js') }}" type="text/javascript"></script>
-       <script src="{{ URL::asset('js/jquery.cycle2.center.js') }}" type="text/javascript"></script>
+      <!-- <script src="{{ URL::asset('js/jquery.cycle2.min.js') }}" type="text/javascript"></script>
+       <script src="{{ URL::asset('js/jquery.cycle2.center.js') }}" type="text/javascript"></script>-->
        <script src="{{ URL::asset('js/typeahead.bundle.js') }}" type="text/javascript"></script>
        <script src="{{ URL::asset('js/main.js') }}" type="text/javascript"></script>
 
