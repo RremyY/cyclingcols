@@ -11,7 +11,7 @@ class Col extends Eloquent
 		'ColTypeID','ColType',
 		'Height',
 		'Latitude','Longitude',
-		'CoverPhoto','CoverPhotoPosition',
+		'CoverPhoto','CoverPhotoPosition','CoverPhotoPosition2',
 		'Panel','PanelSource','PanelSourceURL',
 		'URL','Number','Aliases',
 		'HasImages'

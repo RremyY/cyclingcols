@@ -190,18 +190,24 @@ http://www.cyclingcols.com/profiles/{{$profiles->first()->FileName}}.gif
 	
 	$cover = 'images/covers/' . $col->ColIDString . '.jpg';
 	$cover_url = URL::asset($cover);
-	$backgroundpos = 30;
-	if ($col->CoverPhotoPosition) { $backgroundpos = $col->CoverPhotoPosition; }
-	
-	
-	
+	$cover2 = 'images/covers/' . $col->ColIDString . '_2.jpg';
+	$cover_url2 = URL::asset($cover2);
+	//$backgroundpos = 30;
+	//$backgroundpos2 = 30;
+	//if ($col->CoverPhotoPosition) { $backgroundpos = $col->CoverPhotoPosition; }
+	//if ($col->CoverPhotoPosition2) { $backgroundpos2 = $col->CoverPhotoPosition2; }
+		
 ?>
-<!-- @ if($col->CoverPhotoPosition) : deze code ipv file_exist-->
 <div class="colpage">
-	@if(file_exists(public_path($cover)))
-	<div class="colimage" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $backgroundpos}}%'>
+	@if($col->CoverPhotoPosition)
+		@if($col->CoverPhotoPosition2)
+		<div class="colimage hidden-xs hidden-sm col-md-6" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $col->CoverPhotoPosition}}%'></div>
+		<div class="colimage2 hidden-xs hidden-sm col-md-6" style='background-image: url( {{$cover_url2}} ); background-position: 0% {{ $col->CoverPhotoPosition2}}%'></div>
+		@else
+		<div class="colimage hidden-xs hidden-sm col-md-12" style='background-image: url( {{$cover_url}} ); background-position: 0% {{ $col->CoverPhotoPosition}}%'></div>
+		@endif
 	@else
-    <div class="colimage" style='background-image: url( {{URL::asset("images/covers/_Dummy.jpg")}} ); background-position: 0% 28%'>
+    <div class="colimage hidden-xs hidden-sm col-md-12" style='background-image: url( {{URL::asset("images/covers/_Dummy.jpg")}} ); background-position: 0% 28%'></div>
 	@endif		
 	<!--@if($col->HasImages)
 		<div class="view_slideshow"><a href="../slideshow/{{$col->ColIDString}}">View Slideshow</a></div>     
@@ -229,17 +235,16 @@ http://www.cyclingcols.com/profiles/{{$profiles->first()->FileName}}.gif
 		$reclame_count++;
 	}
 ?>	
-		@if ($reclame_left != "")
-		<div id="reclame_left" class="reclame reclame_left">
-		{{$reclame_left}}
-		</div>
-		@endif
-		@if ($reclame_right != "")
-		<div id="reclame_right" class="reclame reclame_right">
-		{{$reclame_right}}
-		</div>
-		@endif
-	</div>	
+	@if ($reclame_left != "")
+	<div id="reclame_left" class="reclame reclame_left">
+	{{$reclame_left}}
+	</div>
+	@endif
+	@if ($reclame_right != "")
+	<div id="reclame_right" class="reclame reclame_right">
+	{{$reclame_right}}
+	</div>
+	@endif
 
     <div class="coltitlesection col-xs-12">
 		<div class="col-md-3 col-sm-3 colleft">

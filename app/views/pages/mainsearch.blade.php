@@ -91,59 +91,61 @@
 	
 	function changeRandomPhoto() {
 		setTimeout(function(){
-			//get random div
-			var index = Math.floor(photosShown.length * Math.random());
-			
-			var photoHide = photosShown[index]; //pick random item of photosShown
-			photosShown.splice(index,1); //remove random item from photosShown
-			
-			var photo = photos[0]; //pick first item of photos(NotShown)
-			photos.shift(); //remove first item from photos(NotShown)
-			
-			photos.push(photoHide); //add random item to photo(NotShown)
-			photosShown.push(photo); //add item to photoShown
-			
-			var div = $("#photo" + photoHide[0]);
-			var divHeader = $("#photoheader" + photoHide[0]);
-			
-			//console.log("hidden:"+ photoHide[1]);
-			//console.log("shown:"+ photo[1]);
-					
-			var colName = photo[1];
-			colName += '<img src="{{ URL::asset('images/flags')}}/' + photo[3] + '.gif"></img>';
+			if (document.hasFocus()){
+				//get random div
+				var index = Math.floor(photosShown.length * Math.random());
+				
+				var photoHide = photosShown[index]; //pick random item of photosShown
+				photosShown.splice(index,1); //remove random item from photosShown
+				
+				var photo = photos[0]; //pick first item of photos(NotShown)
+				photos.shift(); //remove first item from photos(NotShown)
+				
+				photos.push(photoHide); //add random item to photo(NotShown)
+				photosShown.push(photo); //add item to photoShown
+				
+				var div = $("#photo" + photoHide[0]);
+				var divHeader = $("#photoheader" + photoHide[0]);
+				
+				//console.log("hidden:"+ photoHide[1]);
+				//console.log("shown:"+ photo[1]);
+						
+				var colName = photo[1];
+				colName += '<img src="{{ URL::asset('images/flags')}}/' + photo[3] + '.gif"></img>';
 
-			//hide previous photo
-			$(div).animate({opacity:0},1000,"linear",function(){
-				//set new photo & header
-				$(divHeader)						
-					.html(colName)
-					.attr("id","photoheader" + photo[0])
-					.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
-					.on("mouseenter",function(){
-						$("#photo" + photo[0]).css("opacity",0.4);
-						$("#photoheader" + photo[0]).show();
-					})
-					.on("mouseleave",function(){
-						$("#photo" + photo[0]).css("opacity",1.0);
-						$("#photoheader" + photo[0]).hide();
-					});
-					
-				$(div)
-					.attr("id","photo" + photo[0])
-					.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photo[0] + ".jpg" + ')')
-					.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
-					.on("mouseenter",function(){
-						$("#photo" + photo[0]).css("opacity",0.4);
-						$("#photoheader" + photo[0]).show();
-					})
-					.on("mouseleave",function(){
-						$("#photo" + photo[0]).css("opacity",1.0);
-						$("#photoheader" + photo[0]).hide();
-					});
-			});
-			
-			//show new photo
-			$(div).animate({opacity:1},2000,"swing");
+				//hide previous photo
+				$(div).animate({opacity:0},1000,"linear",function(){
+					//set new photo & header
+					$(divHeader)						
+						.html(colName)
+						.attr("id","photoheader" + photo[0])
+						.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
+						.on("mouseenter",function(){
+							$("#photo" + photo[0]).css("opacity",0.4);
+							$("#photoheader" + photo[0]).show();
+						})
+						.on("mouseleave",function(){
+							$("#photo" + photo[0]).css("opacity",1.0);
+							$("#photoheader" + photo[0]).hide();
+						});
+						
+					$(div)
+						.attr("id","photo" + photo[0])
+						.css("background-image", 'url(' + "{{ URL::asset('images/covers')}}/" + photo[0] + ".jpg" + ')')
+						.on("click",function(){document.location.href="{{ URL::asset('col')}}/" + photo[0];})
+						.on("mouseenter",function(){
+							$("#photo" + photo[0]).css("opacity",0.4);
+							$("#photoheader" + photo[0]).show();
+						})
+						.on("mouseleave",function(){
+							$("#photo" + photo[0]).css("opacity",1.0);
+							$("#photoheader" + photo[0]).hide();
+						});
+				});
+				
+				//show new photo
+				$(div).animate({opacity:1},2000,"swing");
+			}
 				
 			changeRandomPhoto();
 		}, 10000);
@@ -153,31 +155,33 @@
 		if (banners.length == 0) return;
 		
 		setTimeout(function(){
-			//get random banner
-			var index = Math.floor(bannersShown.length * Math.random());
-			
-			var bannerHide = bannersShown[index]; //pick random item of bannersShown
-			bannersShown.splice(index,1); //remove random item from bannersShown
-			
-			var banner = banners[0]; //pick first item of banners(NotShown)
-			banners.shift(); //remove first item from banners(NotShown)
-			
-			banners.push(bannerHide); //add random item to banners(NotShown)
-			bannersShown.push(banner); //add item to bannersShown
-			
-			var div = $("#banner" + bannerHide.Nr);
-			
-			//hide previous banner
-			$(div).animate({opacity:0},1000,"linear",function(){
-				//set new banner
-				$(div)
-					.attr("id","banner" + banner.Nr)		
-					.css("background-image", 'url(' + "{{ URL::asset('images/banners')}}/" + banner.BannerFileName + ')')
-					.on("click",function(){document.location.href = "http:////" + banner.RedirectURL;});
-			});
-			
-			//show new photo
-			$(div).animate({opacity:1},2000,"swing");
+			if (document.hasFocus()){
+				//get random banner
+				var index = Math.floor(bannersShown.length * Math.random());
+				
+				var bannerHide = bannersShown[index]; //pick random item of bannersShown
+				bannersShown.splice(index,1); //remove random item from bannersShown
+				
+				var banner = banners[0]; //pick first item of banners(NotShown)
+				banners.shift(); //remove first item from banners(NotShown)
+				
+				banners.push(bannerHide); //add random item to banners(NotShown)
+				bannersShown.push(banner); //add item to bannersShown
+				
+				var div = $("#banner" + bannerHide.Nr);
+				
+				//hide previous banner
+				$(div).animate({opacity:0},1000,"linear",function(){
+					//set new banner
+					$(div)
+						.attr("id","banner" + banner.Nr)		
+						.css("background-image", 'url(' + "{{ URL::asset('images/banners')}}/" + banner.BannerFileName + ')')
+						.on("click",function(){document.location.href = "http:////" + banner.RedirectURL;});
+				});
+				
+				//show new photo
+				$(div).animate({opacity:1},2000,"swing");
+			}
 				
 			changeRandomBanner();
 		}, 20000);
