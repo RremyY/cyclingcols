@@ -119,15 +119,90 @@ $(document).ready(function() {
     });*/
 
     /*select menu headeritem*/
-    $(".tabrow li").removeClass("selectedtab"); //remove     
-    $('.home .homemenu .tabrow a:nth-child(1) li').addClass("selectedtab");
-    $('.newtemplate .tabrow a:nth-child(2) li').addClass("selectedtab");
-    $('.statstemplate .tabrow a:nth-child(3) li').addClass("selectedtab");
-    $('.helptemplate .tabrow a:nth-child(4) li').addClass("selectedtab");
-    $('.abouttemplate .tabrow a:nth-child(5) li').addClass("selectedtab");
+    $(".menuitem").removeClass("selectedtab"); //remove     
+    $('.home #menuleft a:nth-child(2) .menuitem').addClass("selectedtab");
+	$('.newtemplate #menuleft a:nth-child(3) .menuitem').addClass("selectedtab");
+    $('.statstemplate #menuleft a:nth-child(4) .menuitem').addClass("selectedtab");
+    $('.helptemplate #menuleft a:nth-child(5) .menuitem').addClass("selectedtab");
+    $('.abouttemplate #menuleft a:nth-child(6) .menuitem').addClass("selectedtab");
+
+	//autocomplete
+	$(function() {
+		var accentMap = {
+			"Š": "S",
+			"Œ": "OE",
+			"Ž": "Z",
+			"š": "s",
+			"œ": "oe",
+			"ž": "z",
+			"Ÿ": "Y",
+			"Š": "S",
+			"À": "A","Á": "A","Â": "A","Ã": "A","Ä": "A","Å": "A",
+			"Æ": "AE",
+			"Ç": "C",
+			"È": "E","É": "E","Ê": "E","Ë": "E",
+			"Ì": "I","Í": "I","Î": "I","Ï": "I",
+			"Ð": "D",
+			"Ñ": "N",
+			"Ò": "O","Ó": "O","Ô": "O","Õ": "O","Ö": "O","Ø": "O",
+			"Ù": "U","Ú": "U","Û": "U","Ü": "U",
+			"Ý": "Y",
+			"Þ": "p",
+			"ß": "ss",
+			"à": "a","á": "a","â": "a","ã": "a","ä": "a","å": "a",
+			"æ": "ae",
+			"ç": "c",
+			"è": "e","é": "e","ê": "e","ë": "e","ç": "c",
+			"ì": "i","í": "i","î": "i","ï": "i",
+			"ð": "d",
+			"ñ": "n",
+			"ò": "o","ó": "o","ô": "o","õ": "o","ö": "o","ø": "o",
+			"ù": "u","ú": "u","û": "u","ü": "u",
+			"ý": "y"			
+		};
+	  
+		var normalize = function( term ) {
+			var ret = "";
+			for ( var i = 0; i < term.length; i++ ) {
+				ret += accentMap[ term.charAt(i) ] || term.charAt(i);
+			}
+			return ret;
+		};
+		
+		$.getJSON( homedir + "ajax/getcolsforsearch.php", function( data ) {
+			
+			$( "#searchbox" ).autocomplete({
+				minLength: 2,
+				delay: 300,
+				source: function( request, response ) {
+					var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+					response( $.grep( data, function( value ) {
+						value = value.label || value.value || value;
+						return matcher.test( value ) || matcher.test( normalize( value ) );
+					}).slice(0,10) );
+				},
+				select: function( event, ui ) {
+					$( "#searchbox" ).val( ui.item.label );
+					window.location.replace(homedir + "col/" + ui.item.ColIDString);
+		 
+					return false;
+				}
+			})
+			.autocomplete( "instance" )._renderItem = function( ul, item ) {
+				var html = "<a>" + item.label + "<img class=\"searchitemflag\" src=\"/images/flags/" + item.Country1 + ".gif\"/>";
+				if (item.Country2){
+					html += "<img class=\"searchitemflag\" src=\"/images/flags/" + item.Country2 + ".gif\"/>";
+				}
+				html += "<span class=\"searchitemheight\">" + item.Height + "m</span></a>";
+				return $( "<li>" )
+					.append(html)
+					.appendTo( ul );
+			};
+		});
+	});
 
 // constructs the suggestion engine
-    var countries = new Bloodhound({
+    /*var countries = new Bloodhound({
         datumTokenizer: function(d) {
             var test = Bloodhound.tokenizers.whitespace(d.colname);
             //alert(1);
@@ -167,7 +242,7 @@ $(document).ready(function() {
     }).bind("typeahead:selected", function(obj, datum, name) {
         $("#colid").val(datum.colidstring);
         window.location.replace(homedir + "col/" + datum.colidstring);
-    });
+    });*/
 
 });
 

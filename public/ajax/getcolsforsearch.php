@@ -22,16 +22,19 @@
   //--------------------------------------------------------------------------
   // 2) Query database for data
   //--------------------------------------------------------------------------
-  $result = mysql_query("SELECT ColIDString, Col FROM colsearch ORDER BY Priority");          //query
+  //$result = mysql_query("SELECT ColIDString, Col FROM colsearch ORDER BY Priority");          //query
+  
+  $result = mysql_query("SELECT ColIDString, Col AS label, Country1, Country2, Height FROM colsearch ORDER BY Priority");          //query
   $cols = array();
   while($res = mysql_fetch_array($result)) {
-      if($res[1] != null){
+      /*if($res[1] != null){
         $newarray = [
             "colidstring" => $res[0],
             "colname" => $res[1],
         ];
         $cols[] =$newarray;
-      }
+      }*/
+	  $cols[] = $res;
   }
 //[4]=> string(12) "Montecassino"
   //var_dump($cols);

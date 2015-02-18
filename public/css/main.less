@@ -101,7 +101,7 @@ h2 {
 
 
 /***************** right section of homepage ******************/
-.scenery {
+/*.scenery {
     position:relative;
     right:0;
 }
@@ -196,7 +196,7 @@ h2 {
 
 #arrow_left, #arrow_right {
     display:none;
-}
+}*/
 
 /******************* searchbar styling ********************/
 
@@ -204,18 +204,30 @@ h2 {
     width: 100%;
 }*/
 
-#bloodhound{ 
+#searchbox{
+   width: 100%;
+   height: 34px;
+   border-radius: 4px;
+   border-width: 0px;
+   padding: 5px;
+}
+
+#searchtext{ 
+    position: absolute;
+    width: inherit;
+    max-width: 600px;
+    width: 100% ;
     //position: absolute;
-    z-index: 9999;
+    //z-index: 9999;
 }  
 
-.abs {
+/*.abs {
     position: absolute;
-}
+}*/
 
-.twitter-typeahead {
+/*.twitter-typeahead {
     width: 100%;
-}
+}*/
 
 #searchonmap{ 
     position: absolute;
@@ -256,35 +268,57 @@ form .twitter-typeahead .searchfield {
 }
 
 /*search suggestion*/
-.tt-dropdown-menu {
-    width: 100%;
-}
-
-.tt-dataset-states {
-    width: 100%;
-}
-
-.tt-suggestions {
-    width: 100%;
+.ui-autocomplete {
+    width: 0px;
     background: rgba(255, 255, 255, 0.9);
     padding: 2px 5px 2px 5px;
     border-radius: 0 0 2px 2px;
     line-height: 14px;
+    padding: 0px;
+    list-style-type: none;
+    z-index: 100000;
 }
 
-.tt-suggestion {
-    border-bottom: 1px solid #ccc;
+.ui-menu-item {
+    border-bottom: 1px solid @header2color;
+    padding: 2px;
+    cursor: pointer;
+
+    a{
+        color: @textcolor;
+        text-decoration: none;
+    }
 }
 
-.tt-cursor {
+.ui-menu-item:hover {
+    background: @header3color;
+    color: black;
+}
+
+.searchitemflag{
+    width: 25px;
+    border-radius: 2px;
+    margin: 2px 4px;
+}
+
+.searchitemheight{
+    font-size: 12px;
+    color: @header1color;
+    border: 1px solid @header1color;
+    border-radius: 3px;
+    padding: 2px;
+    background: @header3color;   
+}
+
+/*.tt-cursor {
     background: #ccc;
-}
+}*/
 
 /* stop the glowing blue shadow and make it white */
-.add-on input:focus {
-    box-shadow: none;
+.searchfield input:focus {
+   /* box-shadow: none;
     .box-white-shadow(0px, 0px, 10px, 0.9);
-    border-color: #cccccc; 
+    border-color: #cccccc; */
 }
 
 input:focus {
@@ -335,8 +369,118 @@ input:focus {
 /*******************  header    ********************/
 
 
+.overhome {
+    position: relative;
+    display: inline-block;
+}
+
+
+.overmain, .homemenu {
+    position: relative;
+    display: inline-block;
+}
+
+.homemenu {
+    width: 100%;
+    z-index: 1000;
+    //position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: -5px;
+    //margin-top: -2px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
+    background: @headercolor;
+    a {
+        color: white;
+    }
+}
+
+.homelogo{
+	margin: 0px;
+    display: block;
+	float: left;
+}
+
+
+#logo {
+
+  //display: block;
+  //-moz-box-sizing: border-box;
+  //box-sizing: border-box;
+  //background: url("../images/logo.png") no-repeat;
+  //width: auto; /* Width of new image */
+  //height: auto; /* Height of new image */
+}
+
+#menuleft{
+	//border: 1px solid red;
+	height: 80px;
+	padding: 0;
+}
+
+#menuright{
+	//border: 1px solid red;
+	height: 40px;
+	padding: 0;
+}
+
+#twitter {
+	border-right: 1px solid @header1color;
+}
+
+#twitter img {
+	max-width: 40px;
+    width: 100%;
+}
+
+.menuitem,
+#twitter {
+	display: block;
+	float: left;	
+	height: 100%;
+	border-left: 1px solid @header1color;
+	padding: 0 5px;
+	line-height: 75px;
+    width: 70px;
+    text-align: center;
+	max-width: 10%;
+    cursor: pointer;
+
+    .glyphicon {
+        margin-right: 5px;
+    }
+}
+
+	
+.menuitem a:hover {
+    text-decoration: none;
+}
+
+.menuitem:hover,
+#twitter:hover {
+	background: @header1color;
+}
+
+.menuitem.selectedtab {
+    background: @header1color   ;
+}
+
+
+.headersearch {
+	width: 100%;
+	//background:#333;
+	display: block;
+	//padding:2px 0;
+    margin: 0px;
+	padding: 0px 40px 0px 0px;
+    
+}
+
+
 /*******************  tab items ********************/
 
+/*
 .tabrow:before {
     z-index: 1;
 }
@@ -374,102 +518,24 @@ input:focus {
 }
 .tabrow li a {
     color: #fff;
-}
+}*/
 
-.overhome {
-    position: relative;
-    display: inline-block;
-}
-.homemenu {
-    width: 100%;
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    //margin-top: -2px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #000;
-    background: @headercolor;
-    a {
-        color: white;
-    }
-    .tabrow .glyphicon {
-        margin-right: 5px;
-    }
-    .tabrow .headertext {
-        display: none;
-    }}
 
 .homemenu .tabrow {
     //width:50%;
 	//text-align: right;
-    display:inline-block;
+    //display:inline-block;
 }
 
-.overmain .homemenu {
-    position: relative;
-    display: inline-block;
-}
 
-.headersearch {
-	width: 100%;
-	//background:#333;
-	display: block;
-	//padding:2px 0;
-    margin: 10px;
-	padding: 0px 40px 0px 0px;
-    
-}
-
-#logo {
-
-  display: block;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background: url("../images/logo.png") no-repeat;
-  width: auto; /* Width of new image */
-  height: auto; /* Height of new image */
-}
-
-.homelogo {
-    //width:20%;
-    margin: 0px;
-    display: inline-block;
-    /*box-shadow: 0 0px 3px rgba(255, 255, 255, 0.4), inset 0 1px 0 #000;    */
-    img {
-        padding: 0px;
-        //padding-left: 10px;
-        //width: @mobilelogopixelwidth;
-        //max-width: @logopixelwidth;
-        display: inline;
-    }
-}
 
 .homemenu .tabrow li {
     //padding: 15px 2px 15px 2px;
     /*box-shadow: 0 -2px 3px rgba(255, 255, 255, 0.4);*/
-    display: inline;
-    background: none;
+    //display: inline;
+    //background: none;
 }
 
-.tabrow li.selectedtab {
-    background: @header1color   ;
-}
-
-#twitter{
-    //float: left;
-    display: inline-block;
-    border-right: 1px solid @header1color;
-
-    img{
-        width: 40px;
-    }
-}
-
-#twitter:hover{
-    cursor: pointer;
-    background: @header1color;
-}
 
 /******************** countries section *****************/
 
@@ -696,8 +762,6 @@ input:focus {
     font-weight: bold;
     padding: 5px;
     border-radius: 2px;
-
-    
 }
 
 .table_row {   
@@ -1373,7 +1437,7 @@ input:focus {
 
 /*****************   random col page       **********************/
 
-.randomcol {
+/*.randomcol {
     width:100%;
     margin:80px auto;
     padding-bottom: 60px;
@@ -1390,7 +1454,7 @@ input:focus {
             .box-shadow(0px, 0px, 8px, 0.8);
         }
     }
-}
+}*/
 
 /*************************  media queries  ***********************/
 @media (max-width:420px) {
@@ -1401,29 +1465,34 @@ input:focus {
         padding-left: 2px;
         padding-right: 2px;
     }
-    .tabrow li {
+    .menuitem {
 		 font-size: 12px;
     }
     #twitter{
-        padding: 10px 5px 10px 5px;
-        img {width: 20px;}
+        //padding: 10px 5px 10px 5px;
+        //img {width: 20px;}
     }
 }
 
 @media (max-width:589px) {
-    .homemenu {
-        //height: 75px;
+    #menuleft {
+        height: 40px;
     }
 	.homelogo img {
 		width: 100px;
 	}
-    .tabrow li {
-        padding: 14px 4px 12px 4px;
+    .menuitem,
+    #twitter {
+        line-height: 40px;	
+        vertical-align: initial;
     }
+    /*.tabrow li {
+        padding: 14px 4px 12px 4px;
+    }*/
     
     #twitter{
-        padding: 10px 5px 10px 5px;
-        img {width: 20px;}
+        //padding: 10px 5px 10px 5px;
+        //img {width: 20px;}
     }
 	.category {
         margin: 10px 10px 10px -10px;
@@ -1431,19 +1500,26 @@ input:focus {
         height: 35px;
         line-height: 35px;
     }
+    .headertext {
+        display: none;
+    }
 
 }
-@media (min-width:590px) {
+@media (max-width:766px) {
     .homemenu {
         //height: 75px;
     }
-	.tabrow li {
+	/*.tabrow li {
         padding: 28px 14px;
-    }
+    }*/
     
     #twitter{
-        padding: 24px 15px;
-        img {width: 30px;}
+        //padding: 24px 15px;
+        //img {width: 30px;}
+    }
+    .headertext {
+        font-size: 11px;
+        display: none;
     }
 }
 
@@ -1452,27 +1528,24 @@ input:focus {
     .homemenu {
         //height: 75px;
     }
-	.tabrow li {
+	/*.tabrow li {
         padding: 28px 13px;
-    }
+    }*/
     
     #twitter{
-        padding: 21px 16px;
+        //padding: 21px 16px;
         img {width: 40px;}
-    }
-    .homemenu .tabrow .headertext {
-        display: inline-block;
     }
 }
 
 /*bootstrap medium*/
 @media (min-width:992px) {
-    .homemenu {
-        height: 75px;//fixed height to make menu more "stable"
+    .overmain {
+        //height: 75px;//fixed height to make menu more "stable"
     }
-	.homemenu .tabrow li {
+	/*.homemenu .tabrow li {
         padding: 31px 13px;
-    }
+    }*/
     .homelogo img {
         //padding: 5px;
         //width: @logopixelwidth;
@@ -1482,37 +1555,41 @@ input:focus {
 		//width: 40%;
 	}
 	.headersearch {
-		width: 28%;
-		display: inline-block;
-		background: none;
+		width: 32%;
+		//display: inline-block;
+		//background: none;
 	}
+  
+    #menuright{
+	    margin-top: 20px;
+    }
 
 	.navarrow {
-		display: inline-block;
+		//display: inline-block;
 	}
 	.tabrow {
-		text-align: left;
+		//text-align: left;
 	}
 	.homemenu #countrytab{
-		display: none;
+		//display: none;
 	}
 	.countries {
-		.box-shadow(5px, 0px, 6px, 0.5);
-		background: rgba(0, 0, 0, 0.9);
-		border-right: 1px solid black;
+		//.box-shadow(5px, 0px, 6px, 0.5);
+		//background: rgba(0, 0, 0, 0.9);
+		//border-right: 1px solid black;
 	}
 
 	.thecountries {
-		display: block;
-		position: relative;
-		left: 0px;
+		//display: block;
+		//position: relative;
+		//left: 0px;
 	}
 	.countries, scenery {
-		min-height: 100%;
+		//min-height: 100%;
 	}
 
 	.randomcol .item {
-		width: 50%;
+		//width: 50%;
 	}
 
 	/* mainheader menu items*/

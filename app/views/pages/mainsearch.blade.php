@@ -2,26 +2,26 @@
 
 @section('content')
 
-<div class="overmain">
+<!--<div class="overmain">-->
     <div class="homemenu">
-        <div class="homelogo">
-            <a href="{{ URL::asset('/') }}"><img id="logo_img" src="{{ URL::asset('images/logo.png') }}" /></a>
-        </div>
-        <ul class='tabrow'>
-            <a href="{{url('/')}}"><li class="selectedtab"><i class="glyphicon glyphicon-home" title="Home"></i><span class="headertext">Home</span></li></a>
-            <a href="{{url('/new')}}"><li><i class="glyphicon glyphicon-asterisk" title="New"></i><span class="headertext">New</span></li></a>
-            <a href="{{url('/stats')}}"><li><i class="glyphicon glyphicon-stats" title="Stats"></i><span class="headertext">Stats</span></li></a>
-            <a href="{{url('/help')}}"><li><i class="glyphicon glyphicon-question-sign" title="Help"></i><span class="headertext">Help</span></li></a>
-            <a href="{{url('/about')}}"><li class="about"><i class="glyphicon glyphicon-info-sign" title="About"></i><span class="headertext">About</span></li></a>
+		<div id="menuleft" class="col-md-12">
+			<div class="homelogo">
+				<a href="{{ URL::asset('/') }}"><img id="logo_img" src="{{ URL::asset('images/logo.png') }}" /></a>
+			</div>
+			<a href="{{url('/')}}"><div class="menuitem"><i class="glyphicon glyphicon-home" title="Home"></i><span class="headertext">Home</span></div></a>
+			<a href="{{url('/new')}}"><div class="menuitem"><i class="glyphicon glyphicon-asterisk" title="New"></i><span class="headertext">New</span></div></a>
+			<a href="{{url('/stats')}}"><div class="menuitem"><i class="glyphicon glyphicon-stats" title="Stats"></i><span class="headertext">Stats</span></div></a>
+			<a href="{{url('/help')}}"><div class="menuitem"><i class="glyphicon glyphicon-question-sign" title="Help"></i><span class="headertext">Help</span></div></a>
+			<a href="{{url('/about')}}"><div class="menuitem"><i class="glyphicon glyphicon-info-sign" title="About"></i><span class="headertext">About</span></div></a>
 			<div id="twitter">
 				<img src="{{ URL::asset('images/twitter.png') }}" title="Follow CyclingCols on twitter!"/>
-			</div>         
-        </ul>
+			</div>
+		</div>
 	</div>
-</div>
+<!--</div>-->
 
-<div id="bloodhound" class="abs" style="display:none">
-	<input type="text" class="searchfield form-control typeahead search_main" placeholder="Search a col in Europe..." name="colid" id="searchbox">
+<div id="searchtext" class="abs" style="display:none">
+	<input type="text" class="searchfield" placeholder="Search a col in Europe..." id="searchbox">
 </div>
 <div id="searchonmap" style="display:none">
 	<a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Search on map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
@@ -188,9 +188,9 @@
 	}
 	
 	function arrangePhotoGrid() {
-		$("#bloodhound").hide();
+		$("#searchtext").hide();
 		$("#searchonmap").hide();
-		$('body').append($("#bloodhound"));	
+		$('body').append($("#searchtext"));	
 		$('body').append($("#searchonmap"));	
 		$('#photogrid').empty();
 		
@@ -261,7 +261,7 @@
 					
 					if (parseInt(row) == parseInt(rowSearch) && parseInt(col) == parseInt(colSearchStart)) {				
 						//position searchbox
-						var search = $("#bloodhound");
+						var search = $("#searchtext");
 						$(search).css("left", left + "px")
 							.css("top", (top - photoTop) + "px")
 							.width((photoWidth * (colSearchEnd - colSearchStart + 1) - 40) + "px");				
