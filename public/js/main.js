@@ -15,6 +15,7 @@ var homedir = "http://" + document.location.host + "/";
  //todo: change dataset for in slideshow.
  return false;
  }*/
+
  
 
 
@@ -152,14 +153,18 @@ $(document).ready(function() {
 			"à": "a","á": "a","â": "a","ã": "a","ä": "a","å": "a",
 			"æ": "ae",
 			"ç": "c",
-			"è": "e","é": "e","ê": "e","ë": "e","ç": "c",
+			"è": "e","é": "e","ê": "e","ë": "e",
 			"ì": "i","í": "i","î": "i","ï": "i",
 			"ð": "d",
 			"ñ": "n",
 			"ò": "o","ó": "o","ô": "o","õ": "o","ö": "o","ø": "o",
 			"ù": "u","ú": "u","û": "u","ü": "u",
-			"ý": "y"			
+			"ý": "y",
+			"-": " ",
+			" ": "-"			
 		};
+		
+		var searchCount;
 	  
 		var normalize = function( term ) {
 			var ret = "";
@@ -176,24 +181,50 @@ $(document).ready(function() {
 				delay: 300,
 				source: function( request, response ) {
 					var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-					response( $.grep( data, function( value ) {
+					var res = $.grep( data, function( value ) {
 						value = value.label || value.value || value;
 						return matcher.test( value ) || matcher.test( normalize( value ) );
-					}).slice(0,10) );
+					})
+					
+					searchCount = res.length;
+					
+					response(res.slice(0,10));
 				},
-				select: function( event, ui ) {
+				select: function( event, ui ) {		
+					$("#searchstatus").hide();
 					$( "#searchbox" ).val( ui.item.label );
 					window.location.replace(homedir + "col/" + ui.item.ColIDString);
 		 
 					return false;
+				},
+				response: function(event, ui) {
+					$("#searchstatus").hide();
+					
+					if (ui.content.length === 0) {
+						$("#searchstatus").text("No cols found.");
+					} else {
+						$("#searchstatus").text(searchCount + " cols found" + (searchCount > 10 ? ", showing first 10" : "") + ".");
+						$("#searchstatus").show();
+					}
+					$("#searchstatus").show();
+					
+					//ui.content = ui.content.slice(0,10);
+				},
+				open: function() {
+					$(".ui-autocomplete").css("top","+=26");
+				},
+				close: function(){
+					if ($("#searchbox").val().length <= 2) {
+						$("#searchstatus").hide();
+					}
 				}
 			})
 			.autocomplete( "instance" )._renderItem = function( ul, item ) {
-				var html = "<a>" + item.label + "<img class=\"searchitemflag\" src=\"/images/flags/" + item.Country1 + ".gif\"/>";
+				var html = "<a><img class=\"searchitemflag\" src=\"/images/flags/" + item.Country1 + ".gif\"/>";
 				if (item.Country2){
 					html += "<img class=\"searchitemflag\" src=\"/images/flags/" + item.Country2 + ".gif\"/>";
 				}
-				html += "<span class=\"searchitemheight\">" + item.Height + "m</span></a>";
+				html += item.label + "<span class=\"searchitemheight\">" + item.Height + "m</span></a>";
 				return $( "<li>" )
 					.append(html)
 					.appendTo( ul );
@@ -246,6 +277,7 @@ $(document).ready(function() {
 
 });
 
+/*help page*/
 showInfo = function () {
     var id = "#div_" + $(this).find(".infotype").attr("id");
     $(id).css("opacity", "0.5");
@@ -289,6 +321,10 @@ $(document).ready(function () {
 		var title = $(this).parent().attr("id");
 		printContent($(this).parent().parent(), title); 
 	} );
+	 
+	$(document).on("focusout","#searchbox",function(){
+		$("#searchstatus").hide();
+	});
 })
 
 printContent = function (el, title){

@@ -218,7 +218,7 @@ h2 {
     max-width: 600px;
     width: 100% ;
     //position: absolute;
-    //z-index: 9999;
+    z-index: 2147483647;
 }  
 
 /*.abs {
@@ -295,6 +295,10 @@ form .twitter-typeahead .searchfield {
     color: black;
 }
 
+.ui-helper-hidden-accessible{
+    display: none;
+}
+
 .searchitemflag{
     width: 25px;
     border-radius: 2px;
@@ -307,7 +311,17 @@ form .twitter-typeahead .searchfield {
     border: 1px solid @header1color;
     border-radius: 3px;
     padding: 2px;
+    margin: 2px 4px;
     background: @header3color;   
+}
+
+#searchstatus{
+    display: none;
+    background: @header3color;
+    margin-top: -1px;
+    padding: 3px;
+    border-top: 1px solid black;
+    z-index: 100000;
 }
 
 /*.tt-cursor {
@@ -446,6 +460,7 @@ input:focus {
     text-align: center;
 	max-width: 10%;
     cursor: pointer;
+    font-size: 13px;
 
     .glyphicon {
         margin-right: 5px;

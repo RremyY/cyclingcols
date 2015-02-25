@@ -17,6 +17,7 @@
 		<div id="menuright" class="headersearch col-md-4">
 			<div id="searchtext" class="abs">
 				<input type="text" class="searchfield" placeholder="Search a col in Europe..." id="searchbox">
+				<div id="searchstatus"></div>
 			</div>
         </div>
 

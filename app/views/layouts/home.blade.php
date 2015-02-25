@@ -18,7 +18,7 @@
 		<script src="{{ URL::asset('js/jquery-ui.min.js') }}" type="text/javascript"></script>
 		<!--<script src="{{ URL::asset('js/jquery.cycle.all.min.js') }}" type="text/javascript"></script>-->
 		<!--<script src="{{ URL::asset('js/jquery.maximage.min.js') }}" type="text/javascript"></script>-->
-		<script src="{{ URL::asset('js/typeahead.bundle.js') }}" type="text/javascript"></script>
+		<!--<script src="{{ URL::asset('js/typeahead.bundle.js') }}" type="text/javascript"></script>-->
 		<script src="{{ URL::asset('js/main.js') }}" type="text/javascript"></script>
 		<script src="{{ URL::asset('js/jquery.backstretch.min.js') }}" type="text/javascript"></script>
 		

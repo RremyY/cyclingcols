@@ -22,6 +22,7 @@
 
 <div id="searchtext" class="abs" style="display:none">
 	<input type="text" class="searchfield" placeholder="Search a col in Europe..." id="searchbox">
+	<div id="searchstatus"></div>
 </div>
 <div id="searchonmap" style="display:none">
 	<a href="{{url('/map')}}"><div class="btn btn-default globe" type="submit" title="Search on map"><img src="{{ URL::asset('images/globeblack.png') }}" alt="" /></div></a>
